@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "AWAITING_PROVIDER_DETAILS_AND_EXPLICIT_AUTHORIZATION",
+  "authorized_http_attempts": 0,
+  "global_user_proposed_ceiling": 30,
+  "actual_http_attempts": 0,
+  "successful_attempts": 0,
+  "failed_attempts": 0,
+  "provider": null,
+  "model_id": null,
+  "attempts": [],
+  "required_entry_fields": [
+    "sequence",
+    "stage",
+    "case_id",
+    "consent_scope",
+    "provider_label",
+    "model_id",
+    "started_at",
+    "elapsed_seconds",
+    "http_status",
+    "response_shape",
+    "sanitized_answer_path",
+    "outcome"
+  ],
+  "warning": "Never infer authorization from configuration or a process restart. Never record keys, headers or private data."
+}

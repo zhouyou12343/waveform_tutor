@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-17",
+  "real_key_used": false,
+  "real_provider_calls": 0,
+  "build_with_synthetic_backend_key_exit_code": 0,
+  "build_output": "\n> waveform-tutor-frontend@0.1.0 build\n> tsc -b && vite build\n\nvite v8.3.8 building client environment for production...\ntransforming...\n✓ 22 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.47 kB │ gzip:  0.31 kB\ndist/assets/index-CLAQd7st.css   14.65 kB │ gzip:  4.49 kB\ndist/assets/index-BM4JHOz4.js   246.13 kB │ gzip: 78.04 kB\n\n✓ built in 301ms\n",
+  "build_asset_count": 3,
+  "synthetic_key_found_in_build_files": [],
+  "source_pattern_scan": {
+    "method": "Grep: common long API token/private-key header patterns; filenames only",
+    "scope": "backend, frontend/src, scripts, docs, .github text source/evidence files",
+    "matched_files": []
+  },
+  "frontend_sensitive_api_scan": {
+    "patterns": [
+      "AI_API_KEY",
+      "Authorization",
+      "process.env",
+      "import.meta.env",
+      "dangerouslySetInnerHTML",
+      "localStorage"
+    ],
+    "matched_files": []
+  },
+  "error_redaction": "Mock tests assert fake key/private body absent from error messages and caplog; included in 201 passing tests",
+  "git_history_scan": "NOT_AVAILABLE: no .git metadata; cannot assert tracked files or history are clean",
+  "limits": [
+    "Pattern scan is not an exhaustive secret scanner.",
+    "Synthetic sentinel does not prove every possible configuration is safe.",
+    "No production credentials were read or tested.",
+    "Prompt injection and free-text factual quality need real-provider review."
+  ]
+}

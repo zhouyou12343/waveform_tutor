@@ -1,0 +1,42 @@
+.model-settings {
+  margin: 0 0 24px;
+  scroll-margin-top: 20px;
+}
+.model-settings-body {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+.model-settings-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 22px;
+}
+.model-settings-fields label {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  color: #d8e2f1;
+}
+.model-settings-fields input,
+.model-settings-fields select {
+  width: 100%;
+}
+.model-settings-fields .small {
+  line-height: 1.6;
+}
+.model-settings-success {
+  color: #65dabe;
+}
+@media (max-width: 760px) {
+  .model-settings-fields {
+    grid-template-columns: 1fr;
+  }
+  .model-settings .toolbar {
+    flex-wrap: wrap;
+  }
+}

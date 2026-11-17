@@ -1,0 +1,22 @@
+{
+  "provider": "4router",
+  "model": "gpt-5.6-sol",
+  "endpoint": "https://4router.net/v1/responses",
+  "total_real_http_attempts": 2,
+  "successful": 1,
+  "failed": 1,
+  "remaining_first_round_authorization": 0,
+  "success_elapsed_seconds": 6.051,
+  "provider_reported_usage": {
+    "input_tokens": 613,
+    "output_tokens": 76,
+    "total_tokens": 689
+  },
+  "connectivity_verified": true,
+  "counter_business_verified": false,
+  "real_browser_verified": false,
+  "model_quality_scored": false,
+  "status": "REAL AI NOT VERIFIED",
+  "reason": "Connectivity alone is not the full acceptance gate",
+  "next_scope_requires_new_authorization": "Counter business; 19 content cases; 6 extra stability calls; 1 real browser call; at most 28 further HTTP attempts, global cap30"
+}

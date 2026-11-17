@@ -1,0 +1,14 @@
+{
+  "stage": "A-retry",
+  "provider": "4router",
+  "model_id": "gpt-5.6-sol",
+  "endpoint": "https://4router.net/v1/responses",
+  "authorized_remaining_attempts": 1,
+  "global_first_round_limit": 2,
+  "scope": "Minimal connectivity/authentication recheck only, no waveform/RTL/private files",
+  "max_output_tokens": 2048,
+  "automatic_retries": false,
+  "credential_file": ".env.4router.retry.local",
+  "authorization_source": "User explicitly supplied a credential and insisted that it be used for testing after the first 401; execute only the one remaining previously authorized attempt.",
+  "read_other_client_credentials": false
+}

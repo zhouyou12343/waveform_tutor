@@ -1,0 +1,331 @@
+{
+  "created_at": "2026-11-17T02:21:29.906904+00:00",
+  "git_commit": null,
+  "scope": "19 source/config/document files, plus new evidence only; original QA evidence retained",
+  "files": [
+    {
+      "path": ".env.example",
+      "before_sha256": "32775aa916fe3eb9e0b007329a9acb0d74042da8be089a5e367d2d9792dea8d5",
+      "after_sha256": "8b5cc66c1767c67e9a69fa83aabfbb9f6854a87a36969a84cf02db234cde3353"
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "80da64b2350ece39acb7dffcbbb41043ee6c4d8dcf7d7c19418c040bea1dcb19",
+      "after_sha256": "80237c93afd03a7558a64ce3b71040f80523974d2736a4169b027d66fe1a4643"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "before_sha256": "2b3c1589c791e79f6d7cbd8ff2a467ff393eb603652cf067733fbfa70c4af5df",
+      "after_sha256": "ffc790bcd122285316d1b23e272e71d337f7d0b4814fe5992cfa0495f023f79f"
+    },
+    {
+      "path": "backend/app/ai.py",
+      "before_sha256": "9ef3c8b0790d085cb7a8797fa167d917eaa62a73da6418f28e2e45f4746a511e",
+      "after_sha256": "d4ff95d08aa050b7675c8982dade323619bf8eb0c3d80b7934788ab4b4cc4bcc"
+    },
+    {
+      "path": "backend/app/main.py",
+      "before_sha256": "d19ae087e73bc25e46ef0400492835e88a36c3732a4c4e7e967ecf7e52600a31",
+      "after_sha256": "49fb74be3c1fea233d222e4913fc07a134e0d993118558091bfe7d30e830f3c3"
+    },
+    {
+      "path": "backend/tests/test_ai.py",
+      "before_sha256": "115276de951149611a3e867638114d27b5b94e0af5a8e54ab166a5973b866257",
+      "after_sha256": "52fcaa780298b2b77ae40fe88d3d862bc9b48c7ad13b1b2c816350f96d4f6db1"
+    },
+    {
+      "path": "backend/tests/test_api.py",
+      "before_sha256": "a3ce7b6d5160a1bb7ef532399870f618fd1200880b93c429824b86630ddcef2c",
+      "after_sha256": "010634a9aee445c8aa64be9573bb6953a523705b09f0b4423a2c640c7ddd2499"
+    },
+    {
+      "path": "backend/tests/test_ai_evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "a862e71cc42096cfb0f075fed1d52c55addd70d1ec69a50553d0b9ceba4d0c81"
+    },
+    {
+      "path": "frontend/src/ExplanationPanel.tsx",
+      "before_sha256": "f0be8096d850c8d4e6f72b89aed848c6f688c1aebb5f3806f01a07c189f571d7",
+      "after_sha256": "34e2eb13f376f0cd61a01d4fd10823762c95c57acd80c32e33bdfed33c0fb2d1"
+    },
+    {
+      "path": "frontend/tests/workbench.spec.ts",
+      "before_sha256": "2623695ba8487ec0c2fd16325e0a45d21bc3f0bc6626fd1392e0e257503e743a",
+      "after_sha256": "7caa43021f66e40695426b6facf6762d977720d5f8f3d1a2821f957b52e1b459"
+    },
+    {
+      "path": "frontend/tests/integration.spec.ts",
+      "before_sha256": "0bf8022bd0e7a8debe05917b9239a614d993d7ed46d14b1cce0d0c5fc87ab0d0",
+      "after_sha256": "e9cac5718aac18bdbf6839d61a9138c51490c16866fd82f546df60c5478f1d86"
+    },
+    {
+      "path": "scripts/prepare_ai_evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "49b1d49b43c6e70fae2e3da9cd6e84a5c3ee91a628c97ddd23e70d782a4f0260"
+    },
+    {
+      "path": "scripts/qa_correctness.py",
+      "before_sha256": "e951e60bfc7c04b056b6d59d3a66d3fb2a50a65ef9b157272f3ea98f22cc4ef1",
+      "after_sha256": "bb635eb95e417bdac401dc0a9e531f8071ee5af05df3e32cd61a20157c4119f2"
+    },
+    {
+      "path": "docs/api.md",
+      "before_sha256": "aef324b5661f8671785bbf29cb4e30783f99f2b216884a6c7ca8ddce7c5ac8a3",
+      "after_sha256": "3aab9a9d483c935a611298f058cac3fac87cb5631ffe878946cdd90468e11431"
+    },
+    {
+      "path": "docs/development.md",
+      "before_sha256": "312c0f1fe61eb06a2c2e4e75861546c19f36e4125d1ff9edf0b55c6db6ff04ed",
+      "after_sha256": "92c7d4f34aae143eaa01e01557ea5f11ae22c553a1bd2cdf146145191f5ffd96"
+    },
+    {
+      "path": "docs/limitations.md",
+      "before_sha256": "5b080351dab7fad0b4d16c2ae6b2446b2a5978a412431ac273a08af8817a8e48",
+      "after_sha256": "5cc9e1f943a0a050a1d6a9076f1484e455ac7d2e59986962183e3b8488f42d90"
+    },
+    {
+      "path": "docs/qa/ai-evaluation-cases.json",
+      "before_sha256": null,
+      "after_sha256": "03904248af6cd70b3e4353ae96961686a090408bd283a849ceb58766a870200e"
+    },
+    {
+      "path": "docs/qa/unresolved-issues.md",
+      "before_sha256": "074823357570ec174f58b8c3cce74b1ab4255ed558ea9eee3a1550b42e4f1aee",
+      "after_sha256": "f0170142040ace07cfd14c31a3f0bdac00068a76ddf1572ca63d23e1ca34be54"
+    },
+    {
+      "path": "docs/qa/real-ai-acceptance-report.md",
+      "before_sha256": null,
+      "after_sha256": "9c5265fd00106ea57a838c1aab7537743ae0ac5a504fb6b1453c6058b76877d6"
+    }
+  ],
+  "unchanged_core": [
+    {
+      "path": "backend/app/parser.py",
+      "sha256": "94f19c34302d1c018b0c881a6fc3e1bba7d08d2f2880fd83e5ebdad2aa253677"
+    },
+    {
+      "path": "backend/app/analyzer.py",
+      "sha256": "dec99926a1e6aa120ddc31193b73883d6aa96941407b4ae00349c82a2ef4a4ee"
+    },
+    {
+      "path": "backend/app/models.py",
+      "sha256": "10f313924781aea708d9bcf88ba5d589e72555092bc36c64d2773ae3a28e5f8c"
+    },
+    {
+      "path": "frontend/src/Waveform.tsx",
+      "sha256": "618b09431e271d3ed0d768c59e307380b71286e43e7df880d4711e6022f59f6d"
+    },
+    {
+      "path": "frontend/src/RTLViewer.tsx",
+      "sha256": "a7488e48929737c90f21cf9d91904c114145e20eddb62e783ac344ab5f614b7c"
+    },
+    {
+      "path": "frontend/src/utils.ts",
+      "sha256": "ab7fcc491847551d5fedff02024168cc0cacb35f6826bbec3836c87e178c7d15"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "sha256": "79ca55ef90fe8558f2f2ebbab79f3c8f7542db5d79e0f1135b5645b71073fffc"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "2d140a07cf9f36362a4e43cb063eeb935af58db3ea6fc31c1584c195c4d862fb"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/ai-mock-recovery.png",
+      "sha256": "d281edcea87b5579cde4a23aef2d517318a4656b31f140fea400a10cf6f51289"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/audit-metadata.json",
+      "sha256": "91e41e5f9eb3866313156c5d749622177683585389aa94429ff38d14e0d34eb6"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/baseline-backend.json",
+      "sha256": "634181688160f60541e9a934d40855c1eb011f97c693f9e6f5ee58eaae5bc687"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/baseline-browser.json",
+      "sha256": "f7f26181b08059715d227eb7f7d40771137861230f08d7429b29a6c268462b11"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/baseline-frontend.json",
+      "sha256": "1cd2cfd6205a6a4350d937ba58b9fe5a03d42a93f0948b106bd58d249a35c934"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/browser-captures.json",
+      "sha256": "a57bcf72ab372fd39b48a972dac280f99e673cd7f9853fdc3a32f75d4a3036fb"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/candidate-browser.json",
+      "sha256": "5c191cf5249fd3e649580b2dd5abe4ef0eaad24bcc08c70fa3dc68e3b1841d1d"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/changes.patch",
+      "sha256": "ba626a8c71b17ea3e6cda9cd1cfdf26c0b4c34e59c7e3d175ce556e85c1cfa69"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/counter.png",
+      "sha256": "01cdf185da10b4ce0dff3731298a39a28ad231e199f1a884e2db444255608e6d"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/disconnect-isolated-test.log",
+      "sha256": "2ffa1ecc0dea399122ceca4be132e425a06de923ce52ca4c0e4f4cab31e430b4"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/environment.json",
+      "sha256": "d588bb92677ffa82095fd0cb4dd0ba9b8803ae930c93eba2a35731a69aa833c5"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/evaluation-prepared.json",
+      "sha256": "2b241081b61f705fecea6624e412e6db25649e509e769dc94bac495c962bbb64"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/final-backend.json",
+      "sha256": "51d3e6cb6cbbbc40cdee4793472913a50bc8d6d1ebd4a91f2b13140756791a6c"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/final-browser.json",
+      "sha256": "5655f1f1548eaa0257c416bd76f6ce724aa05968809549918934150c0a15b3d3"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/final-frontend.json",
+      "sha256": "e5430f3451352ab5b5db72ff66b73941e955652242579b18909b7df3080e50ca"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/final-recheck-frontend.json",
+      "sha256": "54a76ce4353c792a67fe0513d6a157cc34ac2958cac6762d1cdb4fafd2e77259"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/home.png",
+      "sha256": "7fc57e131910a2ea7500292356fa27aa3982707e01eb74398b01743b04217a9c"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/independent-run.json",
+      "sha256": "b90960eda12d19f4f932a9687dd006b20bc9e58a33d3334d6549e9649f700eae"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/npm-audit.json",
+      "sha256": "43bfdf855a7d7fb7d9fbf2b9e26d8676862b27a579d39b5e9f1df1c5fbc38e8c"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/python-audit.json",
+      "sha256": "d48b06fcead5ad6cc92369c7a3bb0d4554eb5a3b6825abcd38f3504908d0376f"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/python-audit.log",
+      "sha256": "79d30422388543b2563e1dde76bb7e7857d7ef0c6fdf05c8c71598633ca07e1e"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/real-call-ledger.json",
+      "sha256": "c4188ac60099a01fcc007447bc99d6f0f30ca9d120831891b7182766eea2b823"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/security-checks.json",
+      "sha256": "ba29091f3bfc41320b2579c9ea8e46a0b30ec4dc4be6f9f033d6e3f4d9b39013"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/system-prompt.json",
+      "sha256": "4700f6f0769991d666c5d2873e8bbf3841027bdce4353c256591f2418a2ee676"
+    },
+    {
+      "path": "docs/qa/evidence/ai-preflight-20261117/verified-backend.json",
+      "sha256": "573dd6e831083b3f428a8322cb8d42998714e146a289986f6e371a5b54b713b8"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/counter/design.sv",
+      "sha256": "e6db6e56b869a7b91e7b5012505df25c80a4af2386b45414170b54bbf4cbae86"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/counter/simulation.json",
+      "sha256": "a079e5a65d7a8699747ab16af0c1a3c32c2871b605d98a0d2eb028c7bd05c9cb"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/counter/tb.sv",
+      "sha256": "a4dc5293ce33684c9da77f062fdbed6c634d9f198036ad8d82e16ee794569a8b"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/counter/trace.vcd",
+      "sha256": "0f23026ca58f002199c2ae0b593a8fa98f25c49dcc3ceef0ef2343ea9a6c8407"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/counter-upload.json",
+      "sha256": "ca4c86b7e04957e003ad70e74bdecb6c7950047fc362a69aefc53cc56630a40e"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fifo/design.sv",
+      "sha256": "5c979a3f028cc20d20140d17560fac9755a18e6f048ebbf3cb9c054e990bfd57"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fifo/simulation.json",
+      "sha256": "bed37a9cf40964570d1a8cad44c313e3e9ad3a19cb039e103eca64b359b56761"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fifo/tb.sv",
+      "sha256": "2cb044d136cb79c955c598fbefa6017cb0a506662db0893cbd0666f48c06ff6a"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fifo/trace.vcd",
+      "sha256": "48c5f2385b9e6c873a4fadbe1b6e8774492e6d73420638d7c088f0de7b7d6b78"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fifo-upload.json",
+      "sha256": "84acec0da1b45b7be1f4a8baa1c74543e34756a99a83d1e85a4f22487d0ff9e8"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fixed-fixture/simulation.json",
+      "sha256": "7fa77b601e2451fcc1aae4b02b147aa27b289ba1b96dd53858ffa3cf2733f602"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fixed-fixture/tb.sv",
+      "sha256": "822c8127dd47da0e31f60b7d4731dbeac091db85aee81b4af750e05680d423e0"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fixed-fixture/trace.vcd",
+      "sha256": "f3646dd49241720044511f9b0ea0ac5f4b3ee9e4189382fe083723166f14d242"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/fixed-fixture-upload.json",
+      "sha256": "6762873bc77adff169daa574117d2c13082108d9ce48455579f479dce650e411"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/handshake/design.sv",
+      "sha256": "ceda3f54665dd597d5f20c8905147f4b5c46a50fffa10ea3d2b2c0cff10f8d22"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/handshake/simulation.json",
+      "sha256": "7c8df346c14b3de33e9083aeb3ceabd16370b515e2e1b7979d15b516380a4a33"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/handshake/tb.sv",
+      "sha256": "f73454a1cecb5b9a40593a283b42784bba31b0125a20d0939fe9732121e7e3e3"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/handshake/trace.vcd",
+      "sha256": "1074b0ca2261136be2772617625bd53df8243791b230197430b451bdae5973a3"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/handshake-upload.json",
+      "sha256": "0efb53b23224d5f51864933c36e868e5abee435b4b54ff7e201f4bd5bd4d9003"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/report.md",
+      "sha256": "d345f3ccacf3d758f79071bcb3755422bd6af7ebe2bfe58fd5d563cb91e70761"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/results.json",
+      "sha256": "123bbc938b06d03b2fde01721ed3e365e3d35d8ea604f7a1272619ec060d0bf3"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/same-tick-upload.json",
+      "sha256": "b127cb195220c9c6aa49a5d2ee009181dd6d3cd8f3b081278dddd01601c6d8b3"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-ai-preflight-20261117/same-tick.vcd",
+      "sha256": "6132cdf2217b70d1b7bd5181bb5ffc58487372f8bbadd36fd3f0c0d0d0db76c2"
+    }
+  ],
+  "final_document_correction": "Corrected a wording typo after independent claim verification; preceding manifest/patch retained as .before-wording-fix. No code or test behavior changed."
+}

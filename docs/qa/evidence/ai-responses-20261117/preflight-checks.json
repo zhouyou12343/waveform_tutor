@@ -1,0 +1,14 @@
+{
+  "real_provider_calls": 0,
+  "real_key_configured": false,
+  "context_and_standard_facts_unchanged": true,
+  "benchmark_oracles": 86,
+  "browser_classification": {
+    "real_local_offline": 4,
+    "route_mock": 14,
+    "real_provider": 0
+  },
+  "dependency_files_changed": false,
+  "first_call_authorization_received": false,
+  "screenshot_note": "home/counter are actual local offline browser captures; ai-mock-recovery is a route mock, not a real answer."
+}

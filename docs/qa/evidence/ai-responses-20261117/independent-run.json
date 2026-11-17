@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "scripts/qa_correctness.py",
+    "--label",
+    "responses-20261117"
+  ],
+  "exit_code": 0,
+  "seconds": 0.471,
+  "stdout": "{\"verdict\": \"PASS\", \"passed\": 81, \"total\": 81, \"evidence\": \"./docs/qa/evidence/correctness-responses-20261117\"}\n",
+  "real_provider_calls": 0,
+  "simulator": "Icarus Verilog 11.0, user-local package extraction"
+}

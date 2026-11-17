@@ -1,0 +1,40 @@
+# Local environments and secrets (the example is documentation only)
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+# Browser-managed backend configuration (contains a local plaintext API key)
+.waveform-tutor/
+
+# Frontend dependencies and generated output
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Python/tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Browser test output
+test-results/
+playwright-report/
+
+# Local assistant state and OS metadata
+.claude/
+.qa-baseline/
+.DS_Store
+
+# Compiled simulation output; retain examples/**/trace.vcd
+*.vvp
+docs/qa/evidence/**/sim.out
+docs/qa/evidence/performance-*/*.vcd
+
+# Keep source examples, VCD fixtures, and docs/screenshots tracked.

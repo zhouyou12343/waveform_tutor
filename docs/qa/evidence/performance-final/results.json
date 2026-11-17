@@ -1,0 +1,478 @@
+{
+  "label": "final",
+  "process": {
+    "pid": 12757,
+    "ps": "12757 一 11/16 23:19:26 2026       34208 /opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --limit-concurrency 16",
+    "captured_at": "2026-11-16T23:23:35.488055+08:00"
+  },
+  "baseline_rss_kib": 34208,
+  "datasets": [
+    {
+      "name": "small",
+      "events": 300,
+      "ticks": 100,
+      "vcd_bytes": 22340,
+      "sha256": "394498d4189f8370d8cc1a58ae0f5491557ec66fee61b1461cb722c1b5f77ac8",
+      "runs": [
+        {
+          "iteration": 1,
+          "upload": {
+            "status": 200,
+            "http_ms": 41.44200001610443,
+            "request_body_bytes": 22509,
+            "response_body_bytes": 28361
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 6.996333017013967,
+            "request_body_bytes": 73,
+            "response_body_bytes": 30132
+          },
+          "returned_events": 300,
+          "trace_id": "ca9cb508a8f44b6f96eb93db08990341",
+          "rss_after_kib": 34368,
+          "analysis_truncated": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "iteration": 2,
+          "upload": {
+            "status": 200,
+            "http_ms": 17.963249993044883,
+            "request_body_bytes": 22509,
+            "response_body_bytes": 28361
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 6.111584021709859,
+            "request_body_bytes": 73,
+            "response_body_bytes": 30132
+          },
+          "returned_events": 300,
+          "trace_id": "5571575292684c72953065ba4db05104",
+          "rss_after_kib": 34416,
+          "analysis_truncated": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "iteration": 3,
+          "upload": {
+            "status": 200,
+            "http_ms": 18.464791995938867,
+            "request_body_bytes": 22509,
+            "response_body_bytes": 28361
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 5.895583977689967,
+            "request_body_bytes": 73,
+            "response_body_bytes": 30132
+          },
+          "returned_events": 300,
+          "trace_id": "44ef520e7ed445db8c0551e7c1bae990",
+          "rss_after_kib": 34544,
+          "analysis_truncated": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "iteration": 4,
+          "upload": {
+            "status": 200,
+            "http_ms": 18.304375000298023,
+            "request_body_bytes": 22509,
+            "response_body_bytes": 28361
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 5.59750001411885,
+            "request_body_bytes": 73,
+            "response_body_bytes": 30132
+          },
+          "returned_events": 300,
+          "trace_id": "704438180ae6413ca35ca9840f4d65db",
+          "rss_after_kib": 34704,
+          "analysis_truncated": [
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "iteration": 5,
+          "upload": {
+            "status": 200,
+            "http_ms": 18.297083006473258,
+            "request_body_bytes": 22509,
+            "response_body_bytes": 28361
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 5.437707994133234,
+            "request_body_bytes": 73,
+            "response_body_bytes": 30132
+          },
+          "returned_events": 300,
+          "trace_id": "9ef194bc4e584a86b8ca3c2f24e20d2c",
+          "rss_after_kib": 34944,
+          "analysis_truncated": [
+            false,
+            false,
+            false
+          ]
+        }
+      ],
+      "rss_before_kib": 34208,
+      "upload": {
+        "n": 5,
+        "p50_ms": 18.304375000298023,
+        "p95_ms": 41.44200001610443,
+        "method": "nearest-rank; n=5 p95 is maximum, not a stable tail estimate",
+        "samples_ms": [
+          41.44200001610443,
+          17.963249993044883,
+          18.464791995938867,
+          18.304375000298023,
+          18.297083006473258
+        ]
+      },
+      "analysis": {
+        "n": 5,
+        "p50_ms": 5.895583977689967,
+        "p95_ms": 6.996333017013967,
+        "method": "nearest-rank; n=5 p95 is maximum, not a stable tail estimate",
+        "samples_ms": [
+          6.996333017013967,
+          6.111584021709859,
+          5.895583977689967,
+          5.59750001411885,
+          5.437707994133234
+        ]
+      },
+      "rss_after_kib": 34944
+    },
+    {
+      "name": "medium",
+      "events": 15000,
+      "ticks": 5000,
+      "vcd_bytes": 1119040,
+      "sha256": "6337aac66c75e94e2b9ffaa60d3cc33034c4b8df692323bf207becdb42a1360b",
+      "runs": [
+        {
+          "iteration": 1,
+          "upload": {
+            "status": 200,
+            "http_ms": 806.9807080028113,
+            "request_body_bytes": 1119210,
+            "response_body_bytes": 1422164
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 7.88950000423938,
+            "request_body_bytes": 76,
+            "response_body_bytes": 38145
+          },
+          "returned_events": 15000,
+          "trace_id": "e3be80fdc154486cad8ec183a2ee60fe",
+          "rss_after_kib": 70832,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 2,
+          "upload": {
+            "status": 200,
+            "http_ms": 642.2056250157766,
+            "request_body_bytes": 1119210,
+            "response_body_bytes": 1422164
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 13.836166996043175,
+            "request_body_bytes": 76,
+            "response_body_bytes": 38145
+          },
+          "returned_events": 15000,
+          "trace_id": "8afd8a20d80549ce89bab19ae767d24b",
+          "rss_after_kib": 76224,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 3,
+          "upload": {
+            "status": 200,
+            "http_ms": 689.4524579984136,
+            "request_body_bytes": 1119210,
+            "response_body_bytes": 1422164
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 7.46145800803788,
+            "request_body_bytes": 76,
+            "response_body_bytes": 38145
+          },
+          "returned_events": 15000,
+          "trace_id": "17d1c2cf45f14736abc2595ee4bbc18b",
+          "rss_after_kib": 88496,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 4,
+          "upload": {
+            "status": 200,
+            "http_ms": 640.66816601553,
+            "request_body_bytes": 1119210,
+            "response_body_bytes": 1422164
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 7.3042919975705445,
+            "request_body_bytes": 76,
+            "response_body_bytes": 38145
+          },
+          "returned_events": 15000,
+          "trace_id": "a048b07fbc7b49909e3673e09f7ec679",
+          "rss_after_kib": 103040,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 5,
+          "upload": {
+            "status": 200,
+            "http_ms": 677.6673749845941,
+            "request_body_bytes": 1119210,
+            "response_body_bytes": 1422164
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 7.218209007987753,
+            "request_body_bytes": 76,
+            "response_body_bytes": 38145
+          },
+          "returned_events": 15000,
+          "trace_id": "726c0120ab5d43aaad9c6aa04abf9a8e",
+          "rss_after_kib": 112080,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "rss_before_kib": 34944,
+      "upload": {
+        "n": 5,
+        "p50_ms": 677.6673749845941,
+        "p95_ms": 806.9807080028113,
+        "method": "nearest-rank; n=5 p95 is maximum, not a stable tail estimate",
+        "samples_ms": [
+          806.9807080028113,
+          642.2056250157766,
+          689.4524579984136,
+          640.66816601553,
+          677.6673749845941
+        ]
+      },
+      "analysis": {
+        "n": 5,
+        "p50_ms": 7.46145800803788,
+        "p95_ms": 13.836166996043175,
+        "method": "nearest-rank; n=5 p95 is maximum, not a stable tail estimate",
+        "samples_ms": [
+          7.88950000423938,
+          13.836166996043175,
+          7.46145800803788,
+          7.3042919975705445,
+          7.218209007987753
+        ]
+      },
+      "rss_after_kib": 112080
+    },
+    {
+      "name": "near-limit",
+      "events": 99999,
+      "ticks": 33333,
+      "vcd_bytes": 7488965,
+      "sha256": "a7b8430af57aad7dd3f0f8bcd30c53b81269c94aded735a06c654e3ae6e2d408",
+      "runs": [
+        {
+          "iteration": 1,
+          "upload": {
+            "status": 200,
+            "http_ms": 4491.346874972805,
+            "request_body_bytes": 7489139,
+            "response_body_bytes": 9567073
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 21.92479101358913,
+            "request_body_bytes": 78,
+            "response_body_bytes": 38159
+          },
+          "returned_events": 99999,
+          "trace_id": "efb0479443a4474595534eaf34d8eaa4",
+          "rss_after_kib": 186112,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 2,
+          "upload": {
+            "status": 200,
+            "http_ms": 4344.487541995477,
+            "request_body_bytes": 7489139,
+            "response_body_bytes": 9567073
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 19.491457991534844,
+            "request_body_bytes": 78,
+            "response_body_bytes": 38159
+          },
+          "returned_events": 99999,
+          "trace_id": "050d8b4e9bb742f6831570afed3df699",
+          "rss_after_kib": 204032,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 3,
+          "upload": {
+            "status": 200,
+            "http_ms": 4632.011707988568,
+            "request_body_bytes": 7489139,
+            "response_body_bytes": 9567073
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 18.540916993515566,
+            "request_body_bytes": 78,
+            "response_body_bytes": 38159
+          },
+          "returned_events": 99999,
+          "trace_id": "369c1650640444099835185036d91233",
+          "rss_after_kib": 283904,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 4,
+          "upload": {
+            "status": 200,
+            "http_ms": 4371.228625008371,
+            "request_body_bytes": 7489139,
+            "response_body_bytes": 9567073
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 19.90679101436399,
+            "request_body_bytes": 78,
+            "response_body_bytes": 38159
+          },
+          "returned_events": 99999,
+          "trace_id": "6919a8dd9e414ef098aaa0545696e45f",
+          "rss_after_kib": 214816,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "iteration": 5,
+          "upload": {
+            "status": 200,
+            "http_ms": 4404.552457999671,
+            "request_body_bytes": 7489139,
+            "response_body_bytes": 9567073
+          },
+          "analysis": {
+            "status": 200,
+            "http_ms": 18.458416976500303,
+            "request_body_bytes": 78,
+            "response_body_bytes": 38159
+          },
+          "returned_events": 99999,
+          "trace_id": "b372d724ac164b53a6d1b4c8c3c6d0e4",
+          "rss_after_kib": 159616,
+          "analysis_truncated": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "rss_before_kib": 112080,
+      "upload": {
+        "n": 5,
+        "p50_ms": 4404.552457999671,
+        "p95_ms": 4632.011707988568,
+        "method": "nearest-rank; n=5 p95 is maximum, not a stable tail estimate",
+        "samples_ms": [
+          4491.346874972805,
+          4344.487541995477,
+          4632.011707988568,
+          4371.228625008371,
+          4404.552457999671
+        ]
+      },
+      "analysis": {
+        "n": 5,
+        "p50_ms": 19.491457991534844,
+        "p95_ms": 21.92479101358913,
+        "method": "nearest-rank; n=5 p95 is maximum, not a stable tail estimate",
+        "samples_ms": [
+          21.92479101358913,
+          19.491457991534844,
+          18.540916993515566,
+          19.90679101436399,
+          18.458416976500303
+        ]
+      },
+      "rss_after_kib": 159616
+    }
+  ],
+  "errors": [],
+  "measurement": "Sequential HTTP localhost only; total HTTP includes request/response transfer, parsing JSON excluded. ps RSS approximately every 50ms plus subprocess overhead; sampled maximum is NOT exact peak. Existing process/cache not cleared. No AI or public requests.",
+  "ending_rss_kib": 159616,
+  "sampled_max_rss_kib": 322256,
+  "rss_sample_count": 442,
+  "process_end": {
+    "pid": 12757,
+    "ps": "12757 一 11/16 23:19:26 2026      159792 /opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --limit-concurrency 16",
+    "captured_at": "2026-11-16T23:24:02.585002+08:00"
+  },
+  "verdict": "COMPLETE"
+}

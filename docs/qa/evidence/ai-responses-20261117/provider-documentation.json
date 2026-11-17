@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "provider": "4router",
+  "api_base_url": "https://4router.net/v1",
+  "model_id": "gpt-5.6-sol",
+  "selection": "User explicitly chose to replace HACG with 4router, then selected gpt-5.6-sol from the two offered model choices.",
+  "superseded_target": "HACG llm.sjtuhacg.com / gpt-6-astra; retained in earlier discovery records only",
+  "screenshot_handling": "Only the API Base URL and model display labels were used. No credential characters or screenshot were copied into project evidence.",
+  "documented_by_provider": {
+    "openai_base_url": "https://4router.net/v1",
+    "wire_api": "responses",
+    "model_listed": "gpt-5.6-sol",
+    "third_party_client_support_groups": ["GptPro", "GptPro-Fast"],
+    "requires_openai_auth": true,
+    "disable_response_storage": true,
+    "limitations": "Group entitlement and runtime availability depend on the user's account. Documented labels do not verify upstream official model identity. High retry counts from client guides were not adopted."
+  },
+  "standard_protocol_preparation_not_live_observation": {
+    "method": "POST",
+    "endpoint": "https://4router.net/v1/responses",
+    "authentication": "Authorization: Bearer <backend-only API key>",
+    "payload_fields": ["model", "instructions", "input", "max_output_tokens", "store", "stream"],
+    "store": false,
+    "stream": false,
+    "max_output_tokens": 2048,
+    "input": "A user input_text block containing the same JSON context as the Chat adapter; no tools or conversation continuation",
+    "output": "Require completed top-level status, no error/incomplete_details, then completed assistant messages with output_text blocks; skip reasoning; reject tool/refusal/incomplete/malformed output",
+    "provider_live_support": "NOT_VERIFIED",
+    "privacy_note": "store=false requests API storage disabled; does not promise a third-party provider keeps no logs."
+  },
+  "prospective_nonsecret_configuration": {
+    "AI_BASE_URL": "https://4router.net/v1",
+    "AI_MODEL": "gpt-5.6-sol",
+    "AI_API_FORMAT": "responses",
+    "AI_TIMEOUT_SECONDS": "30",
+    "AI_MAX_OUTPUT_TOKENS": "2048",
+    "AI_MAX_ATTEMPTS": "1",
+    "AI_REQUEST_BUDGET": "2"
+  },
+  "configuration_activated": false,
+  "key_configured_for_acceptance": false,
+  "authorized_inference_attempts": 0,
+  "actual_inference_attempts": 0,
+  "successful_inference_attempts": 0,
+  "failed_inference_attempts": 0,
+  "status": "DOCUMENTED_PROTOCOL_ADAPTER_PREPARED_LIVE_NOT_VERIFIED",
+  "sources": [
+    {"url":"https://docs.4router.net/guides/manual-config/", "basis":"Directly read public guide; Base URL"},
+    {"url":"https://docs.4router.net/guides/cherry-studio/", "basis":"Directly read public guide; GPT models use OpenAI-Response"},
+    {"url":"https://docs.4router.net/guides/model-groups/", "basis":"Directly read public guide; gpt-5.6-sol and third-party access groups"},
+    {"url":"https://docs.4router.net/guides/codex-1m-context/", "basis":"Delegated read-only guide review; wire_api=responses, model ID, storage flag"},
+    {"url":"https://docs.4router.net/guides/codex-mac/", "basis":"Delegated read-only guide review; base URL and protocol/auth flags"},
+    {"url":"https://developers.openai.com/api/reference/resources/responses/methods/create", "basis":"Standard REST shape reference only, not proof of 4router compatibility"}
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb",
+      "-o",
+      "./docs/qa/evidence/correctness-responses-20261117/counter/sim.out",
+      "./docs/qa/evidence/correctness-responses-20261117/counter/design.sv",
+      "./docs/qa/evidence/correctness-responses-20261117/counter/tb.sv"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "vvp",
+      "./docs/qa/evidence/correctness-responses-20261117/counter/sim.out"
+    ],
+    "returncode": 0,
+    "stdout": "VCD info: dumpfile trace.vcd opened for output.\nPASS counter: 24 edges, hold at 120-150ns, wrap at 205ns, sync reset at 235ns\n",
+    "stderr": ""
+  }
+]

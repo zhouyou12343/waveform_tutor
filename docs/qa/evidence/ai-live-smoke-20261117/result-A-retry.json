@@ -1,0 +1,60 @@
+{
+  "stage": "A-retry",
+  "started_at": "2026-11-17T04:04:58.683986+00:00",
+  "provider": "4router",
+  "model_requested": "gpt-5.6-sol",
+  "endpoint": "https://4router.net/v1/responses",
+  "api_format": "responses",
+  "max_attempts": 1,
+  "max_output_tokens": 2048,
+  "http_attempt_reserved": true,
+  "real_provider": true,
+  "rtl_sent": false,
+  "private_data_sent": false,
+  "outcome": "SUCCESS",
+  "headers_elapsed_seconds": 6.038,
+  "http_status": 200,
+  "content_type": "application/json",
+  "response_json_parseable": true,
+  "response_shape": "object",
+  "response_model": "gpt-5.6-sol",
+  "response_status": "completed",
+  "usage": {
+    "input_tokens": 613,
+    "output_tokens": 76,
+    "total_tokens": 689
+  },
+  "output_types": [
+    "message"
+  ],
+  "provider_explanation_untrusted": {
+    "summary": "CONNECTIVITY_OK：本请求不含波形数据，无法进行波形分析。",
+    "observed_facts": [],
+    "possible_explanations": [],
+    "related_signals": [],
+    "related_code": [],
+    "suggested_checks": [],
+    "limitations": [
+      "本连通性请求不包含波形数据，不能得出波形行为结论。"
+    ]
+  },
+  "provider_explanation_valid_json": true,
+  "application_response": {
+    "summary": "推测：CONNECTIVITY_OK：本请求不含波形数据，无法进行波形分析。",
+    "observed_facts": [],
+    "possible_explanations": [],
+    "related_signals": [],
+    "related_code": [],
+    "suggested_checks": [],
+    "limitations": [
+      "本连通性请求不包含波形数据，不能得出波形行为结论。",
+      "AI解释为推测，不是仿真结果或形式验证"
+    ]
+  },
+  "connectivity_marker_present": true,
+  "http_attempts_in_provider": 1,
+  "elapsed_seconds": 6.051,
+  "finished_at": "2026-11-17T04:05:04.737217+00:00",
+  "reserved_attempts_total": 2,
+  "remaining_authorized_attempts": 0
+}

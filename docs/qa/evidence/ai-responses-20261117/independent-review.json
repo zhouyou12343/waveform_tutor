@@ -1,0 +1,19 @@
+{
+  "review_date": "2026-11-17",
+  "mode": "independent read-only code review; no real HTTP calls",
+  "finding": "No blocking defect reported for the Responses increment",
+  "review_scope": [
+    "default Chat behavior",
+    "format selection",
+    "payload/data minimization",
+    "completed assistant output extraction",
+    "refusal/tool/incomplete/malformed rejection",
+    "budget/cancel/size limits"
+  ],
+  "independent_agent_reported_checks": {
+    "pytest": 139,
+    "additional_memory_only_probes": 8
+  },
+  "evidence_limit": "Independent reviewer returned a summary, not persistent raw logs; these counts are not added to the main 261-test run.",
+  "real_provider_calls": 0
+}

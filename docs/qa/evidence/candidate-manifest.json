@@ -1,0 +1,558 @@
+[
+  {
+    "path": "LICENSE",
+    "sha256": "3b4f8570e4ca788b33ddb480920c107a34e4f879dd24df94adf437a386979713"
+  },
+  {
+    "path": "pyproject.toml",
+    "sha256": "b1b124831f574ec330c6e865b31c18a5cad606f37542f07a9b241ec8993d3ad7"
+  },
+  {
+    "path": "README.md",
+    "sha256": "80da64b2350ece39acb7dffcbbb41043ee6c4d8dcf7d7c19418c040bea1dcb19"
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "78232245ebeb3e9b32663b685b76c4751255058529c4ab2272c82d6c754b8cc3"
+  },
+  {
+    "path": "README.zh-CN.md",
+    "sha256": "2b3c1589c791e79f6d7cbd8ff2a467ff393eb603652cf067733fbfa70c4af5df"
+  },
+  {
+    "path": "AGENTS.md",
+    "sha256": "ec4231ae519025f72f0ed912544550464c9bc0dc1c72ab4b1b2a8e5bdf6f266c"
+  },
+  {
+    "path": "frontend/index.html",
+    "sha256": "a973b69e041a3a712894c324b1907402c45623087aea693d6ba775fc34aa9faa"
+  },
+  {
+    "path": "frontend/package-lock.json",
+    "sha256": "2d140a07cf9f36362a4e43cb063eeb935af58db3ea6fc31c1584c195c4d862fb"
+  },
+  {
+    "path": "frontend/package.json",
+    "sha256": "6695f2c3746794ae82b90df873fbc19d33cd5ef5d7fe5e29b8dd24b499b903c9"
+  },
+  {
+    "path": "frontend/tsconfig.json",
+    "sha256": "2d4b916d2facf15a23852a1358e51c28e734ae7be2003122e0a29d4ec90df3fe"
+  },
+  {
+    "path": "frontend/playwright.config.ts",
+    "sha256": "8dbdb7b994cc4a7cd9009d85209757a1565f6fc2916a35a8ecdd0e39aae69e59"
+  },
+  {
+    "path": "frontend/vite.config.ts",
+    "sha256": "c133b71289e3fae146d6201cf70a3dd48b907a43459e897892cf01680ed1d221"
+  },
+  {
+    "path": "frontend/tests/workbench.spec.ts",
+    "sha256": "2623695ba8487ec0c2fd16325e0a45d21bc3f0bc6626fd1392e0e257503e743a"
+  },
+  {
+    "path": "frontend/tests/utils.test.ts",
+    "sha256": "cae56a4ca83aee698b2923f05f2b6116ce2a1affd8360d7f8c3bbc78c1785245"
+  },
+  {
+    "path": "frontend/tests/integration.spec.ts",
+    "sha256": "0bf8022bd0e7a8debe05917b9239a614d993d7ed46d14b1cce0d0c5fc87ab0d0"
+  },
+  {
+    "path": "frontend/src/App.tsx",
+    "sha256": "83e9bc0b3acd09c4f111d645671b9d9197be1f87e41cdb140616ec0907a38fd6"
+  },
+  {
+    "path": "frontend/src/main.tsx",
+    "sha256": "b8c1e566187ea5d53bf9b4c2f4cd8fc8193b4958afa219e57d39b76153f4fb20"
+  },
+  {
+    "path": "frontend/src/Explorer.tsx",
+    "sha256": "7fb4f9f09e72362c47cca26cdade996e005caeed88038c130acc92b2bb2b6e3b"
+  },
+  {
+    "path": "frontend/src/styles.css",
+    "sha256": "2785935f380b72d33f5de47d5557ad077aaa3c467e697f3a1b82954d0a467f02"
+  },
+  {
+    "path": "frontend/src/utils.ts",
+    "sha256": "ab7fcc491847551d5fedff02024168cc0cacb35f6826bbec3836c87e178c7d15"
+  },
+  {
+    "path": "frontend/src/api.ts",
+    "sha256": "85f9ba9e105677e907490f2876f1e445d3c6c5f007dfb6b8b1ed674093141ebc"
+  },
+  {
+    "path": "frontend/src/Waveform.tsx",
+    "sha256": "618b09431e271d3ed0d768c59e307380b71286e43e7df880d4711e6022f59f6d"
+  },
+  {
+    "path": "frontend/src/types.ts",
+    "sha256": "e4e132fa65b7136a61a771086786decac3acd88cfb7a9a9eb52704339fdf23e7"
+  },
+  {
+    "path": "frontend/src/ExplanationPanel.tsx",
+    "sha256": "f0be8096d850c8d4e6f72b89aed848c6f688c1aebb5f3806f01a07c189f571d7"
+  },
+  {
+    "path": "frontend/src/RTLViewer.tsx",
+    "sha256": "a7488e48929737c90f21cf9d91904c114145e20eddb62e783ac344ab5f614b7c"
+  },
+  {
+    "path": "backend/requirements.txt",
+    "sha256": "79ca55ef90fe8558f2f2ebbab79f3c8f7542db5d79e0f1135b5645b71073fffc"
+  },
+  {
+    "path": "backend/app/models.py",
+    "sha256": "10f313924781aea708d9bcf88ba5d589e72555092bc36c64d2773ae3a28e5f8c"
+  },
+  {
+    "path": "backend/app/ai.py",
+    "sha256": "9ef3c8b0790d085cb7a8797fa167d917eaa62a73da6418f28e2e45f4746a511e"
+  },
+  {
+    "path": "backend/app/analyzer.py",
+    "sha256": "dec99926a1e6aa120ddc31193b73883d6aa96941407b4ae00349c82a2ef4a4ee"
+  },
+  {
+    "path": "backend/app/parser.py",
+    "sha256": "94f19c34302d1c018b0c881a6fc3e1bba7d08d2f2880fd83e5ebdad2aa253677"
+  },
+  {
+    "path": "backend/app/main.py",
+    "sha256": "d19ae087e73bc25e46ef0400492835e88a36c3732a4c4e7e967ecf7e52600a31"
+  },
+  {
+    "path": "backend/tests/test_parser.py",
+    "sha256": "24731c1eee10a2c79a3a11578941b275f06b900651a18a23a6d6355814badd3e"
+  },
+  {
+    "path": "backend/tests/test_analyzer.py",
+    "sha256": "c7274f75637be7ea91bb112f6683baa09c22ee9585c501a1fdf8beb8484ce98c"
+  },
+  {
+    "path": "backend/tests/test_ai.py",
+    "sha256": "115276de951149611a3e867638114d27b5b94e0af5a8e54ab166a5973b866257"
+  },
+  {
+    "path": "backend/tests/test_api.py",
+    "sha256": "a3ce7b6d5160a1bb7ef532399870f618fd1200880b93c429824b86630ddcef2c"
+  },
+  {
+    "path": "docs/architecture.md",
+    "sha256": "a6e5180a57b4ec448456ae613d7c8f859b12f6e1d61c73fc8f22e8f5ba04f83e"
+  },
+  {
+    "path": "docs/api.md",
+    "sha256": "aef324b5661f8671785bbf29cb4e30783f99f2b216884a6c7ca8ddce7c5ac8a3"
+  },
+  {
+    "path": "docs/limitations.md",
+    "sha256": "5b080351dab7fad0b4d16c2ae6b2446b2a5978a412431ac273a08af8817a8e48"
+  },
+  {
+    "path": "docs/dependencies.md",
+    "sha256": "c4fd255ba22a56f92725b515a150be0fb3b9ff87c6da3b0019008d98cc3bb47f"
+  },
+  {
+    "path": "docs/delivery.md",
+    "sha256": "c230032708cdb3bce8b1a77d60739cbec968d4d8c0deda984011462193c644e8"
+  },
+  {
+    "path": "docs/development.md",
+    "sha256": "312c0f1fe61eb06a2c2e4e75861546c19f36e4125d1ff9edf0b55c6db6ff04ed"
+  },
+  {
+    "path": "docs/qa/release-candidate-report.md",
+    "sha256": "353fabe182580bedc98db1377d66d9879514e093a2481e04bb28e19a7f1b0ee3"
+  },
+  {
+    "path": "docs/qa/correctness-report.md",
+    "sha256": "27cd5f51c2138a8779402847113d121a0b029b1197db530585f9152451538614"
+  },
+  {
+    "path": "docs/qa/ai-provider-report.md",
+    "sha256": "de6d3aaad7ae683238407b9c60d76488ddf97e2ec4db6cb54724c05b91461fa5"
+  },
+  {
+    "path": "docs/qa/performance-report.md",
+    "sha256": "3d6263c887fcf45ca83a3ac8538c15267b290ec4783721b1ae139d1e48700aed"
+  },
+  {
+    "path": "docs/qa/code-review-report.md",
+    "sha256": "3a2a02bc32122768b7ddd6ba15efd2cad4583c89246b30319c971c593d2fbe55"
+  },
+  {
+    "path": "docs/qa/functional-test-report.md",
+    "sha256": "887c047b2609f41bdae1a2561f23ec6cf7d2404101f0180c15d452dd46517886"
+  },
+  {
+    "path": "docs/qa/unresolved-issues.md",
+    "sha256": "074823357570ec174f58b8c3cce74b1ab4255ed558ea9eee3a1550b42e4f1aee"
+  },
+  {
+    "path": "docs/qa/release-checklist.md",
+    "sha256": "cf96a75979483c47f704144354e8da4fe34a9fed0ba4d5e55f349dbc15707243"
+  },
+  {
+    "path": "docs/qa/evidence/automated-final.json",
+    "sha256": "caca4d5099e6c4b016834855a810c8285ef7918c8bf09f4e4f82cea09469d568"
+  },
+  {
+    "path": "docs/qa/evidence/ai-release-checks.json",
+    "sha256": "cee98ae0765a229a494bc988bed7fd1090597ecd9c61750ca8dbcf86a369e888"
+  },
+  {
+    "path": "docs/qa/evidence/browser-baseline.json",
+    "sha256": "d126f94a3e2a023c9a02a8afb5106b91137eed059a4da1a5bbb6c89aee67d72b"
+  },
+  {
+    "path": "docs/qa/evidence/browser-final.json",
+    "sha256": "09cc868b28afbcec19799b2db33025f058052f27fc964f4ffb580f64fc64e528"
+  },
+  {
+    "path": "docs/qa/evidence/browser-boundaries-final.json",
+    "sha256": "aac8236ad46f5ca5c9aa7c6c3697d1536e1119db48527b10c968b7b149966297"
+  },
+  {
+    "path": "docs/qa/evidence/browser-boundaries-driver-error.json",
+    "sha256": "6aa6fbcee8257e22986d7d40c515f4925cef43c16b9e638e0a986dc23816cfcd"
+  },
+  {
+    "path": "docs/qa/evidence/release-source-scan.json",
+    "sha256": "9a0dc54774a7ad3ed42015b27d9764f8c81277edaa2fb46bbd8c6c329dff65b7"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/small-2-analysis.json",
+    "sha256": "242a3ce49b6428ffb0351d6160bef2720964b1725688124f467cf4d62011a9f4"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/small-1-analysis.json",
+    "sha256": "3a62bb1684db633936fb5bc65a84dfae3c6bc2398a42a91be48f697db34f501a"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/small-5-analysis.json",
+    "sha256": "cd4501ebe361f408fd9d661c9eb7edbc7fed117f7e07ea50c4422b9b3112bec5"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/medium-2-analysis.json",
+    "sha256": "87f52e09042b561e22eba2dbb940c448c4dfbdad5b192a43d984934b0e47d550"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/results.json",
+    "sha256": "1f745909e823772171582c2fd2374ae96705b2798b4c2f0c0cc0958ca0bd1693"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/near-limit-2-analysis.json",
+    "sha256": "491d7b08f2b3672b746944114b222e969c514da29fb79276ee8f4559a5e16c35"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/near-limit-5-analysis.json",
+    "sha256": "cc94c1e6812b71df63e6a43f7e4fc2c5bbe8517f2db69d7063952b9ad339d781"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/near-limit-1-analysis.json",
+    "sha256": "163f38b7abb828f4793dc868452ef8b4bd228030487b49d7900e7b2ac8bdb115"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/medium-5-analysis.json",
+    "sha256": "b084d40e1ec9e957cfe29c35845a8ecca924cbd3fc823548e3575d1477f7b06c"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/medium-1-analysis.json",
+    "sha256": "3a9299ac17dfbd8ae851dbd34a5cd554afc78aae4c942c8b7305ce9315328111"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/rss-samples.json",
+    "sha256": "fc1358db82e8eeb0c0d5be96cf360565d7f059f4404c9199063a298d6f1339ef"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/near-limit-4-analysis.json",
+    "sha256": "66ee5e71964fb5d01826ec4b9b9f693b8be5168b6c429d2b781f22ee9e00c1ab"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/medium-4-analysis.json",
+    "sha256": "2039ce5493d1022f818bb9f1896fd0b2fcb60cb9edd710c9ceabed8f10da90a0"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/medium-3-analysis.json",
+    "sha256": "cd9ef2af75c6dc0662b59ac58f2e237f4eb3cbe7008da708e50520034243470a"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/near-limit-3-analysis.json",
+    "sha256": "75175ef0a60a698f8a4e2afbee0fe2203167717e9483591a9ebdd1c78ddce7e8"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/small-4-analysis.json",
+    "sha256": "d15d666e247e45ddf3d77f9669032eeb2f66b4e317405839ff3ee598bf264bab"
+  },
+  {
+    "path": "docs/qa/evidence/performance-baseline/small-3-analysis.json",
+    "sha256": "831d45885886a1cf2a04f3cc0175cee67d9c06de593a20bb3e30ffb2372050b0"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/same-tick-upload.json",
+    "sha256": "8081fe30b728bc25679cee5cbb257e34e8d5a14fd9c467a493f4be31e4345622"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fifo-upload.json",
+    "sha256": "7211851c74d88b33e80da789287fa8b5e085e43423920b3bb1a1accd312350bf"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/results.json",
+    "sha256": "fe9c3f293c4a3a06b084f09f19fbb6e884e8e1ac521446b1f709877cb668c9d3"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fixed-fixture-upload.json",
+    "sha256": "2944ee960e2c87d37e5ee3f6c4532a564360359d4d029209b5f5bf21c7333d2b"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/counter-upload.json",
+    "sha256": "24c06f28bdff031bdc575adef0cf7e2044ad41c69d030a190339a6368c4913ec"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/handshake-upload.json",
+    "sha256": "ee25d725aa98a26a2aa5f511e024661a09ec2e5e3f6522e96941744c282911ae"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/handshake/tb.sv",
+    "sha256": "f73454a1cecb5b9a40593a283b42784bba31b0125a20d0939fe9732121e7e3e3"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/handshake/design.sv",
+    "sha256": "ceda3f54665dd597d5f20c8905147f4b5c46a50fffa10ea3d2b2c0cff10f8d22"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/handshake/simulation.json",
+    "sha256": "740e7b12c178e1da930cf0151df34da34fd5e91a37b7f71b0a00bf3d874de3b4"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fixed-fixture/tb.sv",
+    "sha256": "822c8127dd47da0e31f60b7d4731dbeac091db85aee81b4af750e05680d423e0"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fixed-fixture/simulation.json",
+    "sha256": "22462d769290a862eb6271badc40287f2ebd8886bdcf4115fe1bfff41edb3100"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fifo/tb.sv",
+    "sha256": "2cb044d136cb79c955c598fbefa6017cb0a506662db0893cbd0666f48c06ff6a"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fifo/design.sv",
+    "sha256": "5c979a3f028cc20d20140d17560fac9755a18e6f048ebbf3cb9c054e990bfd57"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/fifo/simulation.json",
+    "sha256": "e601f5a15aacdec765a1584c1d0134bb8d5730f6be88550e108f33441ab41d1a"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/counter/tb.sv",
+    "sha256": "a4dc5293ce33684c9da77f062fdbed6c634d9f198036ad8d82e16ee794569a8b"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/counter/design.sv",
+    "sha256": "e6db6e56b869a7b91e7b5012505df25c80a4af2386b45414170b54bbf4cbae86"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-final/counter/simulation.json",
+    "sha256": "d467a177d8cfd3c35b9ca00c28f699eb3a6cac05beaefbf237c117dbe6545a3f"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/same-tick-upload.json",
+    "sha256": "2bc7004a1fb23c3806ea01d892a667e69dd9d15fbc6638bd4a7b216550b4a6ab"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fifo-upload.json",
+    "sha256": "70d17fa638b10a0069f9863f5d77af3d961d218d6a47a4748f37dfb4230ebea5"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/results.json",
+    "sha256": "5e4ed9468a501d3bdc930b67a8506a616caafb49f95504be58736b24219acfbc"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fixed-fixture-upload.json",
+    "sha256": "ddcc32ebad30d67edec50535500438d5f62399b58541d58c295c130426a8200c"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/counter-upload.json",
+    "sha256": "c011386d8c9096f3add041cc321afb413c05489f1bd324ec67b8c9f0ad99bb69"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/handshake-upload.json",
+    "sha256": "b18f5d0c506850d3b058c097103932fd1f95f39665d259954d4a6a13e0af3b1c"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/handshake/tb.sv",
+    "sha256": "f73454a1cecb5b9a40593a283b42784bba31b0125a20d0939fe9732121e7e3e3"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/handshake/design.sv",
+    "sha256": "ceda3f54665dd597d5f20c8905147f4b5c46a50fffa10ea3d2b2c0cff10f8d22"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/handshake/simulation.json",
+    "sha256": "6a77b642b65bd101ad0e11ec36654f71a1abdba2befd828b09d1ea01dba26b8b"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fixed-fixture/tb.sv",
+    "sha256": "822c8127dd47da0e31f60b7d4731dbeac091db85aee81b4af750e05680d423e0"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fixed-fixture/simulation.json",
+    "sha256": "788a77e680d37550e3ba3925a7fbd27b0bc7b4d06528a5a634d1c56723842756"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fifo/tb.sv",
+    "sha256": "2cb044d136cb79c955c598fbefa6017cb0a506662db0893cbd0666f48c06ff6a"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fifo/design.sv",
+    "sha256": "5c979a3f028cc20d20140d17560fac9755a18e6f048ebbf3cb9c054e990bfd57"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/fifo/simulation.json",
+    "sha256": "076dd1b81270ada3eec6f84dd4cdf54eb651d0d7f51d5e8ee12564a3d13eb1b4"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/counter/tb.sv",
+    "sha256": "a4dc5293ce33684c9da77f062fdbed6c634d9f198036ad8d82e16ee794569a8b"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/counter/design.sv",
+    "sha256": "e6db6e56b869a7b91e7b5012505df25c80a4af2386b45414170b54bbf4cbae86"
+  },
+  {
+    "path": "docs/qa/evidence/correctness-baseline/counter/simulation.json",
+    "sha256": "a6d0f5b5308e9267d2c8cb7377d8bcf580e9f5f0ef4b3d7893c580c2b5975127"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/small-2-analysis.json",
+    "sha256": "f784fc29cab32188c8a1780e0f03f60b507445a793a821ea9eff48bfc2dd40c1"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/small-1-analysis.json",
+    "sha256": "5bac46a6bc942502194a13e345f2db71354a4da668001dd1fef1473f32bbf821"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/small-5-analysis.json",
+    "sha256": "2d7cc10f053e2c0e59163fd313a7787d5613c228910ea169c01b981e94bb9395"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/medium-2-analysis.json",
+    "sha256": "777376fa92fe088eeda55747f3ebf7500631f5a1af2e97990e179d9d85c47ea1"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/results.json",
+    "sha256": "7aabc9cab02c524450a71b522cc807d2c62268a74f0aa214c27e2c2f02c90fd6"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/near-limit-2-analysis.json",
+    "sha256": "d7ce660e20e679cdbeabfd1de5d9d4b9817dde10b83582ec60c04314575865bc"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/near-limit-5-analysis.json",
+    "sha256": "c8098b2591823bbacf6fc8515f8caa8f9eaac8e740daefbe05ef7c19ec256eb8"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/near-limit-1-analysis.json",
+    "sha256": "7c06e433a5c69e6e5db9c008d54254c85c9ef984a656558777024b7680fc65bb"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/medium-5-analysis.json",
+    "sha256": "bc08e38686fb76b1e5e1ca351f84985e33073a60229267e4bbb0f93961dc1136"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/medium-1-analysis.json",
+    "sha256": "2a152339dbe11f84b80c77e81db104444f38951066678efd6d861bcd300daf13"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/rss-samples.json",
+    "sha256": "56b4dcf99eedb60a7d446ead9ebc13743b64f79392429b73f45890d8d9992f79"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/near-limit-4-analysis.json",
+    "sha256": "3b0dbcaaceb48386c274f9210a88860d64361e9e3785e40907caf52ec5aefcaf"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/medium-4-analysis.json",
+    "sha256": "fe14e6bc83cb156082968eefff9769e41480e880ecac89e578ce1df7687acb26"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/medium-3-analysis.json",
+    "sha256": "900c43a688df5fd30c71c2512c71352a2b1adf29dafc765770d265194b6a9f86"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/near-limit-3-analysis.json",
+    "sha256": "c01fdbcd6ba85fefe58987c67a6c0df4c4dc7279e618314a832473c15abc9637"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/small-4-analysis.json",
+    "sha256": "8880afa42005e8f2357a7f3fa3b6cdc32db5b34f84fead9b8ffefe427c4ddd94"
+  },
+  {
+    "path": "docs/qa/evidence/performance-final/small-3-analysis.json",
+    "sha256": "007436cf3f5c78921f19d2c3db21e31795263c801fd9b0bd6ea6874213e75407"
+  },
+  {
+    "path": "examples/handshake/tb.sv",
+    "sha256": "f73454a1cecb5b9a40593a283b42784bba31b0125a20d0939fe9732121e7e3e3"
+  },
+  {
+    "path": "examples/handshake/design.sv",
+    "sha256": "ceda3f54665dd597d5f20c8905147f4b5c46a50fffa10ea3d2b2c0cff10f8d22"
+  },
+  {
+    "path": "examples/handshake/lesson.json",
+    "sha256": "7eee5d24ea6aeab0faee8418ded2a2213dce9f2d8b336f56b6a8896c50061d45"
+  },
+  {
+    "path": "examples/fifo/tb.sv",
+    "sha256": "2cb044d136cb79c955c598fbefa6017cb0a506662db0893cbd0666f48c06ff6a"
+  },
+  {
+    "path": "examples/fifo/design.sv",
+    "sha256": "5c979a3f028cc20d20140d17560fac9755a18e6f048ebbf3cb9c054e990bfd57"
+  },
+  {
+    "path": "examples/fifo/lesson.json",
+    "sha256": "8e30d43f09e589f43e6ad8b40a321284d07ea53b27352746c7fbc397aca3aca7"
+  },
+  {
+    "path": "examples/counter/tb.sv",
+    "sha256": "a4dc5293ce33684c9da77f062fdbed6c634d9f198036ad8d82e16ee794569a8b"
+  },
+  {
+    "path": "examples/counter/design.sv",
+    "sha256": "e6db6e56b869a7b91e7b5012505df25c80a4af2386b45414170b54bbf4cbae86"
+  },
+  {
+    "path": "examples/counter/lesson.json",
+    "sha256": "1e0b0db2db0b9b80ef65b72109488b7783d117e01bd5bc6af98c5850a5b0d3eb"
+  },
+  {
+    "path": "scripts/qa_browser.mjs",
+    "sha256": "7f72f1df69f42bd7ccf8611a5efd206183c5253c5ca054422fd8f41e01abf628"
+  },
+  {
+    "path": "scripts/qa_performance.py",
+    "sha256": "64e6b3e026fa9d8f347465ca8d2e18e5af55b44df055eb494ba64b11dd15cb5f"
+  },
+  {
+    "path": "scripts/qa_boundaries.mjs",
+    "sha256": "41d87fab0f22da1d48c6c28ef5135d5110b85083e888fa0df0ea5092881b1f84"
+  },
+  {
+    "path": "scripts/qa_correctness.py",
+    "sha256": "e951e60bfc7c04b056b6d59d3a66d3fb2a50a65ef9b157272f3ea98f22cc4ef1"
+  },
+  {
+    "path": "scripts/generate_examples.py",
+    "sha256": "15fb95e06b69b4bd13fc1562d8ba141958215ceb67309dc53c3a7b1bbf31aab0"
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "sha256": "4cf2da8e21072c23c395d4baa12a1da2e55c104a6e2c119a8a9c62d832749863"
+  }
+]

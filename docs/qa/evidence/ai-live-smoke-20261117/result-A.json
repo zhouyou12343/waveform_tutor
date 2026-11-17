@@ -1,0 +1,33 @@
+{
+  "stage": "A",
+  "started_at": "2026-11-17T03:54:46.181450+00:00",
+  "provider": "4router",
+  "model_requested": "gpt-5.6-sol",
+  "endpoint": "https://4router.net/v1/responses",
+  "api_format": "responses",
+  "max_attempts": 1,
+  "max_output_tokens": 2048,
+  "http_attempt_reserved": true,
+  "real_provider": true,
+  "rtl_sent": false,
+  "private_data_sent": false,
+  "outcome": "FAILED_PROVIDER_OR_VALIDATION",
+  "headers_elapsed_seconds": 0.675,
+  "http_status": 401,
+  "content_type": "application/json; charset=utf-8",
+  "response_json_parseable": true,
+  "response_shape": "object",
+  "error": {
+    "type": "4router_error",
+    "code": "",
+    "message": "无效的令牌 (request id: 20261117035446998449910K5y30566)"
+  },
+  "application_error": {
+    "status": 502,
+    "message": "AI 服务请求失败"
+  },
+  "elapsed_seconds": 0.68,
+  "finished_at": "2026-11-17T03:54:46.862618+00:00",
+  "reserved_attempts_total": 1,
+  "remaining_authorized_attempts": 1
+}

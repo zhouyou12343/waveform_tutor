@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "started_at": "2026-11-17T02:12:35.689570+00:00",
+    "seconds": 1.593,
+    "exit_code": 0,
+    "output": "........................................................................ [ 35%]\n........................................................................ [ 71%]\n.........................................................                [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.12/site-packages/fastapi/testclient.py:1\n  ./.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n201 passed, 1 warning in 1.22s\n",
+    "real_provider_calls": 0
+  },
+  {
+    "command": [
+      ".venv/bin/ruff",
+      "check",
+      "backend",
+      "scripts"
+    ],
+    "started_at": "2026-11-17T02:12:37.283723+00:00",
+    "seconds": 0.139,
+    "exit_code": 0,
+    "output": "All checks passed!\n",
+    "real_provider_calls": 0
+  },
+  {
+    "command": [
+      ".venv/bin/ruff",
+      "format",
+      "--check",
+      "backend",
+      "scripts"
+    ],
+    "started_at": "2026-11-17T02:12:37.423688+00:00",
+    "seconds": 0.033,
+    "exit_code": 0,
+    "output": "14 files already formatted\n",
+    "real_provider_calls": 0
+  },
+  {
+    "command": [
+      "uv",
+      "pip",
+      "check",
+      "--python",
+      "./.venv/bin/python"
+    ],
+    "started_at": "2026-11-17T02:12:37.457124+00:00",
+    "seconds": 0.071,
+    "exit_code": 0,
+    "output": "Checked 26 packages in 10ms\nAll installed packages are compatible\n",
+    "real_provider_calls": 0
+  }
+]

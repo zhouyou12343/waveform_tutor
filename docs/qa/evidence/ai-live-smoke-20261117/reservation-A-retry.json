@@ -1,0 +1,9 @@
+{
+  "stage": "A-retry",
+  "reserved_at": "2026-11-17T04:04:58.688425+00:00",
+  "endpoint": "https://4router.net/v1/responses",
+  "model": "gpt-5.6-sol",
+  "attempt_number": 2,
+  "status": "RESERVED_BEFORE_HTTP_IO",
+  "failed_or_interrupted_attempt_consumes_budget": true
+}

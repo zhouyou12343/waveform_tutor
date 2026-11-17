@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-11-17T02:14:00.824511+00:00",
+  "npm": {
+    "command": "npm --prefix frontend audit --json",
+    "exit_code": 0,
+    "source": "configured npm advisory endpoint",
+    "reported_vulnerabilities": 0
+  },
+  "python": {
+    "command": "pip-audit --no-deps --disable-pip -r backend/requirements.txt --format json",
+    "version": "2.10.1",
+    "advisory_source": "PyPI (default service)",
+    "exit_code": 0,
+    "requirements_checked": 26,
+    "skipped_dependencies": 0,
+    "reported_vulnerabilities": 0
+  },
+  "requirements_sha256": "79ca55ef90fe8558f2f2ebbab79f3c8f7542db5d79e0f1135b5645b71073fffc",
+  "package_lock_sha256": "2d140a07cf9f36362a4e43cb063eeb935af58db3ea6fc31c1584c195c4d862fb",
+  "scope": "Known vulnerability lookup for recorded versions only; not proof of absence, artifact integrity or security of all environment tools."
+}

@@ -1,0 +1,115 @@
+[
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "returncode": 0,
+    "seconds": 1.585,
+    "stdout": "........................................................................ [ 49%]\n........................................................................ [ 99%]\n.                                                                        [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.14/site-packages/fastapi/testclient.py:1\n  ./.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n145 passed, 1 warning in 0.87s\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".venv/bin/ruff",
+      "check",
+      "backend",
+      "scripts"
+    ],
+    "returncode": 0,
+    "seconds": 0.063,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".venv/bin/ruff",
+      "format",
+      "--check",
+      "backend",
+      "scripts"
+    ],
+    "returncode": 0,
+    "seconds": 0.013,
+    "stdout": "12 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "returncode": 0,
+    "seconds": 0.464,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "typecheck"
+    ],
+    "returncode": 0,
+    "seconds": 2.552,
+    "stdout": "\n> waveform-tutor-frontend@0.1.0 typecheck\n> tsc --noEmit\n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "format:check"
+    ],
+    "returncode": 0,
+    "seconds": 0.991,
+    "stdout": "\n> waveform-tutor-frontend@0.1.0 format:check\n> prettier --check 'src/**/*.{ts,tsx,css}' 'tests/*.ts' '*.{json,ts,html}'\n\nChecking formatting...\nAll matched files use Prettier code style!\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "test"
+    ],
+    "returncode": 0,
+    "seconds": 0.495,
+    "stdout": "\n> waveform-tutor-frontend@0.1.0 test\n> tsx --test tests/utils.test.ts\n\n✔ cursor uses the last event at a tick, including duplicate times (1.143291ms)\n✔ bus formats preserve unknown bits and support wide vectors (0.355583ms)\n✔ physical time formatting uses exact integer arithmetic (0.337791ms)\n✔ safe integer tick validation (0.221ms)\n✔ segments are clipped to viewport and capped at 2000 (3.898166ms)\n✔ empty and zero duration windows do not invent event values (0.191167ms)\n✔ drawing coalesces redundant records without changing raw evidence (1.26225ms)\n✔ one tick and maximum safe tick navigation stay exact (0.412625ms)\n✔ pan and zoom stay bounded (0.176083ms)\nℹ tests 9\nℹ suites 0\nℹ pass 9\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 153.78\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "build"
+    ],
+    "returncode": 0,
+    "seconds": 2.878,
+    "stdout": "\n> waveform-tutor-frontend@0.1.0 build\n> tsc -b && vite build\n\nvite v8.3.8 building client environment for production...\ntransforming...\n✓ 22 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.47 kB │ gzip:  0.31 kB\ndist/assets/index-CLAQd7st.css   14.65 kB │ gzip:  4.49 kB\ndist/assets/index-CVvXI-S6.js   245.42 kB │ gzip: 77.73 kB\n\n✓ built in 187ms\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "test:e2e"
+    ],
+    "returncode": 0,
+    "seconds": 8.92,
+    "stdout": "\n> waveform-tutor-frontend@0.1.0 test:e2e\n> playwright test\n\n\nRunning 7 tests using 2 workers\n\n  ✓  1 tests/workbench.spec.ts:80:1 › AI requires consent, separates output and survives cancellation (2.0s)\n  ✓  2 tests/integration.spec.ts:6:1 › real Counter: cursor, clock, search, zoom, RTL and report (3.3s)\n  ✓  3 tests/workbench.spec.ts:140:1 › offline demo provides waveforms, integer cursor, RTL and report (1.3s)\n  ✓  4 tests/integration.spec.ts:77:1 › real uploads: invalid VCD recovers, X/Z and no selection remain honest (1.0s)\n  ✓  5 tests/workbench.spec.ts:161:1 › zero selected signals sends no new analysis and unknown bus stays visible (1.1s)\n  ✓  6 tests/integration.spec.ts:106:1 › real FIFO and handshake demos load, uploaded RTL stays local (1.4s)\n  ✓  7 tests/integration.spec.ts:127:1 › real VCD file upload works at a narrow viewport (718ms)\n\n  7 passed (8.1s)\n",
+    "stderr": ""
+  }
+]

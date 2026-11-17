@@ -1,0 +1,762 @@
+--- a/backend/app/ai.py
++++ b/backend/app/ai.py
+@@ -74,6 +74,7 @@
+         timeout_seconds: float = 30.0,
+         max_output_tokens: int = 2048,
+         *,
++        api_format: str = "chat_completions",
+         max_attempts: int = 2,
+         request_budget: int | None = None,
+         transport: httpx.AsyncBaseTransport | None = None,
+@@ -99,6 +100,8 @@
+                 raise ValueError
+             if type(max_output_tokens) is not int or max_output_tokens <= 0:
+                 raise ValueError
++            if type(api_format) is not str or api_format not in ("chat_completions", "responses"):
++                raise ValueError
+             if type(max_attempts) is not int or max_attempts not in (1, 2):
+                 raise ValueError
+             if request_budget is not None and (
+@@ -107,7 +110,9 @@
+                 raise ValueError
+         except (ValueError, TypeError):
+             raise AIError("AI provider 配置无效", 503) from None
+-        self._url = base_url.rstrip("/") + "/chat/completions"
++        self._api_format = api_format
++        endpoint = "/responses" if api_format == "responses" else "/chat/completions"
++        self._url = base_url.rstrip("/") + endpoint
+         self._key = api_key
+         self._model = model
+         self._timeout = timeout_seconds
+@@ -133,7 +138,14 @@
+         except ValueError:
+             raise AIError("AI provider 配置无效", 503) from None
+         return cls(
+-            base_url, key, model, timeout, tokens, max_attempts=attempts, request_budget=budget
++            base_url,
++            key,
++            model,
++            timeout,
++            tokens,
++            api_format=os.getenv("AI_API_FORMAT", "chat_completions"),
++            max_attempts=attempts,
++            request_budget=budget,
+         )
+ 
+     async def complete(self, context: dict) -> str:
+@@ -143,16 +155,46 @@
+         except TimeoutError:
+             raise AIError("AI 服务请求超时", 504) from None
+ 
+-    async def _complete(self, context: dict) -> str:
+-        payload = {
++    def _payload(self, context: dict) -> dict:
++        text = json.dumps(context, ensure_ascii=False)
++        if self._api_format == "responses":
++            return {
++                "model": self._model,
++                "instructions": SYSTEM_PROMPT,
++                "input": [{"role": "user", "content": [{"type": "input_text", "text": text}]}],
++                "max_output_tokens": self._max_tokens,
++                "store": False,
++                "stream": False,
++            }
++        return {
+             "model": self._model,
+             "messages": [
+                 {"role": "system", "content": SYSTEM_PROMPT},
+-                {"role": "user", "content": json.dumps(context, ensure_ascii=False)},
++                {"role": "user", "content": text},
+             ],
+             "max_tokens": self._max_tokens,
+             "stream": False,
+         }
++
++    def _response_text(self, body: bytes | bytearray) -> str:
++        try:
++            data = json.loads(body, object_pairs_hook=_unique_object)
++            if not isinstance(data, dict):
++                raise ValueError
++            if self._api_format == "responses":
++                return _responses_text(data)
++            choice = data["choices"][0]
++            content = choice["message"]["content"]
++            if not isinstance(content, str):
++                raise ValueError
++            if choice.get("finish_reason") == "length":
++                raise AIError("AI 输出达到长度限制，未作为完整解释接受", 502)
++            return content
++        except (ValueError, KeyError, IndexError, TypeError, RecursionError):
++            raise AIError("AI 服务响应格式无效", 502) from None
++
++    async def _complete(self, context: dict) -> str:
++        payload = self._payload(context)
+         async with httpx.AsyncClient(
+             timeout=self._timeout,
+             follow_redirects=False,
+@@ -186,17 +228,7 @@
+                                 if len(body) + len(chunk) > MAX_RESPONSE_BYTES:
+                                     raise AIError("AI 服务响应超过大小限制", 502)
+                                 body.extend(chunk)
+-                            try:
+-                                data = json.loads(body)
+-                                choice = data["choices"][0]
+-                                content = choice["message"]["content"]
+-                                if not isinstance(content, str):
+-                                    raise ValueError
+-                                if choice.get("finish_reason") == "length":
+-                                    raise AIError("AI 输出达到长度限制，未作为完整解释接受", 502)
+-                            except (ValueError, KeyError, IndexError, TypeError):
+-                                raise AIError("AI 服务响应格式无效", 502) from None
+-                            return content
++                            return self._response_text(body)
+                 except httpx.TimeoutException:
+                     logger.warning("AI provider error=timeout")
+                     if attempt + 1 == self._max_attempts:
+@@ -206,6 +238,50 @@
+                     raise AIError("AI 服务连接失败", 503) from None
+                 await asyncio.sleep(0.1)
+         raise AIError("AI 服务暂时不可用", 503)
++
++
++def _responses_text(data: dict) -> str:
++    """Accept only finished assistant text; never expose reasoning or execute tools."""
++    if (
++        data.get("status") != "completed"
++        or data.get("error") is not None
++        or data.get("incomplete_details") is not None
++    ):
++        raise AIError("AI 服务未返回完整解释", 502)
++    output = data.get("output")
++    if not isinstance(output, list) or not output:
++        raise ValueError
++    messages = []
++    for item in output:
++        if not isinstance(item, dict):
++            raise ValueError
++        if item.get("type") == "reasoning":
++            continue
++        # A text-only request must not silently accept a tool-call result.
++        if item.get("type") != "message":
++            raise AIError("AI 服务返回了不支持的输出类型", 502)
++        if item.get("role") != "assistant" or item.get("status") != "completed":
++            raise ValueError
++        content = item.get("content")
++        if not isinstance(content, list) or not content:
++            raise ValueError
++        parts = []
++        for part in content:
++            if not isinstance(part, dict):
++                raise ValueError
++            if part.get("type") == "refusal":
++                raise AIError("AI 服务拒绝生成解释", 502)
++            if part.get("type") != "output_text" or not isinstance(part.get("text"), str):
++                raise ValueError
++            parts.append(part["text"])
++        text = "".join(parts)
++        if not text.strip():
++            raise ValueError
++        messages.append(text)
++    if not messages:
++        raise ValueError
++    # Multiple standalone JSON documents fail the subsequent strict JSON decoder.
++    return "\n".join(messages)
+ 
+ 
+ def _unique_object(pairs: list[tuple]) -> dict:
+--- a/backend/tests/test_ai.py
++++ b/backend/tests/test_ai.py
+@@ -7,6 +7,7 @@
+ from backend.app.ai import (
+     AI_LIMITATION,
+     MAX_RESPONSE_BYTES,
++    SYSTEM_PROMPT,
+     AIError,
+     AIService,
+     OpenAICompatibleProvider,
+@@ -500,3 +501,318 @@
+     with pytest.raises(AIError, match="长度限制"):
+         run(AIService(p).explain(ANALYSIS, request()))
+     assert p.http_attempts == 1
++
++
++def responses_envelope(text=None, **updates):
++    value = {
++        "status": "completed",
++        "error": None,
++        "incomplete_details": None,
++        "output": [
++            {
++                "type": "message",
++                "role": "assistant",
++                "status": "completed",
++                "content": [
++                    {"type": "output_text", "text": json.dumps(result()) if text is None else text}
++                ],
++            }
++        ],
++    }
++    value.update(updates)
++    return value
++
++
++@pytest.mark.parametrize("include_rtl", [False, True])
++def test_responses_payload_and_complete_explanation(include_rtl):
++    calls = []
++
++    def handler(req):
++        calls.append(req)
++        assert str(req.url) == "https://example.test/v1/responses"
++        assert req.headers["authorization"] == "Bearer test-private-key"
++        payload = json.loads(req.content)
++        assert set(payload) == {
++            "model",
++            "instructions",
++            "input",
++            "max_output_tokens",
++            "store",
++            "stream",
++        }
++        assert payload["model"] == "arbitrary-model"
++        assert payload["instructions"] == SYSTEM_PROMPT
++        assert payload["max_output_tokens"] == 321
++        assert payload["store"] is False and payload["stream"] is False
++        assert payload["input"][0]["role"] == "user"
++        assert payload["input"][0]["content"][0]["type"] == "input_text"
++        context = json.loads(payload["input"][0]["content"][0]["text"])
++        assert context == build_context(ANALYSIS, request(include_rtl=include_rtl))
++        assert ("related_code" in context["analysis"]) == include_rtl
++        return httpx.Response(200, json=responses_envelope())
++
++    p = provider(handler, api_format="responses", max_output_tokens=321)
++    value = run(AIService(p).explain(ANALYSIS, request(include_rtl=include_rtl)))
++    assert value.observed_facts == ANALYSIS["observed_facts"]
++    assert value.summary.startswith("推测：")
++    assert AI_LIMITATION in value.limitations
++    assert len(calls) == p.http_attempts == 1
++
++
++def test_responses_skips_reasoning_and_combines_text_parts():
++    text = json.dumps(result())
++    body = responses_envelope(text[:12])
++    body["output"][0]["content"].append({"type": "output_text", "text": text[12:]})
++    body["output"].insert(
++        0, {"type": "reasoning", "summary": [{"type": "summary_text", "text": "not a user answer"}]}
++    )
++    body["output_text"] = "not a raw REST answer"
++    p = provider(lambda req: httpx.Response(200, json=body), api_format="responses")
++    assert run(p.complete({})) == text
++
++
++@pytest.mark.parametrize(
++    "status", [None, "incomplete", "failed", "queued", "in_progress", "cancelled"]
++)
++def test_responses_rejects_unfinished_status_even_with_valid_text(status):
++    p = provider(
++        lambda req: httpx.Response(200, json=responses_envelope(status=status)),
++        api_format="responses",
++    )
++    with pytest.raises(AIError, match="完整解释"):
++        run(p.complete({}))
++    assert p.http_attempts == 1
++
++
++@pytest.mark.parametrize(
++    "body",
++    [
++        {},
++        [],
++        None,
++        responses_envelope(error={"message": "private provider error"}),
++        responses_envelope(incomplete_details={"reason": "max_output_tokens"}),
++        responses_envelope(output=[]),
++        responses_envelope(output={}),
++        responses_envelope(output=[None]),
++        responses_envelope(output=[{"type": "reasoning", "summary": []}]),
++        responses_envelope(
++            output=[{"type": "message", "role": "user", "status": "completed", "content": []}]
++        ),
++        responses_envelope(
++            output=[
++                {
++                    "type": "message",
++                    "role": "assistant",
++                    "status": "incomplete",
++                    "content": [{"type": "output_text", "text": "{}"}],
++                }
++            ]
++        ),
++        responses_envelope(
++            output=[
++                {"type": "message", "role": "assistant", "status": "completed", "content": "{}"}
++            ]
++        ),
++        responses_envelope(
++            output=[{"type": "message", "role": "assistant", "status": "completed", "content": []}]
++        ),
++        responses_envelope(
++            output=[
++                {"type": "message", "role": "assistant", "status": "completed", "content": [None]}
++            ]
++        ),
++        responses_envelope(
++            output=[
++                {
++                    "type": "message",
++                    "role": "assistant",
++                    "status": "completed",
++                    "content": [{"type": "output_text", "text": 123}],
++                }
++            ]
++        ),
++        responses_envelope(
++            output=[
++                {
++                    "type": "message",
++                    "role": "assistant",
++                    "status": "completed",
++                    "content": [{"type": "input_text", "text": "{}"}],
++                }
++            ]
++        ),
++        responses_envelope(text="   "),
++        responses_envelope(output=[], output_text=json.dumps(result())),
++    ],
++)
++def test_responses_malformed_envelopes_are_sanitized(body, caplog):
++    p = provider(
++        lambda req: httpx.Response(200, content=json.dumps(body).encode()), api_format="responses"
++    )
++    with pytest.raises(AIError) as exc:
++        run(p.complete({}))
++    assert exc.value.status_code == 502
++    assert "private provider error" not in str(exc.value) + caplog.text
++    assert "test-private-key" not in str(exc.value) + caplog.text
++    assert p.http_attempts == 1
++
++
++def test_responses_refusal_is_not_accepted_as_explanation(caplog):
++    body = responses_envelope()
++    body["output"][0]["content"].append({"type": "refusal", "refusal": "private refusal body"})
++    p = provider(lambda req: httpx.Response(200, json=body), api_format="responses")
++    with pytest.raises(AIError, match="拒绝") as exc:
++        run(p.complete({}))
++    assert "private refusal body" not in str(exc.value) + caplog.text
++
++
++@pytest.mark.parametrize(
++    "tool_type", ["function_call", "web_search_call", "computer_call", "custom_tool_call"]
++)
++def test_responses_does_not_accept_or_execute_tool_output(tool_type):
++    body = responses_envelope()
++    body["output"].insert(0, {"type": tool_type, "arguments": "private untrusted command"})
++    p = provider(lambda req: httpx.Response(200, json=body), api_format="responses")
++    with pytest.raises(AIError, match="不支持"):
++        run(p.complete({}))
++    assert p.http_attempts == 1
++
++
++@pytest.mark.parametrize(
++    "text",
++    [
++        "not JSON",
++        json.dumps(result(related_signals=["invented"])),
++        json.dumps(result(related_code=["private.sv:1"])),
++    ],
++)
++def test_responses_still_requires_application_schema_and_allowlists(text):
++    p = provider(
++        lambda req: httpx.Response(200, json=responses_envelope(text)), api_format="responses"
++    )
++    with pytest.raises(AIError):
++        run(AIService(p).explain(ANALYSIS, request()))
++
++
++def test_responses_multiple_json_messages_are_not_silently_discarded():
++    body = responses_envelope()
++    body["output"].append(responses_envelope()["output"][0])
++    p = provider(lambda req: httpx.Response(200, json=body), api_format="responses")
++    with pytest.raises(AIError):
++        run(AIService(p).explain(ANALYSIS, request()))
++
++
++@pytest.mark.parametrize("api_format", ["chat_completions", "responses"])
++def test_duplicate_envelope_fields_are_rejected(api_format):
++    body = '{"status":"completed","status":"incomplete",' + json.dumps(responses_envelope())[1:]
++    if api_format == "chat_completions":
++        body = '{"choices":[],"choices":[{"message":{"content":"{}"}}]}'
++    p = provider(lambda req: httpx.Response(200, content=body), api_format=api_format)
++    with pytest.raises(AIError, match="格式无效"):
++        run(p.complete({}))
++
++
++@pytest.mark.parametrize("api_format", ["responses", "chat_completions"])
++def test_protocol_mismatch_does_not_try_another_endpoint(api_format):
++    body = (
++        {"choices": [{"message": {"content": json.dumps(result())}}]}
++        if api_format == "responses"
++        else responses_envelope()
++    )
++    p = provider(lambda req: httpx.Response(200, json=body), api_format=api_format)
++    with pytest.raises(AIError):
++        run(p.complete({}))
++    assert p.http_attempts == 1
++
++
++@pytest.mark.parametrize(
++    "value", ["", "auto", "chat/completions", "response", "Responses", None, True, []]
++)
++def test_unknown_api_format_is_rejected(value):
++    with pytest.raises(AIError, match="配置无效"):
++        provider(lambda req: httpx.Response(200), api_format=value)
++
++
++def test_responses_environment_configuration(monkeypatch):
++    for name, value in {
++        "AI_BASE_URL": "https://example.test/v1/",
++        "AI_API_KEY": "test-key",
++        "AI_MODEL": "custom",
++        "AI_API_FORMAT": "responses",
++        "AI_MAX_ATTEMPTS": "1",
++        "AI_REQUEST_BUDGET": "2",
++    }.items():
++        monkeypatch.setenv(name, value)
++    p = OpenAICompatibleProvider.from_env()
++    assert p._url == "https://example.test/v1/responses"
++    assert p._api_format == "responses" and p._max_attempts == 1
++    assert p._request_budget == 2
++    monkeypatch.setenv("AI_API_FORMAT", "unknown")
++    assert AIService().configured is False
++
++
++def test_responses_consent_and_budget_never_bypass_transport_guard():
++    calls = []
++
++    def handler(req):
++        calls.append(req)
++        return httpx.Response(200, json=responses_envelope())
++
++    p = provider(handler, api_format="responses", max_attempts=1, request_budget=2)
++    service = AIService(p)
++    with pytest.raises(AIError) as exc:
++        run(service.explain(ANALYSIS, request(consent=False)))
++    assert exc.value.status_code == 403 and not calls
++    for _ in range(2):
++        run(service.explain(ANALYSIS, request()))
++    with pytest.raises(AIError, match="预算"):
++        run(service.explain(ANALYSIS, request()))
++    assert service.http_attempts == len(calls) == 2
++
++
++@pytest.mark.parametrize("failure", ["timeout", "network", "cancelled", 401, 429, 502, 503])
++def test_responses_failure_contract_with_single_attempt(failure, caplog):
++    def handler(req):
++        if failure == "timeout":
++            raise httpx.ReadTimeout("private failure", request=req)
++        if failure == "network":
++            raise httpx.ConnectError("private failure", request=req)
++        if failure == "cancelled":
++            raise asyncio.CancelledError
++        return httpx.Response(failure, text="private failure")
++
++    p = provider(handler, api_format="responses", max_attempts=1, request_budget=2)
++    if failure == "cancelled":
++        with pytest.raises(asyncio.CancelledError):
++            run(p.complete({}))
++    else:
++        with pytest.raises(AIError) as exc:
++            run(p.complete({}))
++        assert "private failure" not in str(exc.value) + caplog.text
++    assert p.http_attempts == 1
++
++
++def test_responses_retry_uses_same_endpoint_and_counts_attempts():
++    calls = []
++
++    def handler(req):
++        calls.append(str(req.url))
++        return (
++            httpx.Response(503)
++            if len(calls) == 1
++            else httpx.Response(200, json=responses_envelope())
++        )
++
++    p = provider(handler, api_format="responses", request_budget=2)
++    run(AIService(p).explain(ANALYSIS, request()))
++    assert calls == ["https://example.test/v1/responses"] * 2
++    assert p.http_attempts == 2
++
++
++def test_responses_size_limit_and_streaming_mismatch():
++    for body in (b"x" * (MAX_RESPONSE_BYTES + 1), b'data: {"type":"response.completed"}\n\n'):
++        p = provider(lambda req: httpx.Response(200, content=body), api_format="responses")
++        with pytest.raises(AIError):
++            run(p.complete({}))
++        assert p.http_attempts == 1
+--- a/backend/tests/test_api.py
++++ b/backend/tests/test_api.py
+@@ -149,6 +149,45 @@
+     assert "1010" in response.json()["observed_facts"][0]
+     assert "model invented fact" not in str(response.json())
+     assert client.get("/api/health").json()["requests"] == 1
++
++
++def test_responses_mock_transport_through_real_counter_analysis(client):
++    from backend.app.ai import OpenAICompatibleProvider
++    from backend.tests.test_ai import responses_envelope, result
++
++    calls = []
++
++    def handler(req):
++        calls.append(req)
++        assert req.url.path == "/v1/responses"
++        body = json.loads(req.content)
++        context = json.loads(body["input"][0]["content"][0]["text"])
++        assert "related_code" not in context["analysis"]
++        assert context["analysis"]["signals"][0]["name"] == "tb.count[3:0]"
++        assert context["analysis"]["signals"][0]["value"] == "1010"
++        return httpx.Response(
++            200, json=responses_envelope(json.dumps(result(related_signals=["tb.count[3:0]"])))
++        )
++
++    provider = OpenAICompatibleProvider(
++        "https://example.test/v1",
++        "fake-test-key",
++        "test-model",
++        api_format="responses",
++        max_attempts=1,
++        request_budget=1,
++        transport=httpx.MockTransport(handler),
++    )
++    app.state.ai = AIService(provider)
++    trace = client.post("/api/demos/counter").json()
++    response = client.post(
++        f"/api/traces/{trace['id']}/explain",
++        json={"time": 120000, "signals": ["s0"], "question": "为什么", "consent": True},
++    )
++    assert response.status_code == 200
++    assert "1010" in response.json()["observed_facts"][0]
++    assert "fabricated fact" not in str(response.json())
++    assert len(calls) == client.get("/api/health").json()["provider_http_attempts"] == 1
+ 
+ 
+ @pytest.mark.asyncio
+--- a/.env.example
++++ b/.env.example
+@@ -4,9 +4,11 @@
+ # Do not put API keys in chat, frontend/VITE_* variables, source, screenshots,
+ # or commands that store plaintext secrets in shell history.
+ # Replace these placeholders; do not use them as working provider settings.
+-# The adapter appends /chat/completions to this base URL.
++# The adapter appends /chat/completions or /responses according to AI_API_FORMAT.
+ AI_BASE_URL='<provider base URL ending /v1>'
+ AI_MODEL='<provider model identifier>'
++# Supported values: chat_completions (default) or responses; never auto-falls back.
++AI_API_FORMAT=chat_completions
+ # Deliberately empty. Supply the real key securely in the backend environment.
+ AI_API_KEY=
+ AI_TIMEOUT_SECONDS=30
+--- a/README.md
++++ b/README.md
+@@ -87,7 +87,7 @@
+     |-- PyVCD parser -> bounded, in-memory traces
+     |-- deterministic analyzer -> facts / events / Markdown
+     |-- RTL text -> name-only source references
+-    `-- optional AI adapter -> configured provider /chat/completions
++    `-- optional AI adapter -> configured provider /chat/completions or /responses
+                                (explicit consent required)
+ ```
+ 
+@@ -102,13 +102,14 @@
+ ```sh
+ export AI_BASE_URL='<provider base URL ending /v1>'
+ export AI_MODEL='<provider model identifier>'
++export AI_API_FORMAT=chat_completions
+ export AI_TIMEOUT_SECONDS=30
+ export AI_MAX_OUTPUT_TOKENS=2048
+ ```
+ 
+ Supply `AI_API_KEY` through your own secure shell/environment or secret manager, then restart the backend. Do not paste keys into chat, source code, the frontend, screenshots, or a command that stores the key in shell history. Interactive secret-reading syntax differs between shells; use your shell's documented mechanism. Do not use frontend `VITE_*` variables for secrets.
+ 
+-The adapter uses HTTPX and an **OpenAI-compatible non-streaming `chat/completions`** endpoint, not an official provider SDK. It appends `/chat/completions` to the configured base URL. It asks for JSON text but does **not** assume provider JSON-mode support. Compatibility depends on the provider accepting this request and returning `choices[0].message.content` as a string. No specific provider URL or model is endorsed.
++The adapter uses HTTPX, not an official provider SDK, and has two explicit **non-streaming** wire formats. `AI_API_FORMAT=chat_completions` (the unchanged default) appends `/chat/completions`, sends messages/max_tokens and expects `choices[0].message.content`. `AI_API_FORMAT=responses` appends `/responses`, sends instructions/input/max_output_tokens with `store=false`, and extracts text from completed assistant messages in the REST `output` array. Reasoning is not displayed; tool calls, refusals, incomplete or malformed responses are rejected. Both paths request JSON text and run the same application schema/reference checks; neither assumes provider JSON-mode support. There is no automatic endpoint fallback, which could otherwise create unapproved extra calls. `store=false` requests no API response storage, but does not guarantee that a third-party service retains no logs. Compatibility and model availability still require real testing; no provider/model is endorsed.
+ 
+ Data is sent only after an explicit explanation request with consent: the question and deterministic analysis context, including selected signal names, values, up to 128 window records per signal, strictly earlier/later neighboring records, and manually configured clock/reset names and settings. The analysis window is centered on the cursor and can differ from the visible viewport; neighboring records may lie outside it. The UI shows the actual analysis window. Matched RTL snippets (at most 32 name matches, up to 300 characters per line) are included only with separate RTL consent; this is not a full-project upload. These snippets can omit control flow or sampling rules. Review sensitive signal names and questions before sharing them.
+ 
+@@ -146,7 +147,7 @@
+ 
+ Local validation has included backend pytest tests, frontend `node:test` tests, real-API browser tests, mocked browser tests, and regeneration of all three demo traces with passing assertions. Mocked AI tests are not evidence of live-provider reliability. Test counts are intentionally not fixed here. Remote GitHub CI has not been verified; no passing-check claim is made. See [development](docs/development.md) for scope and troubleshooting.
+ 
+-The 2026-11-16 release-candidate results remain in the [QA report](docs/qa/functional-test-report.md), [independent correctness report](docs/qa/correctness-report.md), [performance measurements](docs/qa/performance-report.md), and [release checklist](docs/qa/release-checklist.md). The [2026-11-17 AI preflight](docs/qa/real-ai-acceptance-report.md) records fresh Linux ARM64 / Python 3.12.15 / Node 22.23.4 regression results. npm audit and a PyPI advisory audit of all 26 pinned Python requirements completed with no reported known vulnerabilities in that run; this is not a security guarantee or a Git-history scan. Live AI is still blocked on provider details, secure configuration and explicit call authorization; remote CI has not run.
++The 2026-11-16 release-candidate results remain in the [QA report](docs/qa/functional-test-report.md), [independent correctness report](docs/qa/correctness-report.md), [performance measurements](docs/qa/performance-report.md), and [release checklist](docs/qa/release-checklist.md). The [2026-11-17 AI preflight](docs/qa/real-ai-acceptance-report.md) records fresh Linux ARM64 / Python 3.12.15 / Node 22.23.4 regression results. npm audit and a PyPI advisory audit of all 26 pinned Python requirements completed with no reported known vulnerabilities in that run; this is not a security guarantee or a Git-history scan. Live AI is still blocked on secure configuration, explicit call authorization and real compatibility/quality testing; remote CI has not run.
+ 
+ ## Limitations
+ 
+--- a/README.zh-CN.md
++++ b/README.zh-CN.md
+@@ -80,13 +80,14 @@
+ ```sh
+ export AI_BASE_URL='<provider base URL ending /v1>'
+ export AI_MODEL='<provider model identifier>'
++export AI_API_FORMAT=chat_completions
+ export AI_TIMEOUT_SECONDS=30
+ export AI_MAX_OUTPUT_TOKENS=2048
+ ```
+ 
+ 请用自己的安全环境管理或秘密管理工具设置 `AI_API_KEY`，再重启后端。不要把 key 贴进聊天、前端、截图、仓库或会留下明文历史的命令。不同 shell 的隐藏输入语法不同，请按所用 shell 文档操作；不要通过前端 `VITE_*` 变量传密钥。
+ 
+-当前适配器使用 OpenAI-compatible **非流式 `chat/completions` HTTP 接口**，不是官方 SDK；在 base URL 后追加 `/chat/completions`。它要求模型返回 JSON 文本，但不假定服务支持 JSON mode，也不保证任意提供商都兼容。
++适配器使用 HTTPX，不是官方 SDK，支持两种显式选择的**非流式**请求格式。`AI_API_FORMAT=chat_completions` 保持原默认行为：追加 `/chat/completions`，发送 messages/max_tokens，解析 choices[0].message.content。`AI_API_FORMAT=responses` 追加 `/responses`，发送 instructions/input/max_output_tokens，并设置 store=false；从原始 REST output 数组提取已完成 assistant 消息的 output_text，不展示 reasoning，拒绝工具、拒答、不完整或畸形输出。两条路径都要求 JSON 文本并复用应用结构/引用校验，不假定 JSON mode。不会自动切换端点重试，以免产生未获授权的额外调用。store=false 仅请求关闭 API 响应存储，不保证第三方不保留日志。实际兼容性和模型可用性仍须真实验收。
+ 
+ 只有明确点击生成并同意后才发送问题和确定性上下文：选中信号名/当前值、每信号最多 128 条窗口事件、严格早于/晚于光标的相邻记录，以及手动指定的 Clock/Reset 名称与配置。分析窗口以光标为中心，可能不同于可见视口；相邻记录可能位于窗口外。界面显示实际分析窗口。单独授权 RTL 后才附带最多 32 项名称匹配、每行最多 300 字符的片段，而非整个项目；这些片段可能缺少控制条件或采样逻辑。信号名和问题也可能敏感，请先审阅。
+ 
+@@ -128,7 +129,7 @@
+ 
+ 本地验证覆盖后端 pytest、前端 `node:test`、真实 API 浏览器场景、mock 浏览器场景，以及三个案例重新生成时的断言。数量随开发变化，不在此固定。mock AI 测试不代表真实服务可靠性；尚未验证远程 GitHub CI，不能据此声称远程 checks 通过。
+ 
+-2026-11-16 发布候选的历史结果保留于[功能报告](docs/qa/functional-test-report.md)、[独立正确性](docs/qa/correctness-report.md)、[性能测量](docs/qa/performance-report.md)及[发布清单](docs/qa/release-checklist.md)。[2026-11-17 AI 准备验收](docs/qa/real-ai-acceptance-report.md)记录了 Linux ARM64、Python 3.12.15、Node 22.23.4 下的新回归结果；本轮 npm audit 与全部 26 个固定 Python 依赖的 PyPI 已知漏洞查询完成，未报告已知漏洞，不代表无漏洞或已检查 Git 历史。真实 AI 仍等待 Provider 信息、安全配置和调用授权；远程 CI 未运行。含 `$dumpoff` 的文件明确拒绝；名称有长度/累计预算限制，RTL 每页 200 行，全文搜索保留原行号。
++2026-11-16 发布候选的历史结果保留于[功能报告](docs/qa/functional-test-report.md)、[独立正确性](docs/qa/correctness-report.md)、[性能测量](docs/qa/performance-report.md)及[发布清单](docs/qa/release-checklist.md)。[2026-11-17 AI 准备验收](docs/qa/real-ai-acceptance-report.md)记录了 Linux ARM64、Python 3.12.15、Node 22.23.4 下的新回归结果；本轮 npm audit 与全部 26 个固定 Python 依赖的 PyPI 已知漏洞查询完成，未报告已知漏洞，不代表无漏洞或已检查 Git 历史。真实 AI 仍等待安全配置、调用授权和实际兼容性/质量测试；远程 CI 未运行。含 `$dumpoff` 的文件明确拒绝；名称有长度/累计预算限制，RTL 每页 200 行，全文搜索保留原行号。
+ 
+ ## 后续方向与贡献
+ 
+--- a/docs/api.md
++++ b/docs/api.md
+@@ -102,7 +102,13 @@
+ 
+ 前端取消不会保证远端服务停止处理或免于计费。后端在分析完成、首次 Provider 调用前重新检查可观察到的客户端断开；这是尽力取消，不是即时撤回协议。默认单次 HTTP 超时 30 秒，`AI_MAX_ATTEMPTS` 只接受 1 或 2（默认 2）；总截止为配置超时 × 尝试次数 + 0.1 秒。`AI_REQUEST_BUDGET` 可设正整数，对当前实例的所有 HTTP 尝试设上限；在 I/O 前扣额，不能靠取消退额。重启重置预算，验收须单独跨进程记账并逐阶段授权。远程提供商 URL 必须 HTTPS，本机 loopback 允许 HTTP。
+ 
+-共享 `build_context` 仅复制 analysis 的 time/timescale/window/signals/clock/reset/observed_facts/limitations，并仅在 include_rtl=true 时添加 related_code；不发送原始 VCD、整个工程或配置。previous/next 可能在窗口外；clock/reset 可以是未选中的手动配置信号。Provider 请求包含 system/user 消息、model、max_tokens、stream=false，使用后端 Bearer 认证，不假定 JSON mode。响应仍要求字符串 content；明确 `finish_reason=length` 时即使 JSON 完整也拒绝作为完整解释接受。
++共享 `build_context` 仅复制 analysis 的 time/timescale/window/signals/clock/reset/observed_facts/limitations，并仅在 include_rtl=true 时添加 related_code；不发送原始 VCD、整个工程或配置。previous/next 可能在窗口外；clock/reset 可以是未选中的手动配置信号。
++
++后端环境 `AI_API_FORMAT` 只接受 `chat_completions`（默认）或 `responses`，不会按域名猜测或自动切换协议。两种格式都使用后端 Bearer 认证、非流式请求、相同的响应大小限制和HTTP预算，不假定 JSON mode。
++
++`chat_completions` 追加 `/chat/completions`，发送 system/user messages、model、max_tokens、stream=false；解析 choices[0].message.content 字符串。明确 finish_reason=length 时即使JSON完整也拒绝作为完整解释接受。
++
++`responses` 追加 `/responses`，发送 model、instructions（相同SYSTEM_PROMPT）、input数组（user/input_text，文本为相同context JSON）、max_output_tokens、store=false、stream=false。不发送 tools、会话ID或 previous_response_id。仅接受顶层 status=completed 且 error/incomplete_details 为空的响应；从 output 数组提取 completed assistant message 的 output_text，跳过 reasoning，不依赖SDK顶层 output_text 便利字段。工具、拒答、不完整消息、空/畸形输出及多份独立JSON被拒绝；随后仍执行应用schema、引用及确定性事实覆盖。协议不匹配不会触发另一个端点的尝试。store=false不是第三方无日志的承诺；max_output_tokens对推理模型可能包含推理token，实际支持和用量需真实验证。
+ 
+ ## 手动检查（无秘密）
+ 
+--- a/docs/architecture.md
++++ b/docs/architecture.md
+@@ -48,7 +48,7 @@
+ 
+ 显式 explain 请求且 `consent=true` 后，发送问题和分析上下文。默认删除 `related_code`；仅 `include_rtl=true` 才包含匹配的源码片段。提供商收到的是上下文而非完整上传文件。用户问题、信号名称、注释与源码都按不可信数据处理，但提示词不能保证彻底防止提示注入。
+ 
+-HTTPX 调用非流式 OpenAI-compatible `/chat/completions`，不使用官方 SDK，不请求 JSON mode。不跟随重定向，`trust_env=false`，因此不自动继承 HTTPX 环境代理设置。响应限 256 KiB；超时以及 429/502/503 可重试一次。默认单次 HTTP 超时 30 秒；整个提供商调用截止为配置超时的两倍加 0.1 秒。远程提供商必须 HTTPS，仅 loopback 可用 HTTP。
++HTTPX 调用显式配置的非流式 OpenAI-compatible协议：`AI_API_FORMAT=chat_completions`（默认）追加 `/chat/completions`，`responses`追加 `/responses`。Responses使用instructions/input/max_output_tokens、store=false，提取已完成assistant文本，忽略reasoning、拒绝工具/拒答/不完整输出；仍走同一应用schema与事实覆盖。不使用官方SDK、不请求JSON mode、不自动换端点。不跟随重定向，trust_env=false，不继承HTTPX环境代理。响应限256KiB；`AI_MAX_ATTEMPTS`默认2、可设1，超时及429/502/503最多再尝试一次。默认单次HTTP超时30秒，总截止为超时×尝试次数＋0.1秒。`AI_REQUEST_BUDGET`可限制单实例HTTP尝试，失败/取消仍计数，重启清零，不替代跨进程账本或授权。远程必须HTTPS，仅loopback可HTTP；store=false不是第三方无日志保证。
+ 
+ 结构校验拒绝额外字段、重复 JSON 字段及不合要求的数据类型；related signals/code 必须属于上下文白名单。后端覆盖 `observed_facts` 并标记推测。这限制了结构和引用，不保证自由文本真实或推理正确。
+ 
+--- a/docs/limitations.md
++++ b/docs/limitations.md
+@@ -59,7 +59,7 @@
+ 
+ 结构校验、引用白名单和后端覆盖 `observed_facts` 只能约束部分输出。summary、possible_explanations、suggested_checks 等自由文本仍可能编造、误导或受提示注入影响。不能将模型文字当作新的波形事实、已证实因果或形式验证结论。
+ 
+-仅支持当前非流式 OpenAI-compatible chat/completions 请求形状，不保证任意提供商、模型或 JSON 行为兼容。默认单次 HTTP 超时 30 秒，`AI_MAX_ATTEMPTS` 默认 2、可设 1；总截止是配置超时 × 尝试次数 + 0.1 秒。网络重试可能重复计费；可设置 `AI_REQUEST_BUDGET` 对本进程 HTTP 尝试设上限，包含失败和取消，重启会重置，不是持久授权或账本。后端在分析完成后复查客户端断开，但无法保证网络通知即时到达或撤回已发送数据。只有 loopback 提供商允许 HTTP，远程必须 HTTPS。Mock 测试不验证实际提供商质量。无 AI 时核心分析仍可离线使用。
++支持显式选择的非流式 OpenAI-compatible Chat Completions 与 Responses 请求形状，不保证任意提供商、模型或 JSON 行为兼容。`AI_API_FORMAT` 默认 chat_completions，可设 responses，不自动回退其他端点。Responses要求完整assistant文本，不支持SSE、工具执行、会话延续或后台轮询；store=false仅为请求参数，不保证第三方无留存。max_output_tokens可能同时计入推理与可见输出。默认单次 HTTP 超时 30 秒，`AI_MAX_ATTEMPTS` 默认 2、可设 1；总截止是配置超时 × 尝试次数 + 0.1 秒。网络重试可能重复计费；可设置 `AI_REQUEST_BUDGET` 对本进程 HTTP 尝试设上限，包含失败和取消，重启会重置，不是持久授权或账本。后端在分析完成后复查客户端断开，但无法保证网络通知即时到达或撤回已发送数据。只有 loopback 提供商允许 HTTP，远程必须 HTTPS。Mock 测试不验证实际提供商质量。无 AI 时核心分析仍可离线使用。
+ 
+ 分析窗口不保证等于可见视口；上下文还包含可能位于窗口外的相邻记录，以及独立配置的 clock/reset。名称匹配的 32 项/300 字符片段可能漏掉敏感列表、条件和采样逻辑。本轮准备器明确记录 C3、F2、H1/H3 等必要 RTL 的缺失，评分只能依据实际 context，不能让模型猜评审侧完整代码。
+ 
+--- a/docs/qa/real-ai-acceptance-report.md
++++ b/docs/qa/real-ai-acceptance-report.md
+@@ -4,11 +4,13 @@
+ 
+ ## 1. 最终结论
+ 
+-**C. REAL AI NOT VERIFIED。** 已完成本地接管、回归、Mock 合同和浏览器状态验证，但真实 Provider 请求为 0 次，不能选择 A/B。2026-11-17 后续收到用户提供的站点入口 `https://llm.sjtuhacg.com` 和模型路由 `gpt-6-astra`；公开元数据确认服务显示名为 HACG LLM Service。站点链接的语雀说明需要成员权限，正文不可读取，因此准确 API Base URL、端点、认证与字段兼容性仍未确认，也未配置真实凭据或取得首次调用授权。提供入口/模型名不等于授权模型请求。
++**C. REAL AI NOT VERIFIED。** 当前验收目标已由所有者明确改为 **4router / gpt-5.6-sol**，Base URL为 `https://4router.net/v1`。公开教程明确Responses协议，项目已增加可选Responses适配并通过本地合同/回归；但真实Provider请求仍为0，未配置验收密钥、未取得首次两次调用授权，不能选择A/B。之前HACG/gpt-6-astra的文档核实保留作历史，不再是当前目标。服务商/模型选择与协议准备不是收费调用授权，也不证明模型官方身份。
+ 
+ 本轮在 Linux ARM64、Python 3.12.15、Node 22.23.4、npm 10.9.9 上实际执行；FastAPI 0.163.1、Pydantic 2.14.3、HTTPX 0.28.1、PyVCD 0.5.1，Chromium 159.0.8154.6 / Playwright 1.65.1，Icarus Verilog 11.0。原 macOS 虚拟环境不可直接运行，另建隔离测试副本，不替换用户现有 .venv/node_modules。环境证据见 [environment.json](evidence/ai-preflight-20261117/environment.json)。
+ 
+ ## 2. 实际完成的工作
++
++4router增量（2026-11-17）：`AI_API_FORMAT=responses`使用instructions/input/max_output_tokens、store=false、stream=false，解析原始REST output中的完整assistant文本；拒绝refusal、未完成/错误状态、工具调用、重复字段及不合法结构。不展示reasoning、不提供工具、无协议自动fallback；默认chat_completions载荷/端点保持。只改ai.py及两个既有后端测试文件，并同步通用说明/QA，不修改前端、解析器、分析器、数据模型、评估标准或依赖。增量后261后端/9前端/18浏览器/80数字＋1PID均实际重跑通过；下面原201项证据保留为前一次交付快照，最新命令见第6节新增段落。
+ 
+ 确认选中目录为已有项目根目录，读取 AGENTS.md、README、前后端、配置和历史报告。实际为 React/TypeScript/Vite + FastAPI，保留离线优先架构；原文件夹无 Git 元数据。原 145 后端、9 前端测试在本轮修改前重新通过，不仅引用历史数据。
+ 
+@@ -22,24 +24,27 @@
+ 
+ `scripts/qa_correctness.py` 修复空PID也能判一致的证据漏洞，拒绝覆盖已有label，把报告留在独立运行目录。Playwright截图改为testInfo输出路径，不覆盖旧home/counter截图。README双语、配置模板、API/开发/限制及未解决事项已同步。解析器、确定性分析器、数据模型、波形渲染器、RTL查看器、工具函数、依赖清单/lock及三个Demo源码均未改变。
+ 
+-离线准备交付时的文件及SHA-256见 [source-manifest.json](evidence/ai-preflight-20261117/source-manifest.json)，当时文本差异见 [changes.patch](evidence/ai-preflight-20261117/changes.patch)。它们是该次交付快照，后续 Provider 文档核实对本报告和未解决事项的补充另记于 [文档更新记录](evidence/ai-provider-docs-20261117/update-verification.json)。原有QA证据保持不变，新证据另存目录。
++离线准备交付时的文件及SHA-256见 [source-manifest.json](evidence/ai-preflight-20261117/source-manifest.json)，当时文本差异见 [changes.patch](evidence/ai-preflight-20261117/changes.patch)。它们是该次交付快照，后续HACG文档核实记于 [文档更新记录](evidence/ai-provider-docs-20261117/update-verification.json)，最新4router Responses增量及哈希见 [Responses交付记录](evidence/ai-responses-20261117/source-manifest.json)。原有QA证据保持不变，新证据另存目录。
+ 
+ ## 3. Provider 验证结果
+ 
+ | 字段 | 本轮实际状态 |
+ | --- | --- |
+-| Provider / Model ID | HACG LLM Service（公开站点显示名）／gpt-6-astra（用户提供，未调用验证）；不将第三方标签视为官方模型 |
+-| 站点入口／API Base URL | 入口 https://llm.sjtuhacg.com；API Base URL未确认，不擅自追加/v1作为已验证配置 |
+-| 当前适配协议 | HTTPS（或loopback HTTP），Bearer认证，POST base_url + /chat/completions；system/user、model、max_tokens、stream=false |
+-| 预期响应 | choices[0].message.content字符串，内容为严格JSON；不是流式或官方SDK支持证明 |
++| Provider / Model ID | 4router / gpt-5.6-sol；用户明确选择且公开文档列出，真实可用性未测，不宣称官方模型身份 |
++| API Base URL | https://4router.net/v1；截图与公开手动配置指南一致 |
++| 本轮拟用协议 | AI_API_FORMAT=responses；POST https://4router.net/v1/responses，Bearer、instructions/input/max_output_tokens、store=false、stream=false。请求形状依据Responses标准；该账号/模型实际兼容未测 |
++| 当前通用适配器 | chat_completions仍为默认；responses须显式设置，无自动端点回退 |
++| Responses预期响应 | 顶层completed且无error/incomplete_details；output中completed assistant message的output_text为严格JSON，工具/拒答/不完整内容拒绝 |
+ | 配置方式 | 后端进程环境；.env.example仅模板，程序不自动加载.env |
+ | 真实 HTTP 尝试 / 成功 / 失败 | 0 / 0 / 0；未调用，不是连接失败，也不是成功 |
+ | 真实延迟、格式、兼容性、System Prompt支持 | NOT_RUN，不能由Mock推断 |
+ | 自由文本数字正确性与注入抗性 | NOT_EVALUATED |
+ 
+-2026-11-17 后续仅做公开文档读取：主页为 New API SPA，[公开status](https://llm.sjtuhacg.com/api/status)返回HTTP200，指向[语雀说明](https://www.yuque.com/chunzhen-ksrdg/ahtgif/nodxvg3mgmox3mgw)。该页面的访问元数据为allowed=false、available=false、need_member，正文不可取得；没有登录、导出、使用缓存或绕过权限。公开JS中的chat/completions仅为管理界面Path Regex示例，不证明部署/模型支持；控制台Bearer认证也不能证明推理API认证。证据见 [public-discovery.json](evidence/ai-provider-docs-20261117/public-discovery.json)。这些只读GET不是推理调用，未产生任何模型答卷，也没有激活应用Provider配置。
++当前4router依据：[手动配置](https://docs.4router.net/guides/manual-config/)确认Base URL；[Cherry Studio指南](https://docs.4router.net/guides/cherry-studio/)建议GPT使用OpenAI-Response；[模型分组](https://docs.4router.net/guides/model-groups/)列出gpt-5.6-sol及GptPro/GptPro-Fast第三方接入；[1M配置](https://docs.4router.net/guides/codex-1m-context/)与[Mac配置](https://docs.4router.net/guides/codex-mac/)明确wire_api=responses及关闭响应存储。原始REST字段参考[Responses标准](https://developers.openai.com/api/reference/resources/responses/methods/create)。服务商文档未证明stream=false/max_output_tokens在该账号上实际可用，也未证明无日志。详见 [provider-documentation.json](evidence/ai-responses-20261117/provider-documentation.json)。截图未被复制到仓库，不保存其中任何凭据字符。
+ 
+-首次授权后最多2次，建议AI_MAX_ATTEMPTS=1、AI_REQUEST_BUDGET=2：A为不含私人内容的最小协议请求，B为公开Counter的真实波形业务请求。只有两项结果报告给所有者、取得第二次授权后才进入批量。此时根据实际文档验证字段兼容性，不能现在提前宣称max_tokens或System Prompt已支持。
++历史HACG核实（已被用户的新选择替代）：2026-11-17仅做公开文档读取，主页为 New API SPA，[公开status](https://llm.sjtuhacg.com/api/status)返回HTTP200，指向[语雀说明](https://www.yuque.com/chunzhen-ksrdg/ahtgif/nodxvg3mgmox3mgw)。该页面的访问元数据为allowed=false、available=false、need_member，正文不可取得；没有登录、导出、使用缓存或绕过权限。公开JS中的chat/completions仅为管理界面Path Regex示例，不证明部署/模型支持；控制台Bearer认证也不能证明推理API认证。证据见 [public-discovery.json](evidence/ai-provider-docs-20261117/public-discovery.json)。这些只读GET不是推理调用，未产生任何模型答卷，也没有激活应用Provider配置。
++
++首次授权后最多2次，目标配置为AI_BASE_URL=https://4router.net/v1、AI_MODEL=gpt-5.6-sol、AI_API_FORMAT=responses，AI_MAX_ATTEMPTS=1、AI_REQUEST_BUDGET=2、AI_MAX_OUTPUT_TOKENS=2048、AI_TIMEOUT_SECONDS=30。密钥仅安全注入后端，不包含在此配置记录。A为不含私人内容的最小协议请求，B为公开Counter的真实波形业务请求。只有两项结果报告给所有者、取得第二次授权后才进入批量。不能提前宣称max_output_tokens、instructions或非流式已获该模型实际支持。
+ 
+ 完整计划是首次2次＋18道原内容题＋A1异步复位1次＋代表题C3/F4/E3各追加2次（连同首次答卷各3次）＋真实浏览器1次，共28次HTTP尝试，最多保留2次修复复验空间，总上限30。N1故障注入不计真实成功。所有失败/重试都计预算；跨进程另存账本。进程预算重启会清零，不能借重启增加授权次数；若预算不够优先全部内容题和真实浏览器，明确记录未做稳定性项。
+ 
+@@ -82,6 +87,9 @@
+ 
+ ## 6. 回归测试
+ 
++最新Responses增量实际复跑：`.venv/bin/python -B -m pytest -q -p no:cacheprovider` 为261 passed、1弃用warning；Ruff lint/format与uv pip check均exit0。`npm --prefix frontend run test/build/typecheck/format:check`分别执行，9单测、构建、类型与格式均通过。`npm --prefix frontend run test:e2e`为18 passed（4真实本地离线、14浏览器route Mock）；`.venv/bin/python scripts/qa_correctness.py --label responses-20261117`为80数字＋1PID通过。准备器重新输出20条记录、86oracle通过；19内容题仍NOT_RUN、评分null。无真实Provider请求。原始命令和输出见 [最新后端](evidence/ai-responses-20261117/final-backend.json)、[最新前端](evidence/ai-responses-20261117/final-frontend.json)、[最新浏览器](evidence/ai-responses-20261117/final-browser.json)、[最新数字回归](evidence/correctness-responses-20261117/results.json)、[最新准备context](evidence/ai-responses-20261117/evaluation-prepared.json)。独立只读代码审查未发现阻塞；其139项合同/相关API测试及8项边界探针不是额外模型调用，也不加进261的主计数。
++
++下表保留Responses增加前的离线准备阶段记录（201项后端等）；它们不是最新代码自动通过的替代。
+ 以下从隔离副本根目录运行，AI配置清除；浏览器额外使用用户授权解包的libXdamage，独立数字脚本使用同方式取得的Icarus。环境安装不涉及提权或系统目录修改。命令和原始退出码见本节链接，不把依赖兼容检查当漏洞审计。
+ 
+ | 实际命令 | 结果 / 证据 |
+@@ -129,7 +137,7 @@
+ 
+ ## 10. 需要所有者完成的事项
+ 
+-站点入口和模型ID已收到，不必重复提供。请提供你有权限查看的文档中的脱敏API调用示例，或可公开访问的接口说明；需要看清准确API Base URL、端点、认证头格式及支持参数。删除API Key、账户标识和其他秘密，只保留占位符；无需提供登录凭据。随后根据实际运行环境安全配置后端凭据；如果不能安全注入，停在该关口说明，不搜索其他项目凭据。
++4router / gpt-5.6-sol、Base URL和拟用Responses协议已确认，不必重复提供HACG文档。下一步需所有者通过安全方式将自己的4router Key仅提供给后端验收进程；不要发进聊天、截图或前端，也不要让助手从其他客户端配置提取。应用仍不自动加载.env；若使用Git忽略的本地秘密文件，须明确指定并授权读取，由验收程序显式载入，不能假称创建文件即已配置。尚无真实凭据，当前未激活该Provider。
+ 
+ 在兼容性审查后明确授权首次最多2次、仅公开Counter/最小合成上下文的真实调用。首轮结果报告后，再单独授权剩余完整验收预算，总HTTP尝试不超过30；任何超额须重新请求授权。普通开发、测试、故障修复和证据整理不需所有者代劳。最终发布仍须另行批准。
+ 
+@@ -144,8 +152,8 @@
+ | RTL片段 | analyzer.source_matches名称匹配，前32项/每行300字符；[ai.py](../../backend/app/ai.py) build_context仅include_rtl时加入 |
+ | 上下文最小化 | build_context固定字段、深拷贝；没有原始trace文件、source全文、路径、配置或标准答案。当前题目context UTF-8约1086–8921 bytes，不含system prompt |
+ | 实际Prompt | ai.py SYSTEM_PROMPT原文与SHA保存于 [system-prompt.json](evidence/ai-preflight-20261117/system-prompt.json)；user消息为json.dumps(context, ensure_ascii=False) |
+-| Provider HTTP | ai.py OpenAICompatibleProvider._complete使用HTTPX、Bearer、stream=false、max_tokens；不跟重定向、不用环境代理；I/O前预算扣额 |
+-| 返回解析 | HTTP响应256KiB限额、content字符串、拒绝length结束；AIService.explain严格JSON与schema、重复字段拒绝、引用白名单，覆盖observed_facts |
++| Provider HTTP | ai.py OpenAICompatibleProvider按AI_API_FORMAT显式选择chat_completions或responses，HTTPX、Bearer、非流式；Responses使用instructions/input/max_output_tokens/store=false，Chat仍messages/max_tokens；不自动换端点、不跟重定向、不用环境代理，I/O前预算扣额 |
++| 返回解析 | HTTP响应256KiB限额；Chat content字符串并拒绝length结束，Responses只接收完整assistant output_text；AIService.explain再严格JSON/schema、重复字段拒绝、引用白名单、覆盖observed_facts |
+ | 显示 | ExplanationPanel单独显示“推测”和局限；[App.tsx](../../frontend/src/App.tsx) 的事实/离线报告独立，不被AI替换 |
+ | 失败恢复 | AIError→本地HTTP错误→api.ts message→面板alert；无模型替身回退，不破坏波形功能；网络错误不原样回传秘密 |
+ | 旧请求失效 | context含traceID/完整request/source数量/question/两授权，变更abort与清除，结果渲染同时核验context；App按trace.id重挂面板。源码只追加且拒同名，因此当前source数量可作版本标识 |
+--- a/docs/qa/unresolved-issues.md
++++ b/docs/qa/unresolved-issues.md
+@@ -5,7 +5,7 @@
+ | ID | 级别 | 现状/影响 | 后续与发布条件 |
+ | --- | --- | --- | --- |
+ | R-01 | 原 HIGH 验证缺口：已解决（有限范围） | 2026-11-17 npm audit exit 0、0 reported；pip-audit 2.10.1 对全部 26 固定 Python 依赖查询 PyPI，exit 0、无跳过、0 reported。历史404/工具缺失记录保留 | 见 evidence/ai-preflight-20261117 的两份审计及 metadata。仅当日版本与数据库结果，不保证无漏洞、供应链制品可信或未来不受影响；正式发布前复查 |
+-| R-02 | MEDIUM；真实 AI 发布门槛阻塞 | 已收到入口llm.sjtuhacg.com和模型gpt-6-astra；公开显示名HACG LLM Service。站点链接的语雀正文需成员权限，准确API Base URL/端点/认证尚未确认，安全配置与首次授权未完成，真实调用0；19内容题均未评分 | 等待所有者提供有权分享的脱敏接口示例或可访问文档；不绕过权限、不猜接口。见evidence/ai-provider-docs-20261117/public-discovery.json；两阶段授权后再验收，201/9/18离线结果不是模型通过 |
++| R-02 | MEDIUM；真实 AI 发布门槛阻塞 | 用户已明确改用4router https://4router.net/v1 + gpt-5.6-sol，公开指南确认Responses协议；本地适配已完成。密钥安全配置与首次两次授权尚未完成，真实调用0，19内容题均未评分 | HACG不再是当前目标；见evidence/ai-responses-20261117/provider-documentation.json。实际stream=false/max_output_tokens/账号权限、数字质量均需真实验收；261/9/18离线结果不是模型通过 |
+ | R-03 | MEDIUM | 99,999事件的7.49MB文件，API上传p95约4.63s，浏览器到事实约5.65s，缩放约0.61s | 保持8MiB/100k/16信号上限与截断提示；后续窗口索引/Canvas，不宣称大规模流畅 |
+ | R-04 | MEDIUM | 同tick零时长变化、右端跳变不形成持续图段；事件清单和光标正确且有提示 | 需从真实事件查看，不能据平线排除变化；专用瞬时事件标记未实现 |
+ | R-05 | MEDIUM；已验证但有限制 | 上传取消无法强制中断CPU线程，第三方取消不能撤回/保证免于计费；本轮修复分析完成至首次外发之间已断开的竞态，新增测试确认Provider调用0 | 首次外发前复查连接；无法保证断开通知即时到达。前端撤权/上下文变化清除结果和取消等待，不应表述为原子远程撤权 |
+@@ -16,6 +16,7 @@
+ | R-10 | LOW | 本轮完成Linux ARM64隔离环境Chromium测试；Windows/Linux实机、其它浏览器、全面无障碍/正式渗透审计仍未验证 | 不外推完整跨平台支持；远程CI仍未运行 |
+ | R-11 | MEDIUM；已验证但有限制 | 新增AI_MAX_ATTEMPTS与AI_REQUEST_BUDGET能限制单实例HTTP尝试，含重试/失败/取消；重启会清零，非持久调用账本 | 真实验收须另行记录跨进程累计尝试、保存脱敏响应及分阶段授权；不能通过重启续用额度 |
+ | R-12 | MEDIUM；明确证据缺口 | C3/F2/H1/H3部分必要RTL敏感列表、分支或采样行不在32项名称匹配上下文内；分析无窗口起始快照，稀疏事件可能缺所问时刻的状态 | 准备题已调F4/H3光标以包含必要沿前值，缺RTL保留为PARTIAL_RTL_REQUIRE_CONDITIONAL_ANSWER；不能把评审完整RTL/隐藏oracle要求模型猜出 |
+-| R-13 | 原P1/P2本地缺口：已解决并回归 | 结果/错误/忙状态绑定context，防旧回答瞬时错标；重入保护；授权文案明确真实窗口/相邻记录/Clock/Reset；Provider长度截断拒绝；证据生成不覆盖历史 | 201后端、18浏览器测试通过，其中AI输出均为Mock；真实模型质量与注入抗性仍受R-02阻塞 |
++| R-13 | 原P1/P2本地缺口：已解决并回归 | 结果/错误/忙状态绑定context，防旧回答瞬时错标；重入保护；授权文案明确真实窗口/相邻记录/Clock/Reset；Provider长度截断拒绝；证据生成不覆盖历史 | 前次201后端/18浏览器通过；本轮Responses增量261后端/18浏览器再通过，其中AI输出均Mock；真实模型质量与注入抗性仍受R-02阻塞 |
++| R-14 | 协议适配缺口已补；真实兼容仍未验证 | 新增AI_API_FORMAT=responses，默认chat_completions不变；完整assistant文本严格解析、store=false、无端点fallback | 4router指南提供协议方向，不证明每个字段/该账号实际可用；Responses只支持非流式文本，无SSE/工具/会话延续；不把store=false当作零日志承诺 |
+ 
+ 明确不支持（不是待修复失败）：`$dumpoff`停录文件整体拒绝；FST/FSDB、执行用户RTL、保存项目、公共账号/租户服务、完整HDL语义分析、教学题目播放器及浅色主题均未实现。

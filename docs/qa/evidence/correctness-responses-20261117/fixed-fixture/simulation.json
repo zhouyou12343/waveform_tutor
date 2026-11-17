@@ -1,0 +1,25 @@
+[
+  {
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb",
+      "-o",
+      "./docs/qa/evidence/correctness-responses-20261117/fixed-fixture/sim.out",
+      "./docs/qa/evidence/correctness-responses-20261117/fixed-fixture/tb.sv"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "vvp",
+      "./docs/qa/evidence/correctness-responses-20261117/fixed-fixture/sim.out"
+    ],
+    "returncode": 0,
+    "stdout": "VCD info: dumpfile trace.vcd opened for output.\n",
+    "stderr": ""
+  }
+]

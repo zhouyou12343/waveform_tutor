@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-11-17",
+  "provider": "4router",
+  "base_url": "https://4router.net/v1",
+  "endpoint": "https://4router.net/v1/responses",
+  "model_id": "gpt-5.6-sol",
+  "authorization_source": "User explicitly selected 授权首次最多 2 次 in AskUserQuestion after scope/cost disclosure, and selected 稍后配置 for the key.",
+  "authorized_http_attempts": 2,
+  "actual_http_attempts": 0,
+  "remaining_authorized_http_attempts": 2,
+  "successes": 0,
+  "failures": 0,
+  "attempts": [],
+  "scope": {
+    "A": "Minimal non-sensitive protocol/connectivity request",
+    "B": "Existing public Counter demo waveform facts only",
+    "private_data_permitted": false,
+    "rtl_permitted": false,
+    "automatic_retries": false,
+    "max_output_tokens_per_attempt": 2048,
+    "request_budget": 2,
+    "failed_attempts_consume_budget": true,
+    "stop_and_report_after_first_round": true,
+    "batch_acceptance_authorized": false
+  },
+  "credential_status": "USER_CHOSE_CONFIGURE_LATER",
+  "read_other_client_credentials_permitted": false,
+  "configuration_activated": false,
+  "status": "AUTHORIZED_BUT_BLOCKED_ON_SAFE_KEY_CONFIGURATION",
+  "ledger_rules": "Persist attempts across process restarts; reserve before HTTP I/O. Do not increase authorized budget, retry automatically, switch model/provider, send RTL or proceed to batch without new explicit authorization. Never record keys or headers."
+}

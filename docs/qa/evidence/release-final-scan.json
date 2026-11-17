@@ -1,0 +1,20 @@
+{
+  "files_scanned": 139,
+  "findings": [],
+  "missing_relative_links": [],
+  "excluded": [
+    ".claude",
+    ".git",
+    ".pytest_cache",
+    ".qa-baseline",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "dist",
+    "node_modules",
+    "playwright-report",
+    "test-results",
+    "venv"
+  ],
+  "limitations": "Pattern scan only; excludes env files, binary screenshots, ignored directories; no Git history; not a secret-free guarantee."
+}

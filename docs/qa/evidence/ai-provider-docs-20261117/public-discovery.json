@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-17",
+  "mode": "PUBLIC_DOCUMENTATION_REVIEW_ONLY",
+  "user_supplied": {
+    "site_url": "https://llm.sjtuhacg.com",
+    "model_id": "gpt-6-astra"
+  },
+  "confirmed_public_metadata": {
+    "source": "https://llm.sjtuhacg.com/api/status",
+    "http_status": 200,
+    "system_name": "HACG LLM Service",
+    "server_address": "https://llm.sjtuhacg.com",
+    "docs_link": "https://www.yuque.com/chunzhen-ksrdg/ahtgif/nodxvg3mgmox3mgw"
+  },
+  "documentation_access": {
+    "url": "https://www.yuque.com/chunzhen-ksrdg/ahtgif/nodxvg3mgmox3mgw",
+    "page_title_observed": "CC / Codex 使用说明",
+    "http_status_observed": 200,
+    "body_available": false,
+    "access_metadata_observed": {
+      "allowed": false,
+      "available": false,
+      "reason": "legacy_denied",
+      "legacyReason": "need_member"
+    },
+    "verification_method": "Delegated read-only web_fetch review of the linked public page and access metadata; no document body was accessible.",
+    "permission_bypass_attempted": false
+  },
+  "compatibility": {
+    "api_base_url": null,
+    "endpoint": null,
+    "authentication": null,
+    "system_user_messages_supported": null,
+    "max_tokens_supported": null,
+    "max_completion_tokens_supported": null,
+    "non_streaming_supported": null,
+    "response_shape": null,
+    "model_available": null,
+    "official_model_identity_verified": false,
+    "status": "BLOCKED_ON_DOCUMENTATION_ACCESS"
+  },
+  "non_proof_observations": [
+    "The homepage is a New API single-page application, not an API specification.",
+    "A /v1/chat/completions string in the linked public JavaScript is an admin Path Regex example, not evidence that this deployment/model accepts that endpoint.",
+    "Bearer authorization used by the console does not establish inference API authentication.",
+    "The user-provided model ID is recorded exactly; its availability or upstream identity has not been tested.",
+    "No usable indexed search result was found; this is not evidence that the model is unavailable."
+  ],
+  "application_changes": "None. No provider URL/model was activated; existing adapter and generic environment template remain unchanged.",
+  "authorized_inference_attempts": 0,
+  "actual_inference_attempts": 0,
+  "successful_inference_attempts": 0,
+  "failed_inference_attempts": 0,
+  "credentials_read_or_requested_in_chat": false,
+  "next_required_input": "An owner-accessible API example with every credential/account value removed, or an accessible public API specification showing the exact API Base URL, endpoint, authentication scheme and supported request shape.",
+  "sources": [
+    "https://llm.sjtuhacg.com",
+    "https://llm.sjtuhacg.com/api/status",
+    "https://llm.sjtuhacg.com/static/js/index.5a7f121da4.js",
+    "https://www.yuque.com/chunzhen-ksrdg/ahtgif/nodxvg3mgmox3mgw"
+  ]
+}

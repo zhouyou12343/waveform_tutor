@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-17",
+  "platform": "Linux-6.8.0-138-generic-aarch64-with-glibc2.35",
+  "architecture": "aarch64",
+  "python": "3.12.15",
+  "node": "v22.23.4",
+  "npm": "10.9.9",
+  "packages": {
+    "fastapi": "0.163.1",
+    "httpx": "0.28.1",
+    "pydantic": "2.14.3",
+    "pyvcd": "0.5.1",
+    "pytest": "9.2.0",
+    "ruff": "0.17.5",
+    "uvicorn": "0.54.0"
+  },
+  "real_provider_calls": 0,
+  "provider_information_received": false,
+  "real_call_authorized": false,
+  "notes": [
+    "Dependencies installed only in isolated test copy; original macOS .venv/node_modules not replaced.",
+    "Browser missing libXdamage.so.1 and Icarus installed using user-authorized nonprivileged package extraction; no system changes.",
+    "No public deployment, Git initialization, commit, remote push or release."
+  ]
+}

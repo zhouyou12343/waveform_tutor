@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb",
+      "-o",
+      "./docs/qa/evidence/correctness-responses-20261117/fifo/sim.out",
+      "./docs/qa/evidence/correctness-responses-20261117/fifo/design.sv",
+      "./docs/qa/evidence/correctness-responses-20261117/fifo/tb.sv"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "vvp",
+      "./docs/qa/evidence/correctness-responses-20261117/fifo/sim.out"
+    ],
+    "returncode": 0,
+    "stdout": "VCD info: dumpfile trace.vcd opened for output.\nPASS fifo: 21 transactions, full/empty guards, simultaneous access and ordering\n",
+    "stderr": ""
+  }
+]

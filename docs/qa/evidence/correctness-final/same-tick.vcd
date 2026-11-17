@@ -1,0 +1,13 @@
+$timescale 1ps $end
+$scope module tb $end
+$var reg 4 ! value $end
+$upscope $end
+$enddefinitions $end
+#0
+b0000 !
+#1000
+b0001 !
+b0010 !
+bx1z0 !
+#2000
+b0011 !

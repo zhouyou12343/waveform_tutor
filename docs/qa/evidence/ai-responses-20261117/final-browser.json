@@ -1,0 +1,16 @@
+[
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "test:e2e"
+    ],
+    "started_at": "2026-11-17T03:13:11.173076+00:00",
+    "seconds": 18.516,
+    "exit_code": 0,
+    "output": "\n> waveform-tutor-frontend@0.1.0 test:e2e\n> playwright test\n\n[WebServer] INFO:     Started server process [27]\n[WebServer] INFO:     Waiting for application startup.\n[WebServer] INFO:     Application startup complete.\n[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\n\nRunning 18 tests using 2 workers\n\n  ✓   2 tests/workbench.spec.ts:80:1 › AI requires consent, separates output and survives cancellation (1.7s)\n  ✓   3 tests/workbench.spec.ts:140:1 › offline demo provides waveforms, integer cursor, RTL and report (1.3s)\n  ✓   1 tests/integration.spec.ts:6:1 › real Counter: cursor, clock, search, zoom, RTL and report (3.2s)\n  ✓   5 tests/integration.spec.ts:77:1 › real uploads: invalid VCD recovers, X/Z and no selection remain honest (733ms)\n  ✓   4 tests/workbench.spec.ts:161:1 › zero selected signals sends no new analysis and unknown bus stays visible (1.1s)\n  ✓   7 tests/workbench.spec.ts:202:1 › Mock: duplicate clicks reserve one request and late old answer cannot replace new answer (746ms)\n  ✓   6 tests/integration.spec.ts:106:1 › real FIFO and handshake demos load, uploaded RTL stays local (1.3s)\n  ✓   8 tests/workbench.spec.ts:254:3 › Mock: question invalidates an in-flight answer (752ms)\n  ✓   9 tests/integration.spec.ts:127:1 › real VCD file upload works at a narrow viewport (609ms)\n  ✓  10 tests/workbench.spec.ts:254:3 › Mock: consent invalidates an in-flight answer (802ms)\n  ✓  11 tests/workbench.spec.ts:254:3 › Mock: rtl invalidates an in-flight answer (1.1s)\n  ✓  12 tests/workbench.spec.ts:254:3 › Mock: cursor invalidates an in-flight answer (928ms)\n  ✓  13 tests/workbench.spec.ts:254:3 › Mock: signals invalidates an in-flight answer (1.1s)\n  ✓  14 tests/workbench.spec.ts:254:3 › Mock: clock invalidates an in-flight answer (796ms)\n  ✓  15 tests/workbench.spec.ts:254:3 › Mock: demo invalidates an in-flight answer (851ms)\n  ✓  16 tests/workbench.spec.ts:254:3 › Mock: upload invalidates an in-flight answer (797ms)\n  ✓  17 tests/workbench.spec.ts:254:3 › Mock: source invalidates an in-flight answer (847ms)\n  ✓  18 tests/workbench.spec.ts:340:1 › Mock: timeout and retry preserve offline facts and disclose actual analysis window (1.1s)\n\n  18 passed (17.7s)\n",
+    "real_provider_calls": 0
+  }
+]

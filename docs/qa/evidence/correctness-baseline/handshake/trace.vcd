@@ -1,0 +1,135 @@
+$date
+	Mon Nov 16 22:55:19 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb $end
+$var wire 1 ! valid $end
+$var wire 2 " sent [1:0] $end
+$var wire 8 # data [7:0] $end
+$var reg 1 $ clk $end
+$var reg 8 % held_data [7:0] $end
+$var reg 1 & ready $end
+$var reg 1 ' reset $end
+$var reg 1 ( stalled $end
+$var integer 32 ) received [31:0] $end
+$var integer 32 * stalls [31:0] $end
+$scope module dut $end
+$var wire 1 $ clk $end
+$var wire 1 & ready $end
+$var wire 1 ' reset $end
+$var reg 8 + data [7:0] $end
+$var reg 2 , sent [1:0] $end
+$var reg 1 ! valid $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx ,
+bx +
+b0 *
+b0 )
+0(
+1'
+0&
+b0 %
+0$
+bx #
+bx "
+x!
+$end
+#5000
+b0 "
+b0 ,
+b10100001 #
+b10100001 +
+0!
+1$
+#10000
+0$
+#15000
+1$
+#20000
+0$
+0'
+#25000
+1!
+b10100001 %
+1$
+#30000
+0$
+#35000
+b1 *
+1(
+1$
+#40000
+0$
+#45000
+b10 *
+1$
+#50000
+0$
+1&
+#55000
+b10100010 #
+b10100010 +
+b1 "
+b1 ,
+0(
+b1 )
+1$
+#60000
+0$
+0&
+#65000
+b11 *
+b10100010 %
+1(
+1$
+#70000
+0$
+#75000
+b100 *
+1$
+#80000
+0$
+#85000
+b101 *
+1$
+#90000
+0$
+1&
+#95000
+b10100011 #
+b10100011 +
+b10 "
+b10 ,
+0(
+b10 )
+1$
+#100000
+0$
+#105000
+0!
+b11 "
+b11 ,
+b10100011 %
+b11 )
+1$
+#110000
+0$
+#115000
+1$
+#120000
+0$
+#125000
+1$
+#127000

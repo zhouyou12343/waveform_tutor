@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "test"
+    ],
+    "started_at": "2026-11-17T03:13:02.234929+00:00",
+    "seconds": 0.71,
+    "exit_code": 0,
+    "output": "\n> waveform-tutor-frontend@0.1.0 test\n> tsx --test tests/utils.test.ts\n\nTAP version 13\n# Subtest: cursor uses the last event at a tick, including duplicate times\nok 1 - cursor uses the last event at a tick, including duplicate times\n  ---\n  duration_ms: 1.198375\n  type: 'test'\n  ...\n# Subtest: bus formats preserve unknown bits and support wide vectors\nok 2 - bus formats preserve unknown bits and support wide vectors\n  ---\n  duration_ms: 0.565167\n  type: 'test'\n  ...\n# Subtest: physical time formatting uses exact integer arithmetic\nok 3 - physical time formatting uses exact integer arithmetic\n  ---\n  duration_ms: 0.326708\n  type: 'test'\n  ...\n# Subtest: safe integer tick validation\nok 4 - safe integer tick validation\n  ---\n  duration_ms: 0.149583\n  type: 'test'\n  ...\n# Subtest: segments are clipped to viewport and capped at 2000\nok 5 - segments are clipped to viewport and capped at 2000\n  ---\n  duration_ms: 3.181792\n  type: 'test'\n  ...\n# Subtest: empty and zero duration windows do not invent event values\nok 6 - empty and zero duration windows do not invent event values\n  ---\n  duration_ms: 0.112459\n  type: 'test'\n  ...\n# Subtest: drawing coalesces redundant records without changing raw evidence\nok 7 - drawing coalesces redundant records without changing raw evidence\n  ---\n  duration_ms: 2.38775\n  type: 'test'\n  ...\n# Subtest: one tick and maximum safe tick navigation stay exact\nok 8 - one tick and maximum safe tick navigation stay exact\n  ---\n  duration_ms: 0.209292\n  type: 'test'\n  ...\n# Subtest: pan and zoom stay bounded\nok 9 - pan and zoom stay bounded\n  ---\n  duration_ms: 0.382542\n  type: 'test'\n  ...\n1..9\n# tests 9\n# suites 0\n# pass 9\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 342.010333\n",
+    "real_provider_calls": 0
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "build"
+    ],
+    "started_at": "2026-11-17T03:13:02.946275+00:00",
+    "seconds": 4.166,
+    "exit_code": 0,
+    "output": "\n> waveform-tutor-frontend@0.1.0 build\n> tsc -b && vite build\n\n\u001b[36mvite v8.3.8 \u001b[32mbuilding client environment for production...\u001b[36m\u001b[39m\ntransforming...\n✓ 22 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.47 kB │ gzip:  0.31 kB\ndist/assets/index-CLAQd7st.css   14.65 kB │ gzip:  4.49 kB\ndist/assets/index-BM4JHOz4.js   246.13 kB │ gzip: 78.04 kB\n\n\u001b[32m✓ built in 333ms\u001b[39m\n",
+    "real_provider_calls": 0
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "typecheck"
+    ],
+    "started_at": "2026-11-17T03:13:07.114841+00:00",
+    "seconds": 2.875,
+    "exit_code": 0,
+    "output": "\n> waveform-tutor-frontend@0.1.0 typecheck\n> tsc --noEmit\n\n",
+    "real_provider_calls": 0
+  },
+  {
+    "command": [
+      "npm",
+      "--prefix",
+      "frontend",
+      "run",
+      "format:check"
+    ],
+    "started_at": "2026-11-17T03:13:09.993754+00:00",
+    "seconds": 1.033,
+    "exit_code": 0,
+    "output": "\n> waveform-tutor-frontend@0.1.0 format:check\n> prettier --check 'src/**/*.{ts,tsx,css}' 'tests/*.ts' '*.{json,ts,html}'\n\nChecking formatting...\nAll matched files use Prettier code style!\n",
+    "real_provider_calls": 0
+  }
+]

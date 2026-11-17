@@ -1,0 +1,14 @@
+{
+  "title": "Valid/Ready握手与背压下的数据稳定性",
+  "description": "源端依次发送0xA1、0xA2、0xA3。只有上升沿之前valid和ready同时为1才算传输；波形中该沿之后的data可能已经更新为下一拍。等待期间源端必须保持valid和data。reset高有效同步复位。时间单位1ns，精度1ps。",
+  "questions": [
+    "tb.valid何时拉高？ready在50ns才拉高，0xA1实际在哪个时钟沿传输？",
+    "60ns施加背压后，65、75、85ns的tb.valid、tb.data和tb.sent分别是多少？",
+    "90ns解除背压后，后两笔传输在哪些时刻发生？105ns之后tb.valid、tb.data和tb.sent是多少？"
+  ],
+  "expected": [
+    "25ns后tb.valid=1，tb.data=0xA1；35、45ns因ready=0不传输，55ns沿前valid=ready=1才传输0xA1；55ns沿后data更新为0xA2，sent变为1。",
+    "65、75、85ns均为tb.valid=1、tb.data=0xA2、tb.sent=1；背压期间data不变、valid不撤回，也没有重复计数。",
+    "95ns传输0xA2，105ns传输0xA3；105ns沿后tb.valid=0、tb.data=0xA3、tb.sent=3；直到仿真结束127ns都没有第四次传输。"
+  ]
+}

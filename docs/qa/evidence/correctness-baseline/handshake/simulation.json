@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "iverilog",
+      "-g2012",
+      "-s",
+      "tb",
+      "-o",
+      "./docs/qa/evidence/correctness-baseline/handshake/sim.out",
+      "./docs/qa/evidence/correctness-baseline/handshake/design.sv",
+      "./docs/qa/evidence/correctness-baseline/handshake/tb.sv"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "vvp",
+      "./docs/qa/evidence/correctness-baseline/handshake/sim.out"
+    ],
+    "returncode": 0,
+    "stdout": "VCD info: dumpfile trace.vcd opened for output.\nPASS handshake: A1@55ns A2@95ns A3@105ns; 5 stalled edges checked\n./docs/qa/evidence/correctness-baseline/handshake/tb.sv:51: $finish called at 127000 (1ps)\n",
+    "stderr": ""
+  }
+]

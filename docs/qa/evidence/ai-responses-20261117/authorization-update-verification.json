@@ -1,0 +1,20 @@
+{
+  "scope": "Documentation/authorization only after protocol-preparation delivery; previous source manifest remains a dated snapshot",
+  "documents": [
+    {
+      "path": "docs/qa/real-ai-acceptance-report.md",
+      "sha256": "b5376e79738777d0bb5bd274134d224568a4e0df9ae90a89cef18aa51455e063"
+    },
+    {
+      "path": "docs/qa/unresolved-issues.md",
+      "sha256": "22daefd5b1bd2b9727c4f0fbe28ad9bc71bb740086a7b4e8b31988f679d2b98d"
+    }
+  ],
+  "application_config_unchanged": true,
+  "old_evidence_unchanged": true,
+  "actual_http_attempts": 0,
+  "authorized_http_attempts": 2,
+  "key_pending": true,
+  "tests_rerun": false,
+  "reason": "No application code change after the 261-test delivered-source run"
+}

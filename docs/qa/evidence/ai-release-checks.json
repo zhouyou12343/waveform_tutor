@@ -1,0 +1,430 @@
+{
+  "started_utc": "2026-11-16T14:50:46.463583+00:00",
+  "hashes_before": {
+    "backend/app/ai.py": "129089d8578143d866a70b5d66eec7708fcccb3d1f1c2d1eefb761fc6a8e55c6",
+    "backend/app/main.py": "119503aaab5cf5502b3808928e5d000ba9868dc28aab0395655cac34b8bac6c0",
+    "backend/app/models.py": "10f313924781aea708d9bcf88ba5d589e72555092bc36c64d2773ae3a28e5f8c",
+    "backend/tests/test_ai.py": "caed6a358cb35027e8d9fe0237f183fd9658bc2da796478dd10276fb6426fd73",
+    "backend/tests/test_api.py": "016e30957b6491a731ce5f25fd0b93b9a2d3a97a89a6cdf9aa28799c93ef42cb",
+    "backend/requirements.txt": "79ca55ef90fe8558f2f2ebbab79f3c8f7542db5d79e0f1135b5645b71073fffc",
+    "frontend/package.json": "6695f2c3746794ae82b90df873fbc19d33cd5ef5d7fe5e29b8dd24b499b903c9",
+    "frontend/package-lock.json": "2d140a07cf9f36362a4e43cb063eeb935af58db3ea6fc31c1584c195c4d862fb"
+  },
+  "python": "3.14.3 (main, Feb  3 2026, 15:32:20) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "live_ai": "BLOCKED: configuration absent per supplied baseline; no credentials read",
+  "python_audit": "BLOCKED: pip_audit and safety unavailable in project Python and PATH; no tool installed",
+  "mock_tests": {
+    "command": [
+      "./.venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "backend/tests/test_ai.py",
+      "backend/tests/test_api.py"
+    ],
+    "exit_code": 0,
+    "output": "................................................................         [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.14/site-packages/fastapi/testclient.py:1\n  ./.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n64 passed, 1 warning in 0.82s\n"
+  },
+  "npm_audit": {
+    "command": [
+      "npm",
+      "--prefix",
+      "./frontend",
+      "audit",
+      "--json",
+      "--fetch-retries=0",
+      "--fetch-timeout=20000"
+    ],
+    "exit_code": 1,
+    "status": "BLOCKED",
+    "metadata": null,
+    "vulnerabilities": {},
+    "error_code": null,
+    "stderr_present": true,
+    "retry_diagnostic_codes": [],
+    "network_unavailable": false,
+    "diagnostic_terms": [
+      "fetch",
+      "registry",
+      "audit endpoint",
+      "400",
+      "404",
+      "405",
+      "Not Found",
+      "connect"
+    ],
+    "diagnostic_top_level_fields": [
+      "message",
+      "method",
+      "uri",
+      "headers",
+      "statusCode",
+      "body",
+      "error"
+    ],
+    "http_status": 404,
+    "reason": "Audit endpoint returned HTTP error; vulnerability results unavailable (not a clean audit)"
+  },
+  "dependencies": {
+    "npm_lockfile_version": 3,
+    "frontend_direct": [
+      {
+        "name": "react",
+        "group": "dependencies",
+        "requested": "19.3.1",
+        "locked": "19.3.1",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "react-dom",
+        "group": "dependencies",
+        "requested": "19.3.1",
+        "locked": "19.3.1",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "@playwright/test",
+        "group": "devDependencies",
+        "requested": "1.65.1",
+        "locked": "1.65.1",
+        "license": "Apache-2.0",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "@tailwindcss/vite",
+        "group": "devDependencies",
+        "requested": "4.3.5",
+        "locked": "4.3.5",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "@types/node",
+        "group": "devDependencies",
+        "requested": "^22.0.0",
+        "locked": "22.20.5",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "@types/react",
+        "group": "devDependencies",
+        "requested": "^19.2.0",
+        "locked": "19.3.0",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "@types/react-dom",
+        "group": "devDependencies",
+        "requested": "^19.2.0",
+        "locked": "19.3.0",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "@vitejs/plugin-react",
+        "group": "devDependencies",
+        "requested": "6.3.0",
+        "locked": "6.3.0",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "prettier",
+        "group": "devDependencies",
+        "requested": "3.10.1",
+        "locked": "3.10.1",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "tailwindcss",
+        "group": "devDependencies",
+        "requested": "4.3.5",
+        "locked": "4.3.5",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "tsx",
+        "group": "devDependencies",
+        "requested": "^4.20.6",
+        "locked": "4.23.15",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "typescript",
+        "group": "devDependencies",
+        "requested": "^5.9.3",
+        "locked": "5.9.3",
+        "license": "Apache-2.0",
+        "integrity_present": true,
+        "root_spec_matches": true
+      },
+      {
+        "name": "vite",
+        "group": "devDependencies",
+        "requested": "8.3.8",
+        "locked": "8.3.8",
+        "license": "MIT",
+        "integrity_present": true,
+        "root_spec_matches": true
+      }
+    ],
+    "python_requirements": [
+      {
+        "name": "annotated-doc",
+        "pinned": "0.0.6",
+        "installed": "0.0.6",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "annotated-types",
+        "pinned": "0.8.0",
+        "installed": "0.8.0",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      {
+        "name": "anyio",
+        "pinned": "4.16.0",
+        "installed": "4.16.0",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "certifi",
+        "pinned": "2026.10.23",
+        "installed": "2026.10.23",
+        "matches": true,
+        "license": "MPL-2.0",
+        "license_classifiers": [
+          "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+        ]
+      },
+      {
+        "name": "click",
+        "pinned": "8.5.1",
+        "installed": "8.5.1",
+        "matches": true,
+        "license": "BSD-3-Clause",
+        "license_classifiers": []
+      },
+      {
+        "name": "fastapi",
+        "pinned": "0.163.1",
+        "installed": "0.163.1",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "h11",
+        "pinned": "0.16.0",
+        "installed": "0.16.0",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      {
+        "name": "httpcore",
+        "pinned": "1.0.9",
+        "installed": "1.0.9",
+        "matches": true,
+        "license": "BSD-3-Clause",
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      {
+        "name": "httpx",
+        "pinned": "0.28.1",
+        "installed": "0.28.1",
+        "matches": true,
+        "license": "BSD-3-Clause",
+        "license_classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      {
+        "name": "idna",
+        "pinned": "3.20",
+        "installed": "3.20",
+        "matches": true,
+        "license": "BSD-3-Clause",
+        "license_classifiers": []
+      },
+      {
+        "name": "iniconfig",
+        "pinned": "2.3.1",
+        "installed": "2.3.1",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "opentelemetry-api",
+        "pinned": "1.45.2",
+        "installed": "1.45.2",
+        "matches": true,
+        "license": "Apache-2.0",
+        "license_classifiers": []
+      },
+      {
+        "name": "packaging",
+        "pinned": "26.3",
+        "installed": "26.3",
+        "matches": true,
+        "license": "Apache-2.0 OR BSD-2-Clause",
+        "license_classifiers": []
+      },
+      {
+        "name": "pluggy",
+        "pinned": "1.7.0",
+        "installed": "1.7.0",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      {
+        "name": "pydantic",
+        "pinned": "2.14.3",
+        "installed": "2.14.3",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "pydantic_core",
+        "pinned": "2.50.4",
+        "installed": "2.50.4",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "Pygments",
+        "pinned": "2.21.0",
+        "installed": "2.21.0",
+        "matches": true,
+        "license": "BSD-2-Clause",
+        "license_classifiers": []
+      },
+      {
+        "name": "pytest",
+        "pinned": "9.2.0",
+        "installed": "9.2.0",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "pytest-asyncio",
+        "pinned": "1.5.0",
+        "installed": "1.5.0",
+        "matches": true,
+        "license": "Apache-2.0",
+        "license_classifiers": []
+      },
+      {
+        "name": "python-multipart",
+        "pinned": "0.0.34",
+        "installed": "0.0.34",
+        "matches": true,
+        "license": "Apache-2.0",
+        "license_classifiers": [
+          "License :: OSI Approved :: Apache Software License"
+        ]
+      },
+      {
+        "name": "pyvcd",
+        "pinned": "0.5.1",
+        "installed": "0.5.1",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "ruff",
+        "pinned": "0.17.5",
+        "installed": "0.17.5",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "starlette",
+        "pinned": "1.10.0",
+        "installed": "1.10.0",
+        "matches": true,
+        "license": "BSD-3-Clause",
+        "license_classifiers": []
+      },
+      {
+        "name": "typing-inspection",
+        "pinned": "0.4.5",
+        "installed": "0.4.5",
+        "matches": true,
+        "license": "MIT",
+        "license_classifiers": []
+      },
+      {
+        "name": "typing_extensions",
+        "pinned": "4.16.0",
+        "installed": "4.16.0",
+        "matches": true,
+        "license": "PSF-2.0",
+        "license_classifiers": []
+      },
+      {
+        "name": "uvicorn",
+        "pinned": "0.54.0",
+        "installed": "0.54.0",
+        "matches": true,
+        "license": "BSD-3-Clause",
+        "license_classifiers": []
+      }
+    ],
+    "python_hash_pins": false
+  },
+  "finished_utc": "2026-11-16T14:50:48.719427+00:00",
+  "hashes_after": {
+    "backend/app/ai.py": "129089d8578143d866a70b5d66eec7708fcccb3d1f1c2d1eefb761fc6a8e55c6",
+    "backend/app/main.py": "119503aaab5cf5502b3808928e5d000ba9868dc28aab0395655cac34b8bac6c0",
+    "backend/app/models.py": "10f313924781aea708d9bcf88ba5d589e72555092bc36c64d2773ae3a28e5f8c",
+    "backend/tests/test_ai.py": "caed6a358cb35027e8d9fe0237f183fd9658bc2da796478dd10276fb6426fd73",
+    "backend/tests/test_api.py": "016e30957b6491a731ce5f25fd0b93b9a2d3a97a89a6cdf9aa28799c93ef42cb",
+    "backend/requirements.txt": "79ca55ef90fe8558f2f2ebbab79f3c8f7542db5d79e0f1135b5645b71073fffc",
+    "frontend/package.json": "6695f2c3746794ae82b90df873fbc19d33cd5ef5d7fe5e29b8dd24b499b903c9",
+    "frontend/package-lock.json": "2d140a07cf9f36362a4e43cb063eeb935af58db3ea6fc31c1584c195c4d862fb"
+  },
+  "changed_during_run": []
+}

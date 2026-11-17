@@ -1,0 +1,16 @@
+{
+  "title": "深度四的同步FIFO：满空保护与同时读写",
+  "description": "8位数据、深度4，读数据在成功读出的上升沿后更新，否则保持。使用沿前full/empty判定是否接受操作：满时拒绝写，即使同时读；空时拒绝读，即使同时写，不直通。reset高有效同步复位。时间单位1ns，精度1ps。",
+  "questions": [
+    "55ns写入0x44后tb.count和tb.full为何值？65ns写入0xEE会被接受吗？",
+    "75、85、95、105、115ns的tb.rd_data分别是多少？85ns同时读写后tb.count如何变化？",
+    "115ns后何时为空？125ns空读和135ns空时同时读写分别如何影响tb.rd_data和tb.count？",
+    "195ns满时同时读写，0xFF是否入队？最后一次成功读取是什么时间、什么数据？"
+  ],
+  "expected": [
+    "55ns后tb.count=4且tb.full=1；65ns写0xEE被拒绝，count仍为4，rd_data仍为0。",
+    "依次读出0x11、0x22、0x33、0x44、0x55；85ns读出0x22并写入0x55，tb.count保持3，写指针发生环绕后的写入仍保持顺序。",
+    "115ns后tb.count=0且tb.empty=1；125ns空读被拒绝，rd_data保持0x55；135ns仅接受写0x66，count=1且empty=0，rd_data仍为0x55；145ns读出0x66。",
+    "195ns沿前full=1，仅接受读取0x77，拒绝写0xFF，count从4降至3；随后205、215、225ns依次读出0x88、0x99、0xAA，225ns后empty=1。"
+  ]
+}

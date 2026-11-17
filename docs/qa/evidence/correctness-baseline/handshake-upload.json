@@ -1,0 +1,602 @@
+{
+  "meta": {
+    "status": 200,
+    "http_ms": 42.995458003133535,
+    "request_body_bytes": 1416,
+    "response_body_bytes": 4879
+  },
+  "response": {
+    "id": "ad77cf0d93284d4dbb80cfaac8ad463c",
+    "name": "trace.vcd",
+    "timescale": "1 ps",
+    "tick_fs": 1000,
+    "start": 0,
+    "end": 127000,
+    "signals": [
+      {
+        "id": "s0",
+        "name": "tb.valid",
+        "scope": "tb",
+        "width": 1,
+        "kind": "wire",
+        "events": [
+          {
+            "time": 0,
+            "value": "x"
+          },
+          {
+            "time": 5000,
+            "value": "0"
+          },
+          {
+            "time": 25000,
+            "value": "1"
+          },
+          {
+            "time": 105000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s1",
+        "name": "tb.sent[1:0]",
+        "scope": "tb",
+        "width": 2,
+        "kind": "wire",
+        "events": [
+          {
+            "time": 0,
+            "value": "xx"
+          },
+          {
+            "time": 5000,
+            "value": "00"
+          },
+          {
+            "time": 55000,
+            "value": "01"
+          },
+          {
+            "time": 95000,
+            "value": "10"
+          },
+          {
+            "time": 105000,
+            "value": "11"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "name": "tb.data[7:0]",
+        "scope": "tb",
+        "width": 8,
+        "kind": "wire",
+        "events": [
+          {
+            "time": 0,
+            "value": "xxxxxxxx"
+          },
+          {
+            "time": 5000,
+            "value": "10100001"
+          },
+          {
+            "time": 55000,
+            "value": "10100010"
+          },
+          {
+            "time": 95000,
+            "value": "10100011"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "name": "tb.clk",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 5000,
+            "value": "1"
+          },
+          {
+            "time": 10000,
+            "value": "0"
+          },
+          {
+            "time": 15000,
+            "value": "1"
+          },
+          {
+            "time": 20000,
+            "value": "0"
+          },
+          {
+            "time": 25000,
+            "value": "1"
+          },
+          {
+            "time": 30000,
+            "value": "0"
+          },
+          {
+            "time": 35000,
+            "value": "1"
+          },
+          {
+            "time": 40000,
+            "value": "0"
+          },
+          {
+            "time": 45000,
+            "value": "1"
+          },
+          {
+            "time": 50000,
+            "value": "0"
+          },
+          {
+            "time": 55000,
+            "value": "1"
+          },
+          {
+            "time": 60000,
+            "value": "0"
+          },
+          {
+            "time": 65000,
+            "value": "1"
+          },
+          {
+            "time": 70000,
+            "value": "0"
+          },
+          {
+            "time": 75000,
+            "value": "1"
+          },
+          {
+            "time": 80000,
+            "value": "0"
+          },
+          {
+            "time": 85000,
+            "value": "1"
+          },
+          {
+            "time": 90000,
+            "value": "0"
+          },
+          {
+            "time": 95000,
+            "value": "1"
+          },
+          {
+            "time": 100000,
+            "value": "0"
+          },
+          {
+            "time": 105000,
+            "value": "1"
+          },
+          {
+            "time": 110000,
+            "value": "0"
+          },
+          {
+            "time": 115000,
+            "value": "1"
+          },
+          {
+            "time": 120000,
+            "value": "0"
+          },
+          {
+            "time": 125000,
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "name": "tb.held_data[7:0]",
+        "scope": "tb",
+        "width": 8,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "00000000"
+          },
+          {
+            "time": 25000,
+            "value": "10100001"
+          },
+          {
+            "time": 65000,
+            "value": "10100010"
+          },
+          {
+            "time": 105000,
+            "value": "10100011"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "name": "tb.ready",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 50000,
+            "value": "1"
+          },
+          {
+            "time": 60000,
+            "value": "0"
+          },
+          {
+            "time": 90000,
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "name": "tb.reset",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "1"
+          },
+          {
+            "time": 20000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s7",
+        "name": "tb.stalled",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 35000,
+            "value": "1"
+          },
+          {
+            "time": 55000,
+            "value": "0"
+          },
+          {
+            "time": 65000,
+            "value": "1"
+          },
+          {
+            "time": 95000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s8",
+        "name": "tb.received[31:0]",
+        "scope": "tb",
+        "width": 32,
+        "kind": "integer",
+        "events": [
+          {
+            "time": 0,
+            "value": "00000000000000000000000000000000"
+          },
+          {
+            "time": 55000,
+            "value": "00000000000000000000000000000001"
+          },
+          {
+            "time": 95000,
+            "value": "00000000000000000000000000000010"
+          },
+          {
+            "time": 105000,
+            "value": "00000000000000000000000000000011"
+          }
+        ]
+      },
+      {
+        "id": "s9",
+        "name": "tb.stalls[31:0]",
+        "scope": "tb",
+        "width": 32,
+        "kind": "integer",
+        "events": [
+          {
+            "time": 0,
+            "value": "00000000000000000000000000000000"
+          },
+          {
+            "time": 35000,
+            "value": "00000000000000000000000000000001"
+          },
+          {
+            "time": 45000,
+            "value": "00000000000000000000000000000010"
+          },
+          {
+            "time": 65000,
+            "value": "00000000000000000000000000000011"
+          },
+          {
+            "time": 75000,
+            "value": "00000000000000000000000000000100"
+          },
+          {
+            "time": 85000,
+            "value": "00000000000000000000000000000101"
+          }
+        ]
+      },
+      {
+        "id": "s10",
+        "name": "tb.dut.clk",
+        "scope": "tb.dut",
+        "width": 1,
+        "kind": "wire",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 5000,
+            "value": "1"
+          },
+          {
+            "time": 10000,
+            "value": "0"
+          },
+          {
+            "time": 15000,
+            "value": "1"
+          },
+          {
+            "time": 20000,
+            "value": "0"
+          },
+          {
+            "time": 25000,
+            "value": "1"
+          },
+          {
+            "time": 30000,
+            "value": "0"
+          },
+          {
+            "time": 35000,
+            "value": "1"
+          },
+          {
+            "time": 40000,
+            "value": "0"
+          },
+          {
+            "time": 45000,
+            "value": "1"
+          },
+          {
+            "time": 50000,
+            "value": "0"
+          },
+          {
+            "time": 55000,
+            "value": "1"
+          },
+          {
+            "time": 60000,
+            "value": "0"
+          },
+          {
+            "time": 65000,
+            "value": "1"
+          },
+          {
+            "time": 70000,
+            "value": "0"
+          },
+          {
+            "time": 75000,
+            "value": "1"
+          },
+          {
+            "time": 80000,
+            "value": "0"
+          },
+          {
+            "time": 85000,
+            "value": "1"
+          },
+          {
+            "time": 90000,
+            "value": "0"
+          },
+          {
+            "time": 95000,
+            "value": "1"
+          },
+          {
+            "time": 100000,
+            "value": "0"
+          },
+          {
+            "time": 105000,
+            "value": "1"
+          },
+          {
+            "time": 110000,
+            "value": "0"
+          },
+          {
+            "time": 115000,
+            "value": "1"
+          },
+          {
+            "time": 120000,
+            "value": "0"
+          },
+          {
+            "time": 125000,
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "id": "s11",
+        "name": "tb.dut.ready",
+        "scope": "tb.dut",
+        "width": 1,
+        "kind": "wire",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 50000,
+            "value": "1"
+          },
+          {
+            "time": 60000,
+            "value": "0"
+          },
+          {
+            "time": 90000,
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "id": "s12",
+        "name": "tb.dut.reset",
+        "scope": "tb.dut",
+        "width": 1,
+        "kind": "wire",
+        "events": [
+          {
+            "time": 0,
+            "value": "1"
+          },
+          {
+            "time": 20000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s13",
+        "name": "tb.dut.data[7:0]",
+        "scope": "tb.dut",
+        "width": 8,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "xxxxxxxx"
+          },
+          {
+            "time": 5000,
+            "value": "10100001"
+          },
+          {
+            "time": 55000,
+            "value": "10100010"
+          },
+          {
+            "time": 95000,
+            "value": "10100011"
+          }
+        ]
+      },
+      {
+        "id": "s14",
+        "name": "tb.dut.sent[1:0]",
+        "scope": "tb.dut",
+        "width": 2,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "xx"
+          },
+          {
+            "time": 5000,
+            "value": "00"
+          },
+          {
+            "time": 55000,
+            "value": "01"
+          },
+          {
+            "time": 95000,
+            "value": "10"
+          },
+          {
+            "time": 105000,
+            "value": "11"
+          }
+        ]
+      },
+      {
+        "id": "s15",
+        "name": "tb.dut.valid",
+        "scope": "tb.dut",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "x"
+          },
+          {
+            "time": 5000,
+            "value": "0"
+          },
+          {
+            "time": 25000,
+            "value": "1"
+          },
+          {
+            "time": 105000,
+            "value": "0"
+          }
+        ]
+      }
+    ],
+    "sources": [],
+    "warnings": [
+      "本地进程最多保留最近 4 个波形；重启或超出容量后需重新加载。"
+    ]
+  }
+}

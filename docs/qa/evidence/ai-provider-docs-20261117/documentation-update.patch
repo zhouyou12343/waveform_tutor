@@ -1,0 +1,56 @@
+--- a/docs/qa/real-ai-acceptance-report.md
++++ b/docs/qa/real-ai-acceptance-report.md
+@@ -4,7 +4,7 @@
+ 
+ ## 1. 最终结论
+ 
+-**C. REAL AI NOT VERIFIED。** 已完成本地接管、回归、Mock 合同和浏览器状态验证，但真实 Provider 请求为 0 次，不能选择 A/B。尚未收到具体服务商文档 URL、Base URL、Model ID、认证协议，也未取得首次真实调用授权。用户表示将提供公开文档，并授权非特权测试依赖安装；这两项不等于授权模型请求。
++**C. REAL AI NOT VERIFIED。** 已完成本地接管、回归、Mock 合同和浏览器状态验证，但真实 Provider 请求为 0 次，不能选择 A/B。2026-11-17 后续收到用户提供的站点入口 `https://llm.sjtuhacg.com` 和模型路由 `gpt-6-astra`；公开元数据确认服务显示名为 HACG LLM Service。站点链接的语雀说明需要成员权限，正文不可读取，因此准确 API Base URL、端点、认证与字段兼容性仍未确认，也未配置真实凭据或取得首次调用授权。提供入口/模型名不等于授权模型请求。
+ 
+ 本轮在 Linux ARM64、Python 3.12.15、Node 22.23.4、npm 10.9.9 上实际执行；FastAPI 0.163.1、Pydantic 2.14.3、HTTPX 0.28.1、PyVCD 0.5.1，Chromium 159.0.8154.6 / Playwright 1.65.1，Icarus Verilog 11.0。原 macOS 虚拟环境不可直接运行，另建隔离测试副本，不替换用户现有 .venv/node_modules。环境证据见 [environment.json](evidence/ai-preflight-20261117/environment.json)。
+ 
+@@ -22,19 +22,22 @@
+ 
+ `scripts/qa_correctness.py` 修复空PID也能判一致的证据漏洞，拒绝覆盖已有label，把报告留在独立运行目录。Playwright截图改为testInfo输出路径，不覆盖旧home/counter截图。README双语、配置模板、API/开发/限制及未解决事项已同步。解析器、确定性分析器、数据模型、波形渲染器、RTL查看器、工具函数、依赖清单/lock及三个Demo源码均未改变。
+ 
+-实际修改文件及SHA-256见 [source-manifest.json](evidence/ai-preflight-20261117/source-manifest.json)，新旧文本差异见 [changes.patch](evidence/ai-preflight-20261117/changes.patch)。原有QA证据保持不变，新证据另存目录。
++离线准备交付时的文件及SHA-256见 [source-manifest.json](evidence/ai-preflight-20261117/source-manifest.json)，当时文本差异见 [changes.patch](evidence/ai-preflight-20261117/changes.patch)。它们是该次交付快照，后续 Provider 文档核实对本报告和未解决事项的补充另记于 [文档更新记录](evidence/ai-provider-docs-20261117/update-verification.json)。原有QA证据保持不变，新证据另存目录。
+ 
+ ## 3. Provider 验证结果
+ 
+ | 字段 | 本轮实际状态 |
+ | --- | --- |
+-| Provider / Model ID | 未提供，未猜测；不将第三方标签视为官方模型 |
++| Provider / Model ID | HACG LLM Service（公开站点显示名）／gpt-6-astra（用户提供，未调用验证）；不将第三方标签视为官方模型 |
++| 站点入口／API Base URL | 入口 https://llm.sjtuhacg.com；API Base URL未确认，不擅自追加/v1作为已验证配置 |
+ | 当前适配协议 | HTTPS（或loopback HTTP），Bearer认证，POST base_url + /chat/completions；system/user、model、max_tokens、stream=false |
+ | 预期响应 | choices[0].message.content字符串，内容为严格JSON；不是流式或官方SDK支持证明 |
+ | 配置方式 | 后端进程环境；.env.example仅模板，程序不自动加载.env |
+ | 真实 HTTP 尝试 / 成功 / 失败 | 0 / 0 / 0；未调用，不是连接失败，也不是成功 |
+ | 真实延迟、格式、兼容性、System Prompt支持 | NOT_RUN，不能由Mock推断 |
+ | 自由文本数字正确性与注入抗性 | NOT_EVALUATED |
++
++2026-11-17 后续仅做公开文档读取：主页为 New API SPA，[公开status](https://llm.sjtuhacg.com/api/status)返回HTTP200，指向[语雀说明](https://www.yuque.com/chunzhen-ksrdg/ahtgif/nodxvg3mgmox3mgw)。该页面的访问元数据为allowed=false、available=false、need_member，正文不可取得；没有登录、导出、使用缓存或绕过权限。公开JS中的chat/completions仅为管理界面Path Regex示例，不证明部署/模型支持；控制台Bearer认证也不能证明推理API认证。证据见 [public-discovery.json](evidence/ai-provider-docs-20261117/public-discovery.json)。这些只读GET不是推理调用，未产生任何模型答卷，也没有激活应用Provider配置。
+ 
+ 首次授权后最多2次，建议AI_MAX_ATTEMPTS=1、AI_REQUEST_BUDGET=2：A为不含私人内容的最小协议请求，B为公开Counter的真实波形业务请求。只有两项结果报告给所有者、取得第二次授权后才进入批量。此时根据实际文档验证字段兼容性，不能现在提前宣称max_tokens或System Prompt已支持。
+ 
+@@ -126,7 +129,7 @@
+ 
+ ## 10. 需要所有者完成的事项
+ 
+-提供服务商公开API文档URL、准确Base URL和Model ID，以及接口/认证方式等非敏感信息。不要贴API Key。随后根据实际运行环境安全配置后端凭据；如果不能安全注入，停在该关口说明，不搜索其他项目凭据。
++站点入口和模型ID已收到，不必重复提供。请提供你有权限查看的文档中的脱敏API调用示例，或可公开访问的接口说明；需要看清准确API Base URL、端点、认证头格式及支持参数。删除API Key、账户标识和其他秘密，只保留占位符；无需提供登录凭据。随后根据实际运行环境安全配置后端凭据；如果不能安全注入，停在该关口说明，不搜索其他项目凭据。
+ 
+ 在兼容性审查后明确授权首次最多2次、仅公开Counter/最小合成上下文的真实调用。首轮结果报告后，再单独授权剩余完整验收预算，总HTTP尝试不超过30；任何超额须重新请求授权。普通开发、测试、故障修复和证据整理不需所有者代劳。最终发布仍须另行批准。
+ 
+--- a/docs/qa/unresolved-issues.md
++++ b/docs/qa/unresolved-issues.md
+@@ -5,7 +5,7 @@
+ | ID | 级别 | 现状/影响 | 后续与发布条件 |
+ | --- | --- | --- | --- |
+ | R-01 | 原 HIGH 验证缺口：已解决（有限范围） | 2026-11-17 npm audit exit 0、0 reported；pip-audit 2.10.1 对全部 26 固定 Python 依赖查询 PyPI，exit 0、无跳过、0 reported。历史404/工具缺失记录保留 | 见 evidence/ai-preflight-20261117 的两份审计及 metadata。仅当日版本与数据库结果，不保证无漏洞、供应链制品可信或未来不受影响；正式发布前复查 |
+-| R-02 | MEDIUM；真实 AI 发布门槛阻塞 | 因条件不足无法验证：尚无 Provider 文档URL/Base URL/Model ID、安全配置和首次调用授权，真实调用0；原18内容题+N1 Mock故障保留，附加A1后19内容题均未评分 | 公开/合成上下文及86个oracle已核对；两阶段授权后执行真实连通性、逐题/稳定性与浏览器链路，不能把201/9/18离线通过当作模型通过 |
++| R-02 | MEDIUM；真实 AI 发布门槛阻塞 | 已收到入口llm.sjtuhacg.com和模型gpt-6-astra；公开显示名HACG LLM Service。站点链接的语雀正文需成员权限，准确API Base URL/端点/认证尚未确认，安全配置与首次授权未完成，真实调用0；19内容题均未评分 | 等待所有者提供有权分享的脱敏接口示例或可访问文档；不绕过权限、不猜接口。见evidence/ai-provider-docs-20261117/public-discovery.json；两阶段授权后再验收，201/9/18离线结果不是模型通过 |
+ | R-03 | MEDIUM | 99,999事件的7.49MB文件，API上传p95约4.63s，浏览器到事实约5.65s，缩放约0.61s | 保持8MiB/100k/16信号上限与截断提示；后续窗口索引/Canvas，不宣称大规模流畅 |
+ | R-04 | MEDIUM | 同tick零时长变化、右端跳变不形成持续图段；事件清单和光标正确且有提示 | 需从真实事件查看，不能据平线排除变化；专用瞬时事件标记未实现 |
+ | R-05 | MEDIUM；已验证但有限制 | 上传取消无法强制中断CPU线程，第三方取消不能撤回/保证免于计费；本轮修复分析完成至首次外发之间已断开的竞态，新增测试确认Provider调用0 | 首次外发前复查连接；无法保证断开通知即时到达。前端撤权/上下文变化清除结果和取消等待，不应表述为原子远程撤权 |

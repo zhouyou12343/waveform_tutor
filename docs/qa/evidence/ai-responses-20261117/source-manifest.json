@@ -1,0 +1,207 @@
+{
+  "created_at": "2026-11-17T03:22:02.039108+00:00",
+  "git_commit": null,
+  "files": [
+    {
+      "path": "backend/app/ai.py",
+      "before_sha256": "d4ff95d08aa050b7675c8982dade323619bf8eb0c3d80b7934788ab4b4cc4bcc",
+      "after_sha256": "b63f0bae4fab2ef4d4147472dc7daea197102235d4a666feeb6410802a0c0f06"
+    },
+    {
+      "path": "backend/tests/test_ai.py",
+      "before_sha256": "52fcaa780298b2b77ae40fe88d3d862bc9b48c7ad13b1b2c816350f96d4f6db1",
+      "after_sha256": "c1dd704ef47c2ec04e8aa7788361e84b96439d353600e9ac505e6c583c0bc6d0"
+    },
+    {
+      "path": "backend/tests/test_api.py",
+      "before_sha256": "010634a9aee445c8aa64be9573bb6953a523705b09f0b4423a2c640c7ddd2499",
+      "after_sha256": "9f0319f34b4109715e06bcf5c58e6f9a60df62e712be73e0f4d362687b5dc01e"
+    },
+    {
+      "path": ".env.example",
+      "before_sha256": "8b5cc66c1767c67e9a69fa83aabfbb9f6854a87a36969a84cf02db234cde3353",
+      "after_sha256": "6356ad0194416ebadae74e2bcc74df7fd268bf55e84fe9dba7ea4eb59ef7606d"
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "80237c93afd03a7558a64ce3b71040f80523974d2736a4169b027d66fe1a4643",
+      "after_sha256": "eaf16a5a14b31048224895a6c42564cc1d3813673990b324d553292ac65bd752"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "before_sha256": "ffc790bcd122285316d1b23e272e71d337f7d0b4814fe5992cfa0495f023f79f",
+      "after_sha256": "ec67038caf60a73d9229b146de4db9f130fcfe3d04305925f387b6c9824ca93c"
+    },
+    {
+      "path": "docs/api.md",
+      "before_sha256": "3aab9a9d483c935a611298f058cac3fac87cb5631ffe878946cdd90468e11431",
+      "after_sha256": "d270c46c085dc1de0bb44d76b89164dd1279ed7d91a232465d09278b996c2b28"
+    },
+    {
+      "path": "docs/architecture.md",
+      "before_sha256": "a6e5180a57b4ec448456ae613d7c8f859b12f6e1d61c73fc8f22e8f5ba04f83e",
+      "after_sha256": "249fd572e54455a4f49da78c725f85ab6bbf4c1b3cc562d0e8b33f67e6e24626"
+    },
+    {
+      "path": "docs/limitations.md",
+      "before_sha256": "5cc9e1f943a0a050a1d6a9076f1484e455ac7d2e59986962183e3b8488f42d90",
+      "after_sha256": "0e0ba45bc86328bca17e1f9df64bd2a465d026e9d15dd80cff6c7f3a5e3a1f06"
+    },
+    {
+      "path": "docs/qa/real-ai-acceptance-report.md",
+      "before_sha256": "b523d842b616b6a70fafbfeec0bb68722166ef6bd0df387006b7a67edeed42d3",
+      "after_sha256": "4019ee2512ee64ef556ff60b3d49813240fcc74c97aa548d2d80ea69ad3a0ab8"
+    },
+    {
+      "path": "docs/qa/unresolved-issues.md",
+      "before_sha256": "d8b3c8d4a391118ae8fbad33444f2ac4b12345c3eceb91e07159b8f933c21655",
+      "after_sha256": "e22e8da21a32da885d31d72db92c4b5c27b8bf87fdb5c766421e13bfbbc29b85"
+    }
+  ],
+  "new_evidence": [
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/ai-mock-recovery.png",
+      "sha256": "026be91a048d80cb1b8523887e5b2156a833dfdabe98785e933526d5217de36f"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/changes.patch",
+      "sha256": "b246f8b03fd824eee079a40a4bbd51c9508e03d613b5fec84413fec51c944235"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/counter.png",
+      "sha256": "01cdf185da10b4ce0dff3731298a39a28ad231e199f1a884e2db444255608e6d"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/evaluation-prepared.json",
+      "sha256": "ba500924f0b1e207a8b4861c38d9e7667de924257bf1b4029ba7c021fbf862e7"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/final-backend.json",
+      "sha256": "4ebc1ea36fab13ceb6bec277e0d67aa88a800c65b43f648815a7527dee705fd0"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/final-browser.json",
+      "sha256": "ae6550726fceb57850b8f9fd0340b18cb8bac302afd598756723b3e0e84b4723"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/final-frontend.json",
+      "sha256": "4b5bad010e2b8f155a8b5501a3883d13ca96e0d2d6bf29e91df84a19a9898cc1"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/home.png",
+      "sha256": "7fc57e131910a2ea7500292356fa27aa3982707e01eb74398b01743b04217a9c"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/independent-review.json",
+      "sha256": "e8909a4d4be0315788326426f100c229de0d8e5b9662e306ffa69827b71e8184"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/independent-run.json",
+      "sha256": "dfcdcf09c1ee26aae12e825c9db077356ce1973682b55babef7d58f33daa8bc8"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/preflight-checks.json",
+      "sha256": "53d67b86f9273f9c54b6d7e0baaa31c2f964e4743fa497f7bcc2033f44513b2e"
+    },
+    {
+      "path": "docs/qa/evidence/ai-responses-20261117/provider-documentation.json",
+      "sha256": "45f159ab6cbff38ce4ab56887bb9f4c4290e3206c5ff4bbde9aae3b306846626"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/counter/design.sv",
+      "sha256": "e6db6e56b869a7b91e7b5012505df25c80a4af2386b45414170b54bbf4cbae86"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/counter/simulation.json",
+      "sha256": "526cf8fd3a1ec5b19a6e51af495a3b699b7897e1e15ba0cf8855069b2ed46e5d"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/counter/tb.sv",
+      "sha256": "a4dc5293ce33684c9da77f062fdbed6c634d9f198036ad8d82e16ee794569a8b"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/counter/trace.vcd",
+      "sha256": "a32b66c72c8fb5a4ad0224c0e4979c3051f559897e4d4fbcca9ec67fb21251ed"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/counter-upload.json",
+      "sha256": "16d86071710034ecef2dee90a660a5305a4b22cfd55656c7c2c233c179e95855"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fifo/design.sv",
+      "sha256": "5c979a3f028cc20d20140d17560fac9755a18e6f048ebbf3cb9c054e990bfd57"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fifo/simulation.json",
+      "sha256": "a19fa00180e2b372561f3747730421f6eeafe842742504e39fd7128716cab673"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fifo/tb.sv",
+      "sha256": "2cb044d136cb79c955c598fbefa6017cb0a506662db0893cbd0666f48c06ff6a"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fifo/trace.vcd",
+      "sha256": "98e924e596cb89647b22fec3c70e8d0bd9675e73f0cd948a42c27cf6b41b7d35"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fifo-upload.json",
+      "sha256": "b80832bc3cd0ddc71a09b5d135e868351ed17de850d130d3d28be12cfcd1e367"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fixed-fixture/simulation.json",
+      "sha256": "d08e4602f8e3f004cbe2dbf2e74f67ed7ba4605357c1d4a2b7443d4bb455ef37"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fixed-fixture/tb.sv",
+      "sha256": "822c8127dd47da0e31f60b7d4731dbeac091db85aee81b4af750e05680d423e0"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fixed-fixture/trace.vcd",
+      "sha256": "667b5756852bcaa038c296f74df19dac982a61c7e443de8a941d51f810551dbb"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/fixed-fixture-upload.json",
+      "sha256": "c92c6af1b8c7bf673831da3dcfba15d8a14af5f9e91688bedda574ed40f690de"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/handshake/design.sv",
+      "sha256": "ceda3f54665dd597d5f20c8905147f4b5c46a50fffa10ea3d2b2c0cff10f8d22"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/handshake/simulation.json",
+      "sha256": "5e7a4f287c479609b6a4a626db36c57b4aca1038d4b0eafcef3eb7d128d9270c"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/handshake/tb.sv",
+      "sha256": "f73454a1cecb5b9a40593a283b42784bba31b0125a20d0939fe9732121e7e3e3"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/handshake/trace.vcd",
+      "sha256": "27bca518fe1ce6fc5e43ebafe1745e88ff10817944c62c28eccaf6ed4304fbe5"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/handshake-upload.json",
+      "sha256": "d897b8362a085a58ba74aa29e73ca0889d9082abad7d1bfaec1b539e18ffdd41"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/report.md",
+      "sha256": "1fb9775083ebbec8db90363b4228abe427cd55af0f3e8e2b910680ab112693d8"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/results.json",
+      "sha256": "ceaba1c1d40cd0265f15d0a64c34bb0dfba09f3a86626fdd223ef4ae0f4e849a"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/same-tick-upload.json",
+      "sha256": "c7d667b2ca151ee9827a614ee37d8931959d5d62a9a9eac29771ed699fb17acb"
+    },
+    {
+      "path": "docs/qa/evidence/correctness-responses-20261117/same-tick.vcd",
+      "sha256": "6132cdf2217b70d1b7bd5181bb5ffc58487372f8bbadd36fd3f0c0d0d0db76c2"
+    }
+  ],
+  "untouched_original_evidence_count": 171,
+  "runtime_tests": "261 backend, 9 frontend, 18 browser (4 real local offline / 14 route mock), 80 digital + 1 non-null PID; all PASS",
+  "real_provider_calls": 0,
+  "status": "C. REAL AI NOT VERIFIED"
+}

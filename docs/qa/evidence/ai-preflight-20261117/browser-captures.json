@@ -1,0 +1,6 @@
+{
+  "home.png": "Actual Chromium, real local offline API, zero Provider requests.",
+  "counter.png": "Actual Chromium, real local Counter waveform and backend facts, zero Provider requests.",
+  "ai-mock-recovery.png": "Actual Chromium with route-mocked backend/AI. RECOVERED MOCK ANSWER is synthetic, not model output.",
+  "visual_review": "All three captures retained; Counter and Mock recovery images inspected for layout and visible credentials. No credentials visible."
+}

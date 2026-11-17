@@ -1,0 +1,496 @@
+{
+  "meta": {
+    "status": 200,
+    "http_ms": 7.3212919814977795,
+    "request_body_bytes": 1437,
+    "response_body_bytes": 3753
+  },
+  "response": {
+    "id": "7e7bf9efc346412d85155419fc1f8b9d",
+    "name": "trace.vcd",
+    "timescale": "1 ps",
+    "tick_fs": 1000,
+    "start": 0,
+    "end": 200000,
+    "signals": [
+      {
+        "id": "s0",
+        "name": "tb.async_count[3:0]",
+        "scope": "tb",
+        "width": 4,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "xxxx"
+          },
+          {
+            "time": 5000,
+            "value": "0000"
+          },
+          {
+            "time": 15000,
+            "value": "0001"
+          },
+          {
+            "time": 25000,
+            "value": "0010"
+          },
+          {
+            "time": 35000,
+            "value": "0011"
+          },
+          {
+            "time": 45000,
+            "value": "0100"
+          },
+          {
+            "time": 55000,
+            "value": "0101"
+          },
+          {
+            "time": 65000,
+            "value": "0110"
+          },
+          {
+            "time": 75000,
+            "value": "0111"
+          },
+          {
+            "time": 85000,
+            "value": "1000"
+          },
+          {
+            "time": 95000,
+            "value": "1001"
+          },
+          {
+            "time": 105000,
+            "value": "1010"
+          },
+          {
+            "time": 115000,
+            "value": "1011"
+          },
+          {
+            "time": 125000,
+            "value": "1100"
+          },
+          {
+            "time": 135000,
+            "value": "1101"
+          },
+          {
+            "time": 145000,
+            "value": "1110"
+          },
+          {
+            "time": 155000,
+            "value": "1111"
+          },
+          {
+            "time": 165000,
+            "value": "0000"
+          },
+          {
+            "time": 175000,
+            "value": "0001"
+          },
+          {
+            "time": 182000,
+            "value": "0000"
+          },
+          {
+            "time": 187000,
+            "value": "0000"
+          },
+          {
+            "time": 187000,
+            "value": "0000"
+          },
+          {
+            "time": 195000,
+            "value": "0001"
+          }
+        ]
+      },
+      {
+        "id": "s1",
+        "name": "tb.bus[3:0]",
+        "scope": "tb",
+        "width": 4,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "xxxx"
+          },
+          {
+            "time": 183000,
+            "value": "zzzz"
+          },
+          {
+            "time": 184000,
+            "value": "x1z0"
+          },
+          {
+            "time": 187000,
+            "value": "x1z0"
+          },
+          {
+            "time": 187000,
+            "value": "x1z0"
+          },
+          {
+            "time": 188000,
+            "value": "0011"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "name": "tb.clk",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 5000,
+            "value": "1"
+          },
+          {
+            "time": 10000,
+            "value": "0"
+          },
+          {
+            "time": 15000,
+            "value": "1"
+          },
+          {
+            "time": 20000,
+            "value": "0"
+          },
+          {
+            "time": 25000,
+            "value": "1"
+          },
+          {
+            "time": 30000,
+            "value": "0"
+          },
+          {
+            "time": 35000,
+            "value": "1"
+          },
+          {
+            "time": 40000,
+            "value": "0"
+          },
+          {
+            "time": 45000,
+            "value": "1"
+          },
+          {
+            "time": 50000,
+            "value": "0"
+          },
+          {
+            "time": 55000,
+            "value": "1"
+          },
+          {
+            "time": 60000,
+            "value": "0"
+          },
+          {
+            "time": 65000,
+            "value": "1"
+          },
+          {
+            "time": 70000,
+            "value": "0"
+          },
+          {
+            "time": 75000,
+            "value": "1"
+          },
+          {
+            "time": 80000,
+            "value": "0"
+          },
+          {
+            "time": 85000,
+            "value": "1"
+          },
+          {
+            "time": 90000,
+            "value": "0"
+          },
+          {
+            "time": 95000,
+            "value": "1"
+          },
+          {
+            "time": 100000,
+            "value": "0"
+          },
+          {
+            "time": 105000,
+            "value": "1"
+          },
+          {
+            "time": 110000,
+            "value": "0"
+          },
+          {
+            "time": 115000,
+            "value": "1"
+          },
+          {
+            "time": 120000,
+            "value": "0"
+          },
+          {
+            "time": 125000,
+            "value": "1"
+          },
+          {
+            "time": 130000,
+            "value": "0"
+          },
+          {
+            "time": 135000,
+            "value": "1"
+          },
+          {
+            "time": 140000,
+            "value": "0"
+          },
+          {
+            "time": 145000,
+            "value": "1"
+          },
+          {
+            "time": 150000,
+            "value": "0"
+          },
+          {
+            "time": 155000,
+            "value": "1"
+          },
+          {
+            "time": 160000,
+            "value": "0"
+          },
+          {
+            "time": 165000,
+            "value": "1"
+          },
+          {
+            "time": 170000,
+            "value": "0"
+          },
+          {
+            "time": 175000,
+            "value": "1"
+          },
+          {
+            "time": 180000,
+            "value": "0"
+          },
+          {
+            "time": 185000,
+            "value": "1"
+          },
+          {
+            "time": 187000,
+            "value": "1"
+          },
+          {
+            "time": 187000,
+            "value": "1"
+          },
+          {
+            "time": 190000,
+            "value": "0"
+          },
+          {
+            "time": 195000,
+            "value": "1"
+          },
+          {
+            "time": 200000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "name": "tb.marker",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "0"
+          },
+          {
+            "time": 187000,
+            "value": "1"
+          },
+          {
+            "time": 187000,
+            "value": "0"
+          },
+          {
+            "time": 187000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "name": "tb.reset",
+        "scope": "tb",
+        "width": 1,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "1"
+          },
+          {
+            "time": 12000,
+            "value": "0"
+          },
+          {
+            "time": 182000,
+            "value": "1"
+          },
+          {
+            "time": 186000,
+            "value": "0"
+          },
+          {
+            "time": 187000,
+            "value": "0"
+          },
+          {
+            "time": 187000,
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "name": "tb.sync_count[3:0]",
+        "scope": "tb",
+        "width": 4,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "xxxx"
+          },
+          {
+            "time": 5000,
+            "value": "0000"
+          },
+          {
+            "time": 15000,
+            "value": "0001"
+          },
+          {
+            "time": 25000,
+            "value": "0010"
+          },
+          {
+            "time": 35000,
+            "value": "0011"
+          },
+          {
+            "time": 45000,
+            "value": "0100"
+          },
+          {
+            "time": 55000,
+            "value": "0101"
+          },
+          {
+            "time": 65000,
+            "value": "0110"
+          },
+          {
+            "time": 75000,
+            "value": "0111"
+          },
+          {
+            "time": 85000,
+            "value": "1000"
+          },
+          {
+            "time": 95000,
+            "value": "1001"
+          },
+          {
+            "time": 105000,
+            "value": "1010"
+          },
+          {
+            "time": 115000,
+            "value": "1011"
+          },
+          {
+            "time": 125000,
+            "value": "1100"
+          },
+          {
+            "time": 135000,
+            "value": "1101"
+          },
+          {
+            "time": 145000,
+            "value": "1110"
+          },
+          {
+            "time": 155000,
+            "value": "1111"
+          },
+          {
+            "time": 165000,
+            "value": "0000"
+          },
+          {
+            "time": 175000,
+            "value": "0001"
+          },
+          {
+            "time": 185000,
+            "value": "0000"
+          },
+          {
+            "time": 187000,
+            "value": "0000"
+          },
+          {
+            "time": 187000,
+            "value": "0000"
+          },
+          {
+            "time": 195000,
+            "value": "0001"
+          }
+        ]
+      }
+    ],
+    "sources": [],
+    "warnings": [
+      "本地进程最多保留最近 4 个波形；重启或超出容量后需重新加载。"
+    ]
+  }
+}

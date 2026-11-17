@@ -1,0 +1,610 @@
+{
+  "phase": "baseline",
+  "browser": "159.0.8154.6",
+  "observations": [
+    {
+      "name": "Home loads without an AI key",
+      "status": "PASS",
+      "milliseconds": 2090,
+      "evidence": {
+        "heading": "Understand Digital Waveforms,\nNot Just View Them"
+      }
+    },
+    {
+      "name": "Counter hierarchy, real values and report content",
+      "status": "PASS",
+      "milliseconds": 4972,
+      "evidence": {
+        "timescale": "1 ps",
+        "observations": [
+          {
+            "tick": 120000,
+            "values": [
+              {
+                "name": "tb.count[3:0]",
+                "value": "1010"
+              },
+              {
+                "name": "tb.clk",
+                "value": "0"
+              },
+              {
+                "name": "tb.enable",
+                "value": "0"
+              },
+              {
+                "name": "tb.expected[3:0]",
+                "value": "1010"
+              },
+              {
+                "name": "tb.reset",
+                "value": "0"
+              },
+              {
+                "name": "tb.checks[31:0]",
+                "value": "00000000000000000000000000001100"
+              },
+              {
+                "name": "tb.dut.clk",
+                "value": "0"
+              },
+              {
+                "name": "tb.dut.enable",
+                "value": "0"
+              }
+            ],
+            "clock": {
+              "name": "tb.clk",
+              "edge": "rising",
+              "previous": 115000,
+              "next": 125000,
+              "at_time": false
+            }
+          },
+          {
+            "tick": 125000,
+            "values": [
+              {
+                "name": "tb.count[3:0]",
+                "value": "1010"
+              },
+              {
+                "name": "tb.clk",
+                "value": "1"
+              },
+              {
+                "name": "tb.enable",
+                "value": "0"
+              },
+              {
+                "name": "tb.expected[3:0]",
+                "value": "1010"
+              },
+              {
+                "name": "tb.reset",
+                "value": "0"
+              },
+              {
+                "name": "tb.checks[31:0]",
+                "value": "00000000000000000000000000001100"
+              },
+              {
+                "name": "tb.dut.clk",
+                "value": "1"
+              },
+              {
+                "name": "tb.dut.enable",
+                "value": "0"
+              }
+            ],
+            "clock": {
+              "name": "tb.clk",
+              "edge": "rising",
+              "previous": 115000,
+              "next": 135000,
+              "at_time": true
+            }
+          },
+          {
+            "tick": 205000,
+            "values": [
+              {
+                "name": "tb.count[3:0]",
+                "value": "0000"
+              },
+              {
+                "name": "tb.clk",
+                "value": "1"
+              },
+              {
+                "name": "tb.enable",
+                "value": "1"
+              },
+              {
+                "name": "tb.expected[3:0]",
+                "value": "0000"
+              },
+              {
+                "name": "tb.reset",
+                "value": "0"
+              },
+              {
+                "name": "tb.checks[31:0]",
+                "value": "00000000000000000000000000010100"
+              },
+              {
+                "name": "tb.dut.clk",
+                "value": "1"
+              },
+              {
+                "name": "tb.dut.enable",
+                "value": "1"
+              }
+            ],
+            "clock": {
+              "name": "tb.clk",
+              "edge": "rising",
+              "previous": 195000,
+              "next": 215000,
+              "at_time": true
+            }
+          },
+          {
+            "tick": 232000,
+            "values": [
+              {
+                "name": "tb.count[3:0]",
+                "value": "0001"
+              },
+              {
+                "name": "tb.clk",
+                "value": "0"
+              },
+              {
+                "name": "tb.enable",
+                "value": "1"
+              },
+              {
+                "name": "tb.expected[3:0]",
+                "value": "0001"
+              },
+              {
+                "name": "tb.reset",
+                "value": "1"
+              },
+              {
+                "name": "tb.checks[31:0]",
+                "value": "00000000000000000000000000010111"
+              },
+              {
+                "name": "tb.dut.clk",
+                "value": "0"
+              },
+              {
+                "name": "tb.dut.enable",
+                "value": "1"
+              }
+            ],
+            "clock": {
+              "name": "tb.clk",
+              "edge": "rising",
+              "previous": 225000,
+              "next": 235000,
+              "at_time": false
+            }
+          },
+          {
+            "tick": 235000,
+            "values": [
+              {
+                "name": "tb.count[3:0]",
+                "value": "0000"
+              },
+              {
+                "name": "tb.clk",
+                "value": "1"
+              },
+              {
+                "name": "tb.enable",
+                "value": "1"
+              },
+              {
+                "name": "tb.expected[3:0]",
+                "value": "0000"
+              },
+              {
+                "name": "tb.reset",
+                "value": "1"
+              },
+              {
+                "name": "tb.checks[31:0]",
+                "value": "00000000000000000000000000010111"
+              },
+              {
+                "name": "tb.dut.clk",
+                "value": "1"
+              },
+              {
+                "name": "tb.dut.enable",
+                "value": "1"
+              }
+            ],
+            "clock": {
+              "name": "tb.clk",
+              "edge": "rising",
+              "previous": 225000,
+              "next": null,
+              "at_time": true
+            }
+          }
+        ],
+        "report": {
+          "filename": "waveform-120000.md",
+          "bytes": 4745
+        }
+      }
+    },
+    {
+      "name": "Zoom, pan, search and RTL matching change the interface",
+      "status": "PASS",
+      "milliseconds": 1486,
+      "evidence": {
+        "before": "窗口 0–237000 ticks · Cursor 120000 (120 ns) · 点击波形定位，输入整数精确跳转",
+        "zoom": "窗口 60750–179250 ticks · Cursor 120000 (120 ns) · 点击波形定位，输入整数精确跳转",
+        "pan": "窗口 118500–237000 ticks · Cursor 120000 (120 ns) · 点击波形定位，输入整数精确跳转",
+        "countMatches": 2,
+        "rtlMatches": 2
+      }
+    },
+    {
+      "name": "FIFO full, rejected write and empty boundary",
+      "status": "PASS",
+      "milliseconds": 2475,
+      "evidence": [
+        {
+          "tick": 55000,
+          "values": [
+            {
+              "name": "tb.rd_data[7:0]",
+              "value": "00000000"
+            },
+            {
+              "name": "tb.full",
+              "value": "1"
+            },
+            {
+              "name": "tb.empty",
+              "value": "0"
+            },
+            {
+              "name": "tb.count[2:0]",
+              "value": "100"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.rd_en",
+              "value": "0"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.wr_data[7:0]",
+              "value": "01000100"
+            }
+          ],
+          "clock": null
+        },
+        {
+          "tick": 65000,
+          "values": [
+            {
+              "name": "tb.rd_data[7:0]",
+              "value": "00000000"
+            },
+            {
+              "name": "tb.full",
+              "value": "1"
+            },
+            {
+              "name": "tb.empty",
+              "value": "0"
+            },
+            {
+              "name": "tb.count[2:0]",
+              "value": "100"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.rd_en",
+              "value": "0"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.wr_data[7:0]",
+              "value": "11101110"
+            }
+          ],
+          "clock": null
+        },
+        {
+          "tick": 115000,
+          "values": [
+            {
+              "name": "tb.rd_data[7:0]",
+              "value": "01010101"
+            },
+            {
+              "name": "tb.full",
+              "value": "0"
+            },
+            {
+              "name": "tb.empty",
+              "value": "1"
+            },
+            {
+              "name": "tb.count[2:0]",
+              "value": "000"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.rd_en",
+              "value": "1"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.wr_data[7:0]",
+              "value": "00000000"
+            }
+          ],
+          "clock": null
+        }
+      ]
+    },
+    {
+      "name": "Handshake before/after transfer and data held under backpressure",
+      "status": "PASS",
+      "milliseconds": 2631,
+      "evidence": [
+        {
+          "tick": 54999,
+          "values": [
+            {
+              "name": "tb.valid",
+              "value": "1"
+            },
+            {
+              "name": "tb.sent[1:0]",
+              "value": "00"
+            },
+            {
+              "name": "tb.data[7:0]",
+              "value": "10100001"
+            },
+            {
+              "name": "tb.clk",
+              "value": "0"
+            },
+            {
+              "name": "tb.held_data[7:0]",
+              "value": "10100001"
+            },
+            {
+              "name": "tb.ready",
+              "value": "1"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.stalled",
+              "value": "1"
+            }
+          ],
+          "clock": null
+        },
+        {
+          "tick": 55000,
+          "values": [
+            {
+              "name": "tb.valid",
+              "value": "1"
+            },
+            {
+              "name": "tb.sent[1:0]",
+              "value": "01"
+            },
+            {
+              "name": "tb.data[7:0]",
+              "value": "10100010"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.held_data[7:0]",
+              "value": "10100001"
+            },
+            {
+              "name": "tb.ready",
+              "value": "1"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.stalled",
+              "value": "0"
+            }
+          ],
+          "clock": null
+        },
+        {
+          "tick": 75000,
+          "values": [
+            {
+              "name": "tb.valid",
+              "value": "1"
+            },
+            {
+              "name": "tb.sent[1:0]",
+              "value": "01"
+            },
+            {
+              "name": "tb.data[7:0]",
+              "value": "10100010"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.held_data[7:0]",
+              "value": "10100010"
+            },
+            {
+              "name": "tb.ready",
+              "value": "0"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.stalled",
+              "value": "1"
+            }
+          ],
+          "clock": null
+        },
+        {
+          "tick": 95000,
+          "values": [
+            {
+              "name": "tb.valid",
+              "value": "1"
+            },
+            {
+              "name": "tb.sent[1:0]",
+              "value": "10"
+            },
+            {
+              "name": "tb.data[7:0]",
+              "value": "10100011"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.held_data[7:0]",
+              "value": "10100010"
+            },
+            {
+              "name": "tb.ready",
+              "value": "1"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.stalled",
+              "value": "0"
+            }
+          ],
+          "clock": null
+        },
+        {
+          "tick": 105000,
+          "values": [
+            {
+              "name": "tb.valid",
+              "value": "0"
+            },
+            {
+              "name": "tb.sent[1:0]",
+              "value": "11"
+            },
+            {
+              "name": "tb.data[7:0]",
+              "value": "10100011"
+            },
+            {
+              "name": "tb.clk",
+              "value": "1"
+            },
+            {
+              "name": "tb.held_data[7:0]",
+              "value": "10100011"
+            },
+            {
+              "name": "tb.ready",
+              "value": "1"
+            },
+            {
+              "name": "tb.reset",
+              "value": "0"
+            },
+            {
+              "name": "tb.stalled",
+              "value": "0"
+            }
+          ],
+          "clock": null
+        }
+      ]
+    },
+    {
+      "name": "Malformed upload shows error and next valid demo recovers",
+      "status": "PASS",
+      "milliseconds": 687,
+      "evidence": {
+        "expectedStatus": 422,
+        "message": "VCD 文件不完整。"
+      }
+    },
+    {
+      "name": "Console and network audit",
+      "status": "PASS",
+      "milliseconds": 0,
+      "evidence": {
+        "errors": [],
+        "failedRequests": [],
+        "badResponses": [
+          {
+            "path": "/api/traces",
+            "status": 422
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "badResponses": [
+    {
+      "path": "/api/traces",
+      "status": 422
+    }
+  ]
+}

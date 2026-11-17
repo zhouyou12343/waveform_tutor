@@ -1,0 +1,129 @@
+{
+  "browser": "159.0.8154.6",
+  "observations": [
+    {
+      "name": "Oversized identifier and unsupported dump gap reject safely",
+      "status": "PASS",
+      "evidence": {
+        "identifierError": "scope 标识符超过 256 字符。",
+        "dumpError": "暂不支持 $dumpoff 停录区间，无法确定期间的信号状态。"
+      }
+    },
+    {
+      "name": "One-tick bidirectional pan and maximum integer zoom",
+      "status": "PASS",
+      "evidence": {
+        "end": "窗口 9007199254740990–9007199254740991 ticks · Cursor 9007199254740991 (9007199.254740991 s) · 点击波形定位，输入整数精确跳转",
+        "back": "窗口 9007199254740989–9007199254740990 ticks · Cursor 9007199254740991 (9007199.254740991 s) · 点击波形定位，输入整数精确跳转"
+      }
+    },
+    {
+      "name": "Zero-duration trace and raw same-tick evidence remain honest",
+      "status": "PASS",
+      "evidence": {
+        "labels": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        "events": "0\n0\n5\n1\n5\n0\n10\n1",
+        "notice": "图形仅绘制持续区间；同 tick 瞬时变化和窗口右端记录请查“真实事件 / 当前值”，不能据平线排除瞬时变化。总线完整值可悬停查看。"
+      }
+    },
+    {
+      "name": "Dense RTL is paged, global search retains original CR line numbers",
+      "status": "PASS",
+      "evidence": {
+        "sourceLines": 10001,
+        "maxDomRows": 200,
+        "searchLine": 10001
+      }
+    },
+    {
+      "name": "Wide bus labels show ellipsis and full tooltip, unknowns preserved",
+      "status": "PASS",
+      "evidence": {
+        "labels": [
+          "0",
+          "13",
+          "25",
+          "38",
+          "50",
+          "63",
+          "75",
+          "88",
+          "100",
+          "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111…"
+        ],
+        "title": "wide · 0–100 ticks · 11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111xz (bin)"
+      }
+    },
+    {
+      "name": "Small, medium and near-limit browser rendering and interactions",
+      "status": "PASS",
+      "evidence": [
+        {
+          "name": "small",
+          "uploadToFactsMs": 386.02649999999994,
+          "zoomMs": 99.10008299999936,
+          "searchMs": 10.38275000000067,
+          "cursorToFactsMs": 263.9103750000013,
+          "svgPaths": 126,
+          "warning": [],
+          "samples": 1
+        },
+        {
+          "name": "medium",
+          "uploadToFactsMs": 1663.723833,
+          "zoomMs": 625.4935830000013,
+          "searchMs": 149.1150409999991,
+          "cursorToFactsMs": 796.1614580000005,
+          "svgPaths": 5251,
+          "warning": [
+            "每信号最多绘制 2000 segments；部分波形已省略，请 Zoom + 缩小窗口。空白不代表没有事件。"
+          ],
+          "samples": 1
+        },
+        {
+          "name": "near-limit",
+          "uploadToFactsMs": 5650.404290999999,
+          "zoomMs": 613.3420420000002,
+          "searchMs": 167.28920799999833,
+          "cursorToFactsMs": 743.3055420000019,
+          "svgPaths": 6001,
+          "warning": [
+            "每信号最多绘制 2000 segments；部分波形已省略，请 Zoom + 缩小窗口。空白不代表没有事件。"
+          ],
+          "samples": 1
+        }
+      ]
+    },
+    {
+      "name": "AI question and consent changes invalidate mocked results and requests",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser route Mock, no provider request",
+        "staleResultCleared": true,
+        "consentRevocationAbortsWait": true
+      }
+    },
+    {
+      "name": "Narrow viewport remains navigable and no JavaScript exceptions",
+      "status": "PASS",
+      "evidence": {
+        "width": {
+          "viewport": 390,
+          "document": 390
+        },
+        "errors": []
+      }
+    }
+  ],
+  "errors": []
+}

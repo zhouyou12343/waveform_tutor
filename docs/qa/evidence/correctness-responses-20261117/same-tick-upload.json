@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "status": 200,
+    "http_ms": 1.5517499996349216,
+    "request_body_bytes": 329,
+    "response_body_bytes": 466
+  },
+  "response": {
+    "id": "e67c704d08ed4b5ba171cdcafa165047",
+    "name": "same-tick.vcd",
+    "timescale": "1 ps",
+    "tick_fs": 1000,
+    "start": 0,
+    "end": 2000,
+    "signals": [
+      {
+        "id": "s0",
+        "name": "tb.value",
+        "scope": "tb",
+        "width": 4,
+        "kind": "reg",
+        "events": [
+          {
+            "time": 0,
+            "value": "0000"
+          },
+          {
+            "time": 1000,
+            "value": "0001"
+          },
+          {
+            "time": 1000,
+            "value": "0010"
+          },
+          {
+            "time": 1000,
+            "value": "x1z0"
+          },
+          {
+            "time": 2000,
+            "value": "0011"
+          }
+        ]
+      }
+    ],
+    "sources": [],
+    "warnings": [
+      "本地进程最多保留最近 4 个波形；重启或超出容量后需重新加载。"
+    ]
+  }
+}

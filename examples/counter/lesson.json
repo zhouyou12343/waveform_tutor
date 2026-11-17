@@ -1,0 +1,14 @@
+{
+  "title": "四位使能计数器与同步复位",
+  "description": "时钟周期10ns，上升沿为5、15、25ns等。reset为高有效同步复位且优先于enable；count为四位无符号数，模16递增。时间单位1ns，精度1ps。",
+  "questions": [
+    "120ns时tb.enable变为多少？tb.count在125、135、145ns的上升沿后各是多少？",
+    "150ns恢复使能后，tb.count何时从15回绕到0？",
+    "232ns拉高tb.reset时tb.count是否立即清零？在哪个上升沿清零，能否覆盖仍为1的enable？"
+  ],
+  "expected": [
+    "120ns时tb.enable=0；tb.count保持十进制10（二进制1010），125、135、145ns均不改变；155ns才递增到11。",
+    "195ns时tb.count=15，205ns时从15回绕到0，体现四位模16计数。",
+    "232ns时tb.count仍为1，233ns也为1；235ns上升沿才清零，此时tb.enable=1，证明高有效同步复位优先于使能。"
+  ]
+}

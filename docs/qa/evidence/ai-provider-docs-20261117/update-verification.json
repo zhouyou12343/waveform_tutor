@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-17",
+  "scope": "Documentation-only public provider discovery; no application or configuration changes",
+  "changed_documents": [
+    {
+      "path": "docs/qa/real-ai-acceptance-report.md",
+      "before_sha256": "9c5265fd00106ea57a838c1aab7537743ae0ac5a504fb6b1453c6058b76877d6",
+      "after_sha256": "b523d842b616b6a70fafbfeec0bb68722166ef6bd0df387006b7a67edeed42d3"
+    },
+    {
+      "path": "docs/qa/unresolved-issues.md",
+      "before_sha256": "f0170142040ace07cfd14c31a3f0bdac00068a76ddf1572ca63d23e1ca34be54",
+      "after_sha256": "d8b3c8d4a391118ae8fbad33444f2ac4b12345c3eceb91e07159b8f933c21655"
+    }
+  ],
+  "inference_calls": 0,
+  "inference_authorized": false,
+  "model_id_source": "User supplied gpt-6-astra; availability not tested",
+  "provider_name_source": "Public /api/status system_name",
+  "compatibility_status": "Blocked on member-only API documentation; no guessed /v1 Base URL",
+  "prior_source_config_files_unchanged": true,
+  "regression_tests_rerun": false,
+  "reason": "Only QA documentation/evidence changed; previous regression results are retained as dated observations",
+  "public_discovery_sha256": "ba7e7f2ee37388e9a398b9fd8a30c74b8809795914ef00889f33aed1d9e0d724"
+}
