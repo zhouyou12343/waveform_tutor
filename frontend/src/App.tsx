@@ -240,11 +240,15 @@ export default function App() {
             </label>
           </div>
         </section>
-        <ModelSettings onChange={(value) => setHealth({
-          ai_configured: value.configured,
-          requests: 0,
-          ai_config_revision: value.revision,
-        })} />
+        <ModelSettings
+          onChange={(value) =>
+            setHealth({
+              ai_configured: value.configured,
+              requests: 0,
+              ai_config_revision: value.revision,
+            })
+          }
+        />
         {busy && (
           <div className="notice" role="status">
             正在解析波形…{" "}

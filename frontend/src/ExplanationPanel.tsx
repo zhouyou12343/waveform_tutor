@@ -89,7 +89,12 @@ export function ExplanationPanel({
         无 API key 也能使用全部波形、事实分析、RTL 和报告功能。AI
         仅作辅助，不能替代仿真证据。
       </p>
-      {!configured && <p className="muted small">先在页面上方“模型配置”填写地址和 API Key 并保存；上传波形与离线事实分析无需等待配置。</p>}
+      {!configured && (
+        <p className="muted small">
+          先在页面上方“模型配置”填写地址和 API Key
+          并保存；上传波形与离线事实分析无需等待配置。
+        </p>
+      )}
       <textarea
         aria-label="向 AI 提问"
         value={question}

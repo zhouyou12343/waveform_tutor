@@ -300,7 +300,9 @@ class AIService:
             self._provider = (
                 provider
                 if provider is not None
-                else OpenAICompatibleProvider.from_env() if load_environment else None
+                else OpenAICompatibleProvider.from_env()
+                if load_environment
+                else None
             )
         except AIError as exc:
             self._provider = None

@@ -85,12 +85,14 @@ def load_configuration() -> tuple[AIService, dict]:
             if stored.get("disabled") is True:
                 service = AIService(load_environment=False)
                 return service, public_config(service, "disabled")
-            settings = normalize_settings({
-                "url": stored["base_url"],
-                "api_key": stored["api_key"],
-                "model": stored["model"],
-                "api_format": stored["api_format"],
-            })
+            settings = normalize_settings(
+                {
+                    "url": stored["base_url"],
+                    "api_key": stored["api_key"],
+                    "model": stored["model"],
+                    "api_format": stored["api_format"],
+                }
+            )
             service = AIService(make_provider(settings))
             return service, public_config(service, "local")
         service = AIService()

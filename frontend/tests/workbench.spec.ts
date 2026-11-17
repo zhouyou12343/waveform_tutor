@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import type { AnalysisRequest, Trace } from "../src/types";
+import type { AnalysisRequest, ModelConfiguration, Trace } from "../src/types";
 const trace: Trace = {
   id: "demo",
   name: "counter.vcd",
@@ -39,11 +39,32 @@ const trace: Trace = {
   ],
   warnings: [],
 };
+const modelConfiguration = (configured: boolean): ModelConfiguration => ({
+  configured,
+  base_url: configured ? "https://provider.example/v1" : "",
+  model: "mock-model",
+  api_format: "responses",
+  has_key: configured,
+  source: configured ? "runtime" : "none",
+  saved_locally: false,
+  revision: configured ? "mock-configured" : "mock-offline",
+  error: "",
+});
+async function mockConfiguredAI(page: Page) {
+  await page.route("**/api/health", (route) =>
+    route.fulfill({ json: { ai_configured: true, requests: 0 } }),
+  );
+  await page.route("**/api/ai/config", (route) =>
+    route.fulfill({ json: modelConfiguration(true) }),
+  );
+}
 test.beforeEach(async ({ page }) => {
   await page.route("**/api/**", async (route) => {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith("/health"))
       return route.fulfill({ json: { ai_configured: false, requests: 0 } });
+    if (path.endsWith("/ai/config"))
+      return route.fulfill({ json: modelConfiguration(false) });
     if (path.includes("/demos/")) return route.fulfill({ json: trace });
     if (path.endsWith("/analysis")) {
       const body = route.request().postDataJSON() as AnalysisRequest;
@@ -80,9 +101,7 @@ test.beforeEach(async ({ page }) => {
 test("AI requires consent, separates output and survives cancellation", async ({
   page,
 }) => {
-  await page.route("**/api/health", (route) =>
-    route.fulfill({ json: { ai_configured: true, requests: 0 } }),
-  );
+  await mockConfiguredAI(page);
   await page.route("**/explain", (route) => {
     const body = route.request().postDataJSON();
     expect(body.consent).toBe(true);
@@ -190,9 +209,7 @@ const answer = (summary: string) => ({
   limitations: ["Mock only"],
 });
 async function openAI(page: Page) {
-  await page.route("**/api/health", (route) =>
-    route.fulfill({ json: { ai_configured: true, requests: 0 } }),
-  );
+  await mockConfiguredAI(page);
   await page.goto("/");
   await page.getByRole("button", { name: /01 \/ DEMO Counter/ }).click();
   await expect(page.getByText("Observed at 0", { exact: true })).toBeVisible();

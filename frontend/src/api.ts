@@ -50,12 +50,22 @@ const upload = (file: File, signal?: AbortSignal): RequestInit => {
 export const api = {
   modelConfiguration: (signal?: AbortSignal) =>
     request<ModelConfiguration>("/ai/config", { signal, cache: "no-store" }),
-  saveModelConfiguration: (body: ModelConfigurationInput, signal?: AbortSignal) =>
-    request<ModelConfiguration>("/ai/config", { ...post(body, signal), method: "PUT" }),
+  saveModelConfiguration: (
+    body: ModelConfigurationInput,
+    signal?: AbortSignal,
+  ) =>
+    request<ModelConfiguration>("/ai/config", {
+      ...post(body, signal),
+      method: "PUT",
+    }),
   clearModelConfiguration: (signal?: AbortSignal) =>
     request<ModelConfiguration>("/ai/config", { method: "DELETE", signal }),
   health: (signal?: AbortSignal) =>
-    request<{ ai_configured: boolean; requests: number; ai_config_revision?: string }>("/health", {
+    request<{
+      ai_configured: boolean;
+      requests: number;
+      ai_config_revision?: string;
+    }>("/health", {
       signal,
     }),
   demo: (name: string, signal?: AbortSignal) =>

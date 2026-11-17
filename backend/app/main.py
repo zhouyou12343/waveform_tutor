@@ -155,7 +155,9 @@ async def save_ai_configuration(request: Request):
         provider = make_provider(settings)
     except (ValueError, TypeError, KeyError, AIError):
         # Do not return Pydantic input/error details: they may contain the API key.
-        raise HTTPException(422, "配置无效：请检查 API 地址、Key、模型 ID 和接口类型。远程地址须使用 HTTPS。") from None
+        raise HTTPException(
+            422, "配置无效：请检查 API 地址、Key、模型 ID 和接口类型。远程地址须使用 HTTPS。"
+        ) from None
     if getattr(app.state, "ai_busy", False):
         raise HTTPException(409, "AI 正在处理请求，请等待结束或取消后再修改配置。")
     try:
@@ -165,7 +167,10 @@ async def save_ai_configuration(request: Request):
     app.state.ai = AIService(provider)
     app.state.ai_settings = public_config(app.state.ai, "local")
     return JSONResponse(
-        {**app.state.ai_settings, "message": "配置已保存。保存不验证密钥或模型；点击生成解释时才会调用服务。"},
+        {
+            **app.state.ai_settings,
+            "message": "配置已保存。保存不验证密钥或模型；点击生成解释时才会调用服务。",
+        },
         headers={"Cache-Control": "no-store"},
     )
 
